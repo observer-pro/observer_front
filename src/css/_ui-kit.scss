@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@mixin font-props {
+    font-family: "StratosSkyeng";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    @include font-props();
+    src: url(../../public/fonts/stratosskyengweb-regular.woff2) format("woff2");
+}
+
+@font-face {
+    @include font-props();
+    src: url(../../public/fonts/stratosskyengweb-regular.woff) format("woff");
+}
+
+html {
+    scrollbar-width: none;
+}
+
+body {
+    background: #000;
+    font-family: StratosSkyeng;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.button {
+    width: 248px;
+    height: 54px;
+    border-radius: 4px;
+    background: #3574f0;
+    border: none;
+    cursor: pointer;
+    color: #e5e5e5;
+    font-weight: 400;
+    line-height: normal;
+    transition: all 0.5s;
+
+    &:hover {
+        opacity: 0.5;
+    }
+
+    &:disabled {
+        opacity: 0.1;
+    }
+}
+
+.link {
+    color: $font-color;
+    line-height: normal;
+    opacity: 0.5;
+    transition: all 0.5s;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.area {
+    flex-grow: 1;
+    height: auto;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+
+    &:focus {
+        overflow-y: hidden;
+    }
+
+    &:not(:focus) {
+        height: auto !important;
+    }
+}
+
+.send-button {
+    align-self: baseline;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}

@@ -1,0 +1,52 @@
+{
+    "name": "observer",
+    "version": "1.0.0",
+    "description": "**Обсервер** – это приложение для наблюдения за несколькими учениками, которые пишут код в реальном времени. Приложение позволяет приглашать учеников в комнаты, просматривать код и обмениваться сообщениями с пользователями.",
+    "main": "main.js",
+    "scripts": {
+        "format": "prettier —write .",
+        "lint:js": "eslint --ext ./src/**/*.js",
+        "lint:fix": "eslint --fix ./src/**/*.js",
+        "lint:css": "stylelint ./src/**/*.css --fix",
+        "prepare": "husky install",
+        "lint": "npm run lint:js && npm run lint:css",
+        "build": "cross-env NODE_ENV=production webpack",
+        "start": "webpack-dev-server --open"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DmitryTell/Observer.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DmitryTell/Observer/issues"
+    },
+    "homepage": "https://github.com/DmitryTell/Observer#readme",
+    "devDependencies": {
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.8.1",
+        "css-minimizer-webpack-plugin": "^5.0.1",
+        "eslint": "^8.47.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "html-webpack-plugin": "^5.5.3",
+        "http-proxy-middleware": "^2.0.6",
+        "husky": "^8.0.3",
+        "mini-css-extract-plugin": "^2.7.6",
+        "prettier": "^3.0.2",
+        "pug": "^2.0.4",
+        "pug-loader": "^2.4.0",
+        "stylelint": "^15.10.3",
+        "stylelint-config-standard": "^34.0.0",
+        "stylelint-prettier": "^4.0.2",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^4.15.1"
+    },
+    "dependencies": {
+        "cross-env": "^7.0.3",
+        "socket.io": "^4.7.2",
+        "socket.io-client": "^4.7.2"
+    }
+}
