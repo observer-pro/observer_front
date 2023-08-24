@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { context } from "./main.js";
 
 const socket = io("http://5.53.125.76:5000/", {
     transports: ["websocket"],
@@ -60,9 +61,18 @@ export function updateRoom(set) {
     });
 }
 
-export function changeStudent(id) {
-    console.log(
-        `Запрос "start from host" отправлен на сервер`,
-        `user_id: ${id}`,
-    );
+export function startStudent(id) {
+    socket.emit("sharing/start", { user_id: id, room_id: context.room.id });
+}
+
+export function endStudent(id) {
+    socket.emit("sharing/end", { user_id: id, room_id: context.room.id });
+}
+
+export function sendCode(set) {
+    // socket.on("sharind/send_code", (data) => {
+    //     set(data.files);
+    // });
+
+    set();
 }

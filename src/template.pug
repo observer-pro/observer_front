@@ -24,10 +24,10 @@ else
                         each user in context.room.users 
                             if user.role === 'client'
                                 li.students__item.item(class=`${
-                                    user.unreadMessages && !user.isActive && 'students__item--unread'
+                                    user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
                                 } ${
                                     user.isActive && 'students__item--active'
-                                }` id=user.id data-num="0")
+                                }` id=user.id)
                                     span.item__name(class=!user.unreadMessages && 'item__name--read')= user.name 
                                     if user.unreadMessages && !user.isActive
                                         span.item__unread= user.unreadMessages.length

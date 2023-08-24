@@ -12,7 +12,6 @@
     },
     "rules": {
         "prettier/prettier": "error",
-        "camelcase": ["error"],
         "eqeqeq": ["error", "always"]
     }
 }
