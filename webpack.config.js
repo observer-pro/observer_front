@@ -34,7 +34,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/socket.io": {
-                target: "http://localhost:5000",
+                target: "http://5.53.125.76:5000/",
                 ws: true,
                 secure: false,
                 changeOrigin: true,
