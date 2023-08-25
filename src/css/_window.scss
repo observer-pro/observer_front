@@ -185,6 +185,11 @@
                     opacity: 1;
                 }
             }
+
+            &__show-screen {
+                padding: 10px;
+                flex-grow: 1;
+            }
         }
     }
 }

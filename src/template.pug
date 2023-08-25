@@ -32,10 +32,27 @@ else
                                     if user.unreadMessages && !user.isActive
                                         span.item__unread= user.unreadMessages.length
             a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
-        .window__code.code(class=!context.code && 'window__code--empty')
-            if !context.code
+        .window__code.code(class=!context.files && 'window__code--empty')
+            if !context.files
                 span Выберите ученика, его код появится здесь
             else 
                 .code__filetree
+                    each file in context.files
+                        if file.filePath.length > 1 && file.status !== 'removed'
+                            each dir, index in file.filePath 
+                                if dir !== file.filePath[file.filePath.length - 1]
+                                    .code__tree-section(class=`code__tree-section--level-${index + 1}`)
+                                        img(src="./public/img/folder.svg")
+                                        span.code__tree-name.dir= dir
+                                else 
+                                    .code__tree-section(class=`code__tree-section--level-${index + 1}`)
+                                        img(src="./public/img/file.svg")
+                                        span.code__tree-name.file= dir
+                        else 
+                            .code__tree-section(class=`code__tree-section--level-1`)
+                                img(src="./public/img/file.svg")
+                                span.code__tree-name.file= file.filename
+                .code__show-screen#code
+
 
 

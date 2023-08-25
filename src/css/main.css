@@ -289,6 +289,10 @@ ul {
 .window__code .code__tree-name--active {
   opacity: 1;
 }
+.window__code .code__show-screen {
+  padding: 10px;
+  flex-grow: 1;
+}
 
 .messages {
   width: 406px;
