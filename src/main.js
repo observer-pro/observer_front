@@ -3,7 +3,7 @@
 import "./css/main.css";
 import Context from "./context.js";
 import { renderApp } from "./render.js";
-import { getStatus, shareCode, updateRoom } from "./socket.js";
+import { getStatus, shareCode, updateRoom } from "./socket-events.js";
 
 const appElement = document.querySelector("#app");
 export const context = new Context(true, false);
@@ -25,7 +25,6 @@ updateRoom((isStart, data) => {
 
 shareCode((data) => {
     context.files = data.files;
-    context.files.map((file) => (file.filePath = file.filename.split("/")));
     context.room.users.map((user) => (user.isActive = false));
     context.room.users.map((user) => {
         if (user.id === data.user_id) {

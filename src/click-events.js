@@ -1,5 +1,5 @@
-import { createRoom, endStudent } from "./socket.js";
-import { startStudent } from "./socket.js";
+import { createRoom, endStudent } from "./socket-events.js";
+import { startStudent } from "./socket-events.js";
 
 export function initCreatingRoom() {
     const createElement = document.querySelector("#create-room");

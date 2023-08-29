@@ -1,8 +1,8 @@
-import template from "./template.pug";
-import { initChangingUsers, initCreatingRoom } from "./events.js";
+import main from "./templates/main.pug";
+import { initChangingUsers, initCreatingRoom } from "./click-events.js";
 
 export function renderApp(appElement, context) {
-    appElement.innerHTML = template({ context: context });
+    appElement.innerHTML = main({ context: context });
 
     initCreatingRoom();
     initChangingUsers();
