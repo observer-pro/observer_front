@@ -1,42 +1,29 @@
-if context.isStart
-    .connection
-        .connection__form
-            h2.connection__title Observer by Sky Pro
-            .connection__status
-                img(src=context.isOnline ? './public/img/status-online.svg' : './public/img/status-offline.svg')
-                span.connection__text-status= context.isOnline ? 'Сервер работает' : 'Сервер недоступен'
-            button.button.create-room#create-room(disabled=!context.isOnline) Создать комнату
-        a(href="#" class="connection__link link" id="load-plugin") Скачать плагин (для учеников)
-else 
-    .window 
-        .window__room.room 
-            h2.room__title= `Комната #${context.room.id}`
-            .room__panel
-                p.room__students-amount
-                    span= context.room.users.length - 1 
-                    span участников
-                a(href="#" class="link room__quit" id="quit") выйти
-            .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
-                if context.room.users.length < 2
-                    p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
-                else
-                    ul.students__list
-                        each user in context.room.users 
-                            if user.role === 'client'
-                                li.students__item.item(class=`${
-                                    user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
-                                } ${
-                                    user.isActive && 'students__item--active'
-                                }` id=user.id)
-                                    span.item__name(class=!user.unreadMessages && 'item__name--read')= user.name 
-                                    if user.unreadMessages && !user.isActive
-                                        span.item__unread= user.unreadMessages.length
-            a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
-        .window__code.code(class=!context.files && 'window__code--empty')
-            if !context.files
-                span Выберите ученика, его код появится здесь
-            else 
-                
-
-
-
+.window 
+    .window__room.room 
+        h2.room__title= `Комната #${context.room.id}`
+        .room__panel
+            p.room__students-amount
+                span= context.room.users.length - 1 
+                span участников
+            a(href="#" class="link room__quit" id="quit") выйти
+        .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
+            if context.room.users.length < 2
+                p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
+            else
+                ul.students__list
+                    each user in context.room.users 
+                        if user.role === 'client'
+                            li.students__item.item(class=`${
+                                user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
+                            } ${
+                                user.isActive && 'students__item--active'
+                            }` id=user.id)
+                                span.item__name(class=!user.unreadMessages && 'item__name--read')= user.name 
+                                if user.unreadMessages && !user.isActive
+                                    span.item__unread= user.unreadMessages.length
+        a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
+    .window__code.code(class=!context.files && 'window__code--empty')
+        if !context.files
+            span Выберите ученика, его код появится здесь
+        else 
+            

@@ -1,9 +1,15 @@
+import start from "./templates/start.pug";
 import main from "./templates/main.pug";
-import { initChangingUsers, initCreatingRoom } from "./click-events.js";
+import { initClickingUsers, initCreatingRoom } from "./click-events.js";
 
-export function renderApp(appElement, context) {
-    appElement.innerHTML = main({ context: context });
+export const renderApp = (appElement, context) => {
+    if (context.isStart) {
+        appElement.innerHTML = start({ context: context });
 
-    initCreatingRoom();
-    initChangingUsers();
-}
+        initCreatingRoom();
+    } else {
+        appElement.innerHTML = main({ context: context });
+
+        initClickingUsers();
+    }
+};

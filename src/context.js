@@ -1,9 +1,7 @@
 class Context {
-    constructor(isStart, isOnline, room, files) {
+    constructor(isStart, isOnline) {
         this.isStart = isStart;
         this.isOnline = isOnline;
-        this.room = room;
-        this.files = files;
     }
 }
 

@@ -1,24 +1,25 @@
-import { createRoom, endStudent } from "./socket-events.js";
-import { startStudent } from "./socket-events.js";
+import { context } from "./main.js";
+import { createRoom, startStudent, endStudent } from "./socket-events.js";
 
-export function initCreatingRoom() {
+export const initCreatingRoom = () => {
     const createElement = document.querySelector("#create-room");
 
     createElement?.addEventListener("click", () => {
         createRoom("JSON JSONych");
     });
-}
-
-export function initChangingUsers() {
+};
+export const initClickingUsers = () => {
     const userElements = document.querySelectorAll(".item");
 
-    userElements.forEach((element) => {
-        element.addEventListener("click", () => {
-            userElements.forEach((element) => {
-                endStudent(element.id);
+    userElements.forEach((user) => {
+        user.addEventListener("click", () => {
+            window.localStorage.setItem("user_id", user.id);
+
+            userElements.forEach((user) => {
+                endStudent(user.id, context.room.id);
             });
 
-            startStudent(element.id);
+            startStudent(user.id, context.room.id);
         });
     });
-}
+};
