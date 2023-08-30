@@ -1,6 +1,6 @@
-import start from "./templates/start.pug";
-import main from "./templates/main.pug";
-import { initClickingUsers, initCreatingRoom } from "./click-events.js";
+import start from "../templates/start.pug";
+import main from "../templates/main.pug";
+import { initClickingUsers, initCreatingRoom } from "../click-events.js";
 
 export const renderApp = (appElement, context) => {
     if (context.isStart) {

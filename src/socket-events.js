@@ -5,11 +5,13 @@ const socket = io("http://5.53.125.76:5000/", {
 });
 
 export const getStatus = (set) => {
-    socket.on("connect", () => {
-        set(true);
-    });
-    socket.on("disconnect", () => {
-        set(false);
+    socket.on("log", (log) => {
+        socket.on("connect", () => {
+            set(true, log);
+        });
+        socket.on("disconnect", () => {
+            set(false, log);
+        });
     });
 };
 export const createRoom = (name) => {
@@ -20,14 +22,14 @@ export const updateRoom = (set) => {
         set(false, data);
     });
 };
-export const startStudent = (userId, roomId) => {
-    socket.emit("sharing/start", { user_id: userId, room_id: roomId });
-};
 export const endStudent = (userId, roomId) => {
     socket.emit("sharing/end", { user_id: userId, room_id: roomId });
 };
-export const shareCode = (set) => {
-    socket.on("sharind/code_send", (data) => {
+export const startStudent = (userId, roomId) => {
+    socket.emit("sharing/start", { user_id: userId, room_id: roomId });
+};
+export const sendCode = (set) => {
+    socket.on("sharing/code_send", (data) => {
         set(data);
     });
 };

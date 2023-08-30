@@ -16,14 +16,17 @@
                             li.students__item.item(class=`${
                                 user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
                             } ${
-                                user.isActive && 'students__item--active'
+                                user.isActive ? 'students__item--active' : ''
                             }` id=user.id)
-                                span.item__name(class=!user.unreadMessages && 'item__name--read')= user.name 
+                                span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
         a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
-    .window__code.code(class=!context.files && 'window__code--empty')
-        if !context.files
+    .window__code.code(class=!context.filetree && 'window__code--empty')
+        if !context.filetree
             span Выберите ученика, его код появится здесь
         else 
+            .code__filetree
+                each file in context.filetree.files 
+                    .code__tree-section
             
