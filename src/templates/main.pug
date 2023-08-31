@@ -28,7 +28,7 @@
         else 
             .code__filetree
                 each file in context.filetree.files 
-                    if file.type === 'file'
+                    if file.type === 'file' && file.status !== 'removed'
                         .code__tree-section.file(class=`code__tree-section--level-${file.level} ${
                             file.isActive ? 'code__tree-section--active' : ''
                         }`)
@@ -36,7 +36,7 @@
                             span.code__tree-name(class=`${
                                 file.isActive ? 'code__tree-name--active' : ''
                             }`)= file.name
-                    else 
+                    else if file.type === 'folder' && file.status !== 'removed'
                         .code__tree-section(class=`code__tree-section--level-${file.level}`)
                             img(src="./img/folder.svg" alt="folder")
                             span.code__tree-name= file.name

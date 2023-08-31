@@ -37,8 +37,6 @@ updateRoom((isStart, data) => {
 });
 sendCode((data) => {
     context.filetree = getFiletree(data.files);
-    console.log(data);
-    console.log(context.filetree);
     context.room.users.map((user) => (user.isActive = false));
     context.room.users.map((user) => {
         if (user.id === context.activeUserId) {

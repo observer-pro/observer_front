@@ -18,6 +18,7 @@ export const getFiletree = (files) => {
                 level: 1,
                 isActive: false,
                 status: file.status,
+                content: file.content,
             });
             return;
         }
@@ -43,6 +44,7 @@ export const getFiletree = (files) => {
             level: path.length,
             isActive: false,
             status: file.status,
+            content: file.content,
         });
     });
 
