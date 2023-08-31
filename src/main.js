@@ -11,8 +11,7 @@ import {
 } from "./socket-events.js";
 import { getFiletree } from "./components/filetree.js";
 
-const appElement = document.querySelector("#app");
-
+export const appElement = document.querySelector("#app");
 export const context = new Context(true, false);
 
 renderApp(appElement, context);

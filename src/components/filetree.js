@@ -12,14 +12,16 @@ export const getFiletree = (files) => {
         const path = file.filename.slice(1).split("/");
 
         if (path.length === 1) {
-            tree.files.push({
+            const newFile = {
                 name: path[0],
                 type: "file",
                 level: 1,
                 isActive: false,
                 status: file.status,
                 content: file.content,
-            });
+            };
+
+            tree.files.push(newFile);
             return;
         }
 
@@ -38,14 +40,16 @@ export const getFiletree = (files) => {
             }
         }
 
-        tree[path[path.length - 2]].files.push({
+        const newFile = {
             name: path[path.length - 1],
             type: "file",
             level: path.length,
             isActive: false,
             status: file.status,
             content: file.content,
-        });
+        };
+
+        tree[path[path.length - 2]].files.push(newFile);
     });
 
     return tree;
