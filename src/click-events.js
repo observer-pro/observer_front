@@ -25,12 +25,15 @@ export const initClickingUsers = () => {
 };
 export const initClickingFiles = () => {
     const fileElements = document.querySelectorAll(".file");
+    // const showCodeElement = document.querySelector("#show-screen");
 
     fileElements.forEach((element) => {
         element.addEventListener("click", () => {
             context.filetree.files.forEach((file) => {
                 if (file.name === element.textContent) {
                     file.isActive = true;
+
+                    console.log(file.content);
                 } else {
                     file.isActive = false;
                 }
@@ -39,6 +42,8 @@ export const initClickingFiles = () => {
                 context.filetree[dir].files.forEach((file) => {
                     if (file.name === element.textContent) {
                         file.isActive = true;
+
+                        console.log(file.content);
                     } else {
                         file.isActive = false;
                     }
