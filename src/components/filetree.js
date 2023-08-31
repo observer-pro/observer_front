@@ -1,40 +1,48 @@
 class Tree {
-    constructor(name, files) {
-        this.name = name;
+    constructor(dirs, files) {
+        this.dirs = dirs;
         this.files = files;
     }
 }
 
 export const getFiletree = (files) => {
-    const tree = new Tree("root", []);
+    const tree = new Tree([], []);
 
     files.forEach((file) => {
-        const filePath = file.filename.split("/");
+        const path = file.filename.slice(1).split("/");
 
-        if (filePath.length < 2) {
+        if (path.length === 1) {
             tree.files.push({
-                name: filePath[0],
+                name: path[0],
                 type: "file",
                 level: 1,
+                isActive: false,
+                status: file.status,
             });
             return;
         }
 
-        for (let i = 0; i < filePath.length - 1; i++) {
-            tree.files.push({
-                name: filePath[i],
-                type: "dir",
-                level: i + 1,
-            });
-            tree[filePath[i]] = {
-                files: [],
-            };
+        for (let i = 0; i < path.length - 1; i++) {
+            if (!tree.dirs.includes(path[i])) {
+                tree.dirs.push(path[i]);
+                tree.files.push({
+                    name: path[i],
+                    type: "folder",
+                    level: i + 1,
+                    status: file.status,
+                });
+                tree[path[i]] = {
+                    files: [],
+                };
+            }
         }
 
-        tree[filePath[filePath.length - 2]].files.push({
-            name: filePath[filePath.length - 1],
+        tree[path[path.length - 2]].files.push({
+            name: path[path.length - 1],
             type: "file",
-            level: filePath.length,
+            level: path.length,
+            isActive: false,
+            status: file.status,
         });
     });
 
