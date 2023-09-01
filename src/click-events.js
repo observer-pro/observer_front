@@ -14,12 +14,15 @@ export const initClickingUsers = () => {
 
     userElements.forEach((user) => {
         user.addEventListener("click", () => {
-            userElements.forEach((user) =>
-                endStudent(+user.id, context.room.id),
-            );
             context.activeUserId = +user.id;
 
-            startStudent(+user.id, context.room.id);
+            userElements.forEach((user) => {
+                if (context.activeUserId === +user.id) {
+                    startStudent(+user.id, context.room.id);
+                } else {
+                    endStudent(+user.id, context.room.id);
+                }
+            });
         });
     });
 };
@@ -32,8 +35,6 @@ export const initClickingFiles = () => {
             context.filetree.files.forEach((file) => {
                 if (file.name === element.textContent) {
                     file.isActive = true;
-
-                    console.log(file.content);
                 } else {
                     file.isActive = false;
                 }
@@ -42,8 +43,6 @@ export const initClickingFiles = () => {
                 context.filetree[dir].files.forEach((file) => {
                     if (file.name === element.textContent) {
                         file.isActive = true;
-
-                        console.log(file.content);
                     } else {
                         file.isActive = false;
                     }

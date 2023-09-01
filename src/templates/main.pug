@@ -25,7 +25,7 @@
     .window__code.code(class=!context.filetree && 'window__code--empty')
         if !context.filetree
             span Выберите ученика, его код появится здесь
-        else 
+        else
             .code__filetree
                 each file in context.filetree.files 
                     if file.type === 'file' && file.status !== 'removed'

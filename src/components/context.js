@@ -5,4 +5,12 @@ class Context {
     }
 }
 
-export default Context;
+export const getContext = () => {
+    const contextJson = window.localStorage.getItem("context");
+
+    if (contextJson) {
+        return JSON.parse(contextJson);
+    } else {
+        return new Context(true, false);
+    }
+};

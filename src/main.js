@@ -1,18 +1,13 @@
 "use strict";
 
 import "./css/main.css";
-import Context from "./components/context.js";
+import { getContext } from "./components/context.js";
 import { renderApp } from "./components/render.js";
-import {
-    getStatus,
-    sendCode,
-    updateCode,
-    updateRoom,
-} from "./socket-events.js";
+import { getStatus, getCode, updateRoom, updateCode } from "./socket-events.js";
 import { getFiletree } from "./components/filetree.js";
 
 export const appElement = document.querySelector("#app");
-export const context = new Context(true, false);
+export const context = getContext();
 
 renderApp(appElement, context);
 getStatus((status, log) => {
@@ -24,17 +19,24 @@ getStatus((status, log) => {
     renderApp(appElement, context);
 });
 updateRoom((isStart, data) => {
+    let isActiveFiles = false;
+
     context.isStart = isStart;
     context.room = data;
     context.room.users.map((user) => {
         if (user.id === context.activeUserId) {
+            isActiveFiles = true;
             user.isActive = true;
         }
     });
 
+    if (!isActiveFiles) {
+        context.filetree = null;
+    }
+
     renderApp(appElement, context);
 });
-sendCode((data) => {
+getCode((data) => {
     context.filetree = getFiletree(data.files);
     context.room.users.map((user) => (user.isActive = false));
     context.room.users.map((user) => {
@@ -46,7 +48,5 @@ sendCode((data) => {
     renderApp(appElement, context);
 });
 updateCode((data) => {
-    context.filetree = getFiletree(data.files);
-
-    renderApp(appElement, context);
+    console.log(data);
 });
