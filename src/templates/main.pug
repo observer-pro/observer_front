@@ -48,4 +48,5 @@
                                 span.code__tree-name(class=`${
                                     dirFile.isActive ? 'code__tree-name--active' : ''
                                 }`)= dirFile.name
-            .code__show-screen#show-screen
+            pre.code__show-screen 
+                code= context.code

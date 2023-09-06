@@ -1,6 +1,7 @@
 import { createRoom, endStudent, startStudent } from "./socket-events.js";
 import { appElement, context } from "./main.js";
 import { renderApp } from "./components/render.js";
+import hljs from "./components/hljs.js";
 
 export const initCreatingRoom = () => {
     const createElement = document.querySelector("#create-room");
@@ -28,13 +29,18 @@ export const initClickingUsers = () => {
 };
 export const initClickingFiles = () => {
     const fileElements = document.querySelectorAll(".file");
-    // const showCodeElement = document.querySelector("#show-screen");
+    const codeElement = document.querySelector("code");
 
     fileElements.forEach((element) => {
         element.addEventListener("click", () => {
             context.filetree.files.forEach((file) => {
                 if (file.name === element.textContent) {
+                    console.log("Выбран файл " + file.name);
+                    console.log("Содержимое");
+                    console.log(file.content);
+
                     file.isActive = true;
+                    context.code = file.content;
                 } else {
                     file.isActive = false;
                 }
@@ -42,7 +48,12 @@ export const initClickingFiles = () => {
             context.filetree.dirs.forEach((dir) => {
                 context.filetree[dir].files.forEach((file) => {
                     if (file.name === element.textContent) {
+                        console.log("Выбран файл " + file.name);
+                        console.log("Содержимое");
+                        console.log(file.content);
+
                         file.isActive = true;
+                        context.code = file.content;
                     } else {
                         file.isActive = false;
                     }
@@ -50,6 +61,8 @@ export const initClickingFiles = () => {
             });
 
             renderApp(appElement, context);
+
+            hljs.highlightAll(codeElement);
         });
     });
 };

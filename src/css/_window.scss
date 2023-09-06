@@ -188,8 +188,12 @@
 
             &__show-screen {
                 height: 100%;
-                padding: 10px;
                 flex-grow: 1;
+
+                & code {
+                    width: 773px;
+                    height: 615px;
+                }
             }
         }
     }
