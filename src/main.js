@@ -4,9 +4,9 @@ import "./css/main.css";
 import { getContext } from "./components/context.js";
 import { renderApp } from "./components/render.js";
 import { getStatus, getCode, updateRoom, updateCode } from "./socket-events.js";
-import { deleteDuplicates, getFiletree } from "./components/filetree.js";
+import { getFiletree } from "./components/filetree.js";
 import hljs from "./hljs";
-import { checkActiveFiles, getActiveFile } from "./components/active-files.js";
+import { checkActiveFiles } from "./components/active-files.js";
 
 export const appElement = document.querySelector("#app");
 export const codeElement = document.querySelector("code");
@@ -57,22 +57,7 @@ getCode((data) => {
     renderApp(appElement, context);
 });
 updateCode((data) => {
-    context.filetree = getFiletree([...context.files, ...data.files]);
-    context.room.users.map((user) => {
-        if (user.id === context.activeUserId) {
-            user.isActive = true;
-        } else {
-            user.isActive = false;
-        }
-    });
+    context.files = [...context.files, data.files[0]];
 
-    deleteDuplicates(context, (filetree) => {
-        context.filetree = filetree;
-    });
-    getActiveFile(context.activeFileName, context);
-    checkActiveFiles(context, (areActiveFiles) => {
-        if (areActiveFiles) hljs.highlightAll(codeElement);
-    });
-
-    console.log(context.filetree);
+    console.log(context);
 });
