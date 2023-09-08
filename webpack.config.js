@@ -31,16 +31,6 @@ module.exports = {
         filename: "bundle.js",
         clean: true,
     },
-    devServer: {
-        proxy: {
-            "/socket.io": {
-                target: "http://5.53.125.76:5000/",
-                ws: true,
-                secure: false,
-                changeOrigin: true,
-            },
-        },
-    },
     plugins: [
         new HtmlWebpackPlugin({
             template: "src/templates/index.pug",
