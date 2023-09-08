@@ -54,6 +54,7 @@ export const getCode = (set) => {
 export const updateCode = (set) => {
     socket.on("sharing/code_update", (data) => {
         console.log(`Выполнен запрос sharing/code_update. Получены данные:`);
+        console.log(data);
 
         set(data);
     });

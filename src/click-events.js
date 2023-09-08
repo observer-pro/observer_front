@@ -1,7 +1,7 @@
 import { createRoom, endStudent, startStudent } from "./socket-events.js";
-import { context } from "./main.js";
+import { codeElement, context } from "./main.js";
 import hljs from "./hljs.js";
-import { getActiveFile } from "./components/get-active-files.js";
+import { getActiveFile } from "./components/active-files.js";
 
 export const initCreatingRoom = () => {
     const createElement = document.querySelector("#create-room");
@@ -29,13 +29,12 @@ export const initClickingUsers = () => {
 };
 export const initClickingFiles = () => {
     const fileElements = document.querySelectorAll(".file");
-    const codeElement = document.querySelector("code");
 
     fileElements.forEach((element) => {
         element.addEventListener("click", () => {
-            const fileName = element.textContent;
+            context.activeFileName = element.textContent;
 
-            getActiveFile(fileName, context);
+            getActiveFile(context.activeFileName, context);
             hljs.highlightAll(codeElement);
         });
     });

@@ -4,11 +4,12 @@ import "./css/main.css";
 import { getContext } from "./components/context.js";
 import { renderApp } from "./components/render.js";
 import { getStatus, getCode, updateRoom, updateCode } from "./socket-events.js";
-import { getFiletree } from "./components/filetree.js";
+import { deleteDuplicates, getFiletree } from "./components/filetree.js";
 import hljs from "./hljs";
-import { checkActiveFiles } from "./components/get-active-files.js";
+import { checkActiveFiles, getActiveFile } from "./components/active-files.js";
 
 export const appElement = document.querySelector("#app");
+export const codeElement = document.querySelector("code");
 export const context = getContext();
 
 renderApp(appElement, context);
@@ -21,8 +22,6 @@ getStatus((status, log) => {
     renderApp(appElement, context);
 });
 updateRoom((isStart, data) => {
-    const codeElement = document.querySelector("code");
-
     context.isStart = isStart;
     context.room = data;
     context.room.users.map((user) => {
@@ -45,6 +44,7 @@ updateRoom((isStart, data) => {
 });
 getCode((data) => {
     context.code = null;
+    context.files = data.files;
     context.filetree = getFiletree(data.files);
     context.room.users.map((user) => {
         if (user.id === context.activeUserId) {
@@ -57,5 +57,22 @@ getCode((data) => {
     renderApp(appElement, context);
 });
 updateCode((data) => {
-    console.log(data);
+    context.filetree = getFiletree([...context.files, ...data.files]);
+    context.room.users.map((user) => {
+        if (user.id === context.activeUserId) {
+            user.isActive = true;
+        } else {
+            user.isActive = false;
+        }
+    });
+
+    deleteDuplicates(context, (filetree) => {
+        context.filetree = filetree;
+    });
+    getActiveFile(context.activeFileName, context);
+    checkActiveFiles(context, (areActiveFiles) => {
+        if (areActiveFiles) hljs.highlightAll(codeElement);
+    });
+
+    console.log(context.filetree);
 });
