@@ -9,7 +9,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 handler_object = MyHttpRequestHandler
 
-PORT = 80
+PORT = 8080
 
 if __name__ == "__main__":
     try:
