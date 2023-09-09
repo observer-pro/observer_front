@@ -55,6 +55,27 @@ export const getFiletree = (files) => {
     return tree;
 };
 
-export const deleteDuplicates = (files, set) => {
+export const correctFiles = (files, set) => {
+    files.forEach((file, index) => {
+        const prevName = file.filename;
+        const prevIndex = index;
+
+        files.forEach((file, index) => {
+            if (file.filename === prevName && index > prevIndex) {
+                files.splice(prevIndex, 1);
+            }
+        });
+    });
+
+    set(files);
+};
+
+export const removeFiles = (files, set) => {
+    files.forEach((file, index) => {
+        if (file.status === "REMOVED") {
+            files.splice(index, 1);
+        }
+    });
+
     set(files);
 };

@@ -1,6 +1,5 @@
 import { createRoom, endStudent, startStudent } from "./socket-events.js";
-import { codeElement, context } from "./main.js";
-import hljs from "./hljs.js";
+import { context } from "./main.js";
 import { getActiveFile } from "./components/active-files.js";
 
 export const initCreatingRoom = () => {
@@ -35,7 +34,6 @@ export const initClickingFiles = () => {
             context.activeFileName = element.textContent;
 
             getActiveFile(context.activeFileName, context);
-            hljs.highlightAll(codeElement);
         });
     });
 };

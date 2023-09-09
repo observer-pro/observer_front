@@ -1,7 +1,11 @@
 import { appElement } from "../main.js";
 import { renderApp } from "./render.js";
+import { codeElement } from "../main.js";
+import hljs from "../hljs.js";
 
 export const getActiveFile = (fileName, context) => {
+    let areActiveFiles = false;
+
     context.filetree.files.forEach((file) => {
         if (file.name === fileName) {
             console.log("Выбран файл " + file.name);
@@ -10,6 +14,7 @@ export const getActiveFile = (fileName, context) => {
 
             file.isActive = true;
             context.code = file.content;
+            areActiveFiles = true;
         } else {
             file.isActive = false;
         }
@@ -23,6 +28,7 @@ export const getActiveFile = (fileName, context) => {
 
                 file.isActive = true;
                 context.code = file.content;
+                areActiveFiles = true;
             } else {
                 file.isActive = false;
             }
@@ -30,25 +36,6 @@ export const getActiveFile = (fileName, context) => {
     });
 
     renderApp(appElement, context);
-};
 
-export const checkActiveFiles = (context, set) => {
-    let areActiveFiles = false;
-
-    if (context.filetree) {
-        context.filetree.files.forEach((file) => {
-            if (file.isActive) {
-                areActiveFiles = true;
-            }
-        });
-        context.filetree.dirs.forEach((dir) => {
-            context.filetree[dir].files.forEach((file) => {
-                if (file.isActive) {
-                    areActiveFiles = true;
-                }
-            });
-        });
-    }
-
-    set(areActiveFiles);
+    if (areActiveFiles) hljs.highlightAll(codeElement);
 };
