@@ -19,9 +19,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
-          source:
-            - ./build
-            - server.py
+          source: "./build,server.py"
           target: /home/deploy/Observer/build
 
       - name: Restart the service
