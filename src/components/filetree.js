@@ -71,6 +71,17 @@ export const correctFiles = (files, set) => {
 };
 
 export const removeFiles = (files, set) => {
+    const lastFile = files[files.length - 1];
+
+    for (let i = 0; i < files.length - 1; i++) {
+        if (
+            files[i].filename === lastFile.filename &&
+            files[i].status === "CHANGED"
+        ) {
+            files.splice(i, 1);
+        }
+    }
+
     files.forEach((file, index) => {
         if (file.status === "REMOVED") {
             files.splice(index, 1);
