@@ -32,7 +32,6 @@ export const getFiletree = (files) => {
                     name: path[i],
                     type: "folder",
                     level: i + 1,
-                    status: file.status,
                 });
                 tree[path[i]] = {
                     files: [],
@@ -55,38 +54,22 @@ export const getFiletree = (files) => {
     return tree;
 };
 
-export const correctFiles = (files, set) => {
-    files.forEach((file, index) => {
-        const prevName = file.filename;
-        const prevIndex = index;
-
-        files.forEach((file, index) => {
-            if (file.filename === prevName && index > prevIndex) {
-                files.splice(prevIndex, 1);
-            }
-        });
-    });
-
-    set(files);
-};
-
-export const removeFiles = (files, set) => {
+export const removeExtraFiles = (files, set) => {
+    const result = [];
     const lastFile = files[files.length - 1];
 
     for (let i = 0; i < files.length - 1; i++) {
         if (
-            files[i].filename === lastFile.filename &&
-            files[i].status === "CHANGED"
+            files[i].filename !== lastFile.filename &&
+            files[i].status !== "REMOVED"
         ) {
-            files.splice(i, 1);
+            result.push(files[i]);
         }
     }
 
-    files.forEach((file, index) => {
-        if (file.status === "REMOVED") {
-            files.splice(index, 1);
-        }
-    });
+    if (lastFile.status !== "REMOVED") {
+        result.push(lastFile);
+    }
 
-    set(files);
+    set(result);
 };
