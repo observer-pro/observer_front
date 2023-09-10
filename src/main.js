@@ -15,8 +15,6 @@ export const appElement = document.querySelector("#app");
 export const codeElement = document.querySelector("code");
 export const context = getContext();
 
-alert("Сервер работает");
-
 renderApp(appElement, context);
 getStatus((status, log) => {
     context.isOnline = status;
