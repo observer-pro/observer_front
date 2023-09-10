@@ -4,11 +4,7 @@ import "./css/main.css";
 import { getContext } from "./components/context.js";
 import { renderApp } from "./components/render.js";
 import { getStatus, getCode, updateRoom, updateCode } from "./socket-events.js";
-import {
-    correctFiles,
-    getFiletree,
-    removeFiles,
-} from "./components/filetree.js";
+import { getFiletree, removeExtraFiles } from "./components/filetree.js";
 import { getActiveFile } from "./components/active-files.js";
 
 export const appElement = document.querySelector("#app");
@@ -64,11 +60,8 @@ getCode((data) => {
     renderApp(appElement, context);
 });
 updateCode((data) => {
-    correctFiles([...context.files, ...data.files], (files) => {
-        context.files = files;
-    });
-    removeFiles(context.files, (files) => {
-        context.filetree = getFiletree(files);
+    removeExtraFiles([...context.files, ...data.files], (result) => {
+        context.filetree = getFiletree(result);
     });
 
     context.room.users.map((user) => {
