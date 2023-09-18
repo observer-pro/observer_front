@@ -4,6 +4,7 @@ import {
     initClickingFiles,
     initClickingUsers,
     initCreatingRoom,
+    initReconnecting,
 } from "../click-events.js";
 
 export const renderApp = (appElement, context) => {
@@ -16,5 +17,6 @@ export const renderApp = (appElement, context) => {
 
         initClickingUsers();
         initClickingFiles();
+        initReconnecting();
     }
 };

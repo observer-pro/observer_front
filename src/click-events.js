@@ -37,3 +37,18 @@ export const initClickingFiles = () => {
         });
     });
 };
+export const initReconnecting = () => {
+    const rehostElement = document.querySelector("#rehost");
+
+    rehostElement?.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const data = {
+            user_id: context.room.users[0].id,
+            room__id: context.room.id,
+        };
+
+        console.log("Запрос room/rehost отправлен Отправлены данные:");
+        console.log(data);
+    });
+};

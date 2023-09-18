@@ -169,6 +169,38 @@ ul {
     display: flex;
     gap: 5px;
 }
+.window .room__disconnected-block {
+    width: 232px;
+    height: 36px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 3px;
+    background: #fc4c1e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.window .room__disconnected-text {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.window .room__disconnected-link {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    transition: all 0.5s;
+}
+.window .room__disconnected-link:hover {
+    text-decoration: none;
+    opacity: 0.6;
+}
+.window .room__links {
+    display: flex;
+    justify-content: space-between;
+}
 .window .room__quite {
     font-size: 15px;
     line-height: 20px;
@@ -241,6 +273,7 @@ ul {
     min-height: 619px;
     background: #242424;
     border-radius: 7px;
+    overflow: auto;
     display: flex;
 }
 .window__code--empty {
@@ -256,6 +289,7 @@ ul {
 .window__code .code__filetree {
     width: 197px;
     padding-top: 7px;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -297,6 +331,7 @@ ul {
 .window__code .code__show-screen code {
     width: 773px;
     height: 615px;
+    font-size: 16px;
 }
 
 .messages {

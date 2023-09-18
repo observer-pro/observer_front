@@ -1,10 +1,16 @@
 .window 
     .window__room.room 
-        h2.room__title= `Комната #${context.room.id}`
         .room__panel
+            h2.room__title= `#${context.room.id}`
             p.room__students-amount
                 span= context.room.users.length - 1 
-                span участников
+                span онлайн
+        if !context.isOnline
+            .room__disconnected-block
+                span.room__disconnected-text Нет соединения
+                a(href="#" class="room__disconnected-link" id="rehost") Подключить
+        .room__links
+            a(href="#" class="link room__invite" id="invite") пригласить
             a(href="#" class="link room__quit" id="quit") выйти
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2

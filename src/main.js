@@ -3,7 +3,13 @@
 import "./css/main.css";
 import { getContext } from "./components/context.js";
 import { renderApp } from "./components/render.js";
-import { getStatus, getCode, updateRoom, updateCode } from "./socket-events.js";
+import {
+    getStatus,
+    getCode,
+    updateRoom,
+    updateCode,
+    disconnect,
+} from "./socket-events.js";
 import { getFiletree, removeExtraFiles } from "./components/filetree.js";
 import { getActiveFile } from "./components/active-files.js";
 
@@ -21,12 +27,12 @@ getStatus((status, log) => {
     renderApp(appElement, context);
 });
 updateRoom((isStart, data) => {
+    context.code = null;
     context.isStart = isStart;
     context.room = data;
 
     if (!context.room.users.find((user) => user.isActive)) {
         context.filetree = null;
-        context.code = null;
         context.activeFileName = null;
     }
 
@@ -60,6 +66,8 @@ getCode((data) => {
     renderApp(appElement, context);
 });
 updateCode((data) => {
+    context.code = null;
+
     removeExtraFiles([...context.files, ...data.files], (result) => {
         context.filetree = getFiletree(result);
     });
@@ -73,4 +81,9 @@ updateCode((data) => {
     });
 
     getActiveFile(context.activeFileName, context);
+});
+disconnect((status) => {
+    context.isOnline = status;
+
+    renderApp(appElement, context);
 });

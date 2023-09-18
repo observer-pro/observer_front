@@ -59,3 +59,13 @@ export const updateCode = (set) => {
         set(data);
     });
 };
+export const disconnect = (set) => {
+    socket.on("disconnect", () => {
+        console.log("Дисконнект");
+
+        set(false);
+    });
+};
+export const reconnect = (data) => {
+    socket.emit("room/rehost", data);
+};

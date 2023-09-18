@@ -36,6 +36,43 @@
             gap: 5px;
         }
 
+        &__disconnected-block {
+            width: 232px;
+            height: 36px;
+            padding-left: 8px;
+            padding-right: 8px;
+            border-radius: 3px;
+            background: #fc4c1e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__disconnected-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        &__disconnected-link {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            transition: all 0.5s;
+
+            &:hover {
+                text-decoration: none;
+                opacity: 0.6;
+            }
+        }
+
+        &__links {
+            display: flex;
+            justify-content: space-between;
+        }
+
         &__quite {
             font-size: 15px;
             line-height: 20px;
@@ -126,6 +163,7 @@
         min-height: 619px;
         background: $work-background;
         border-radius: 7px;
+        overflow: auto;
         display: flex;
 
         &--empty {
@@ -144,6 +182,7 @@
             &__filetree {
                 width: 197px;
                 padding-top: 7px;
+                overflow: auto;
                 display: flex;
                 flex-direction: column;
                 gap: 14px;
@@ -193,6 +232,7 @@
                 & code {
                     width: 773px;
                     height: 615px;
+                    font-size: 16px;
                 }
             }
         }
