@@ -1,6 +1,12 @@
-import { createRoom, endStudent, startStudent } from "./socket-events.js";
-import { context } from "./main.js";
+import {
+    createRoom,
+    endStudent,
+    reconnect,
+    startStudent,
+} from "./socket-events.js";
+import { appElement, context } from "./main.js";
 import { getActiveFile } from "./components/active-files.js";
+import { renderApp } from "./components/render.js";
 
 export const initCreatingRoom = () => {
     const createElement = document.querySelector("#create-room");
@@ -43,12 +49,12 @@ export const initReconnecting = () => {
     rehostElement?.addEventListener("click", (event) => {
         event.preventDefault();
 
-        const data = {
-            user_id: context.room.users[0].id,
-            room__id: context.room.id,
-        };
+        context.isReconnecting = true;
 
-        console.log("Запрос room/rehost отправлен Отправлены данные:");
-        console.log(data);
+        renderApp(appElement, context);
+        reconnect({
+            user_id: context.room.users[0].id,
+            room_id: context.room.id,
+        });
     });
 };

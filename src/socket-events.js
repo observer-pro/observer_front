@@ -63,9 +63,12 @@ export const disconnect = (set) => {
     socket.on("disconnect", () => {
         console.log("Дисконнект");
 
-        set(false);
+        set(true);
     });
 };
 export const reconnect = (data) => {
+    console.log("Запрос room/rehost отправлен. Отправлены данные:");
+    console.log(data);
+
     socket.emit("room/rehost", data);
 };

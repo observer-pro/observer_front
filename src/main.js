@@ -27,6 +27,8 @@ getStatus((status, log) => {
     renderApp(appElement, context);
 });
 updateRoom((isStart, data) => {
+    context.isDisconnected = false;
+    context.isReconnecting = false;
     context.code = null;
     context.isStart = isStart;
     context.room = data;
@@ -83,7 +85,7 @@ updateCode((data) => {
     getActiveFile(context.activeFileName, context);
 });
 disconnect((status) => {
-    context.isOnline = status;
+    context.isDisconnected = status;
 
     renderApp(appElement, context);
 });

@@ -5,10 +5,13 @@
             p.room__students-amount
                 span= context.room.users.length - 1 
                 span онлайн
-        if !context.isOnline
+        if context.isDisconnected
             .room__disconnected-block
-                span.room__disconnected-text Нет соединения
-                a(href="#" class="room__disconnected-link" id="rehost") Подключить
+                if context.isReconnecting 
+                    span.room__disconnected-text Подключаюсь ....
+                else 
+                    span.room__disconnected-text Нет соединения
+                    a(href="#" class="room__disconnected-link" id="rehost") Подключить
         .room__links
             a(href="#" class="link room__invite" id="invite") пригласить
             a(href="#" class="link room__quit" id="quit") выйти
