@@ -29,14 +29,8 @@ getStatus((status, log) => {
 updateRoom((isStart, data) => {
     context.isDisconnected = false;
     context.isReconnecting = false;
-    context.code = null;
     context.isStart = isStart;
     context.room = data;
-
-    if (!context.room.users.find((user) => user.isActive)) {
-        context.filetree = null;
-        context.activeFileName = null;
-    }
 
     context.room.users.map((user) => {
         if (user.id === context.activeUserId) {
@@ -45,6 +39,12 @@ updateRoom((isStart, data) => {
             user.isActive = false;
         }
     });
+
+    if (!context.room.users.find((user) => user.isActive)) {
+        context.filetree = null;
+        context.code = null;
+        context.activeFileName = null;
+    }
 
     if (context.activeFileName) {
         getActiveFile(context.activeFileName, context);

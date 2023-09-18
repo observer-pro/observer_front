@@ -333,6 +333,16 @@ ul {
     height: 615px;
     font-size: 16px;
 }
+.window__code .code__disconnected-screen {
+    width: 773px;
+    height: 615px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+}
 
 .messages {
     width: 406px;

@@ -58,5 +58,8 @@
                                     span.code__tree-name(class=`${
                                         dirFile.isActive ? 'code__tree-name--active' : ''
                                     }`)= dirFile.name
-            pre.code__show-screen 
-                code= context.code
+            if context.isDisconnected || context.isReconnecting 
+                p.code__disconnected-screen Нет соединения...
+            else 
+                pre.code__show-screen 
+                    code= context.code
