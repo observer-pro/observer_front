@@ -37,5 +37,7 @@ export const getActiveFile = (context) => {
 
     renderApp(appElement, context);
 
-    if (isActiveFile) hljs.highlightAll(codeElement);
+    if (isActiveFile) {
+        hljs.highlightAll(codeElement);
+    }
 };
