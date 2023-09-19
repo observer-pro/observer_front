@@ -12,9 +12,10 @@
                 else 
                     span.room__disconnected-text Нет соединения
                     a(href="#" class="room__disconnected-link" id="rehost") Подключить
-        .room__links
-            a(href="#" class="link room__invite" id="invite") пригласить
-            a(href="#" class="link room__quit" id="quit") выйти
+        else 
+            .room__links
+                a(href="#" class="link room__invite" id="invite") пригласить
+                a(href="#" class="link room__quit" id="quit") выйти
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
                 p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
@@ -26,7 +27,7 @@
                                 user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
                             } ${
                                 user.isActive ? 'students__item--active' : ''
-                            }` id=user.id)
+                            } students__item--${user.signal}` id=user.id)
                                 span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length

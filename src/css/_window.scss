@@ -112,7 +112,7 @@
                 padding-left: 13px;
                 display: flex;
                 align-items: center;
-                gap: 43px;
+                gap: 8px;
 
                 &--unread {
                     border-bottom: 1px solid $font-color;
@@ -122,8 +122,24 @@
                     background: #606060;
                 }
 
-                &--order-1 {
-                    order: -1;
+                &--NONE::before {
+                    content: "";
+                    width: 20px;
+                    background: transparent;
+                }
+
+                &--HELP::before {
+                    content: url(../../public/img/help-icon.svg);
+                }
+
+                &--DONE::before {
+                    content: url(../../public/img/done-icon.svg);
+                    margin-right: 5px;
+                }
+
+                &--IN_PROGRESS::before {
+                    content: url(../../public/img/doing-icon.svg);
+                    margin-right: 8px;
                 }
             }
 

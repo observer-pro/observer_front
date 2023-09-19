@@ -3,32 +3,32 @@ import { renderApp } from "./render.js";
 import { codeElement } from "../main.js";
 import hljs from "../hljs.js";
 
-export const getActiveFile = (fileName, context) => {
-    let areActiveFiles = false;
+export const getActiveFile = (context) => {
+    let isActiveFile = false;
 
     context.filetree.files.forEach((file) => {
-        if (file.name === fileName) {
+        if (file.name === context.activeFileName) {
             console.log("Выбран файл " + file.name);
             console.log("Содержимое:");
             console.log(file.content);
 
             file.isActive = true;
             context.code = file.content;
-            areActiveFiles = true;
+            isActiveFile = true;
         } else {
             file.isActive = false;
         }
     });
     context.filetree.dirs.forEach((dir) => {
         context.filetree[dir].files.forEach((file) => {
-            if (file.name === fileName) {
+            if (file.name === context.activeFileName) {
                 console.log("Выбран файл " + file.name);
                 console.log("Содержимое:");
                 console.log(file.content);
 
                 file.isActive = true;
                 context.code = file.content;
-                areActiveFiles = true;
+                isActiveFile = true;
             } else {
                 file.isActive = false;
             }
@@ -37,5 +37,5 @@ export const getActiveFile = (fileName, context) => {
 
     renderApp(appElement, context);
 
-    if (areActiveFiles) hljs.highlightAll(codeElement);
+    if (isActiveFile) hljs.highlightAll(codeElement);
 };

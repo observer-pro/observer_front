@@ -72,3 +72,17 @@ export const reconnect = (data) => {
 
     socket.emit("room/rehost", data);
 };
+export const closeRoom = (data) => {
+    console.log("Запрос room/close отправлен. Отправлены данные:");
+    console.log(data);
+
+    socket.emit("room/close", data);
+};
+export const getSignal = (set) => {
+    socket.on("signal", (data) => {
+        console.log("Выполнен запрос signal. Получены данные:");
+        console.log(data);
+
+        set(data);
+    });
+};

@@ -234,7 +234,7 @@ ul {
     padding-left: 13px;
     display: flex;
     align-items: center;
-    gap: 43px;
+    gap: 8px;
 }
 .window .room .students__item--unread {
     border-bottom: 1px solid #fff;
@@ -242,8 +242,21 @@ ul {
 .window .room .students__item--active {
     background: #606060;
 }
-.window .room .students__item--order-1 {
-    order: -1;
+.window .room .students__item--NONE::before {
+    content: "";
+    width: 20px;
+    background: transparent;
+}
+.window .room .students__item--HELP::before {
+    content: url(../../public/img/help-icon.svg);
+}
+.window .room .students__item--DONE::before {
+    content: url(../../public/img/done-icon.svg);
+    margin-right: 5px;
+}
+.window .room .students__item--IN_PROGRESS::before {
+    content: url(../../public/img/doing-icon.svg);
+    margin-right: 8px;
 }
 .window .room .students .item__name {
     color: #fff;
