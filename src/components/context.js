@@ -1,16 +1,9 @@
 class Context {
-    constructor(isStart, isOnline) {
+    constructor(isStart, isOnline, isShowingTask) {
         this.isStart = isStart;
         this.isOnline = isOnline;
+        this.isShowingTask = isShowingTask;
     }
 }
 
-export const getContext = () => {
-    const contextJson = window.localStorage.getItem("context");
-
-    if (contextJson) {
-        return JSON.parse(contextJson);
-    } else {
-        return new Context(true, false);
-    }
-};
+export default Context;

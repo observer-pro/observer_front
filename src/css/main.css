@@ -197,6 +197,20 @@ ul {
     text-decoration: none;
     opacity: 0.6;
 }
+.window .room__task-button {
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    background: #a96afc;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    transition: all 0.5s;
+}
+.window .room__task-button:hover {
+    opacity: 0.5;
+}
 .window .room__links {
     display: flex;
     justify-content: space-between;
@@ -299,7 +313,7 @@ ul {
 .window__code--empty span {
     opacity: 0.5;
 }
-.window__code .code__filetree {
+.window .code__filetree {
     width: 197px;
     padding-top: 7px;
     overflow: auto;
@@ -307,7 +321,7 @@ ul {
     flex-direction: column;
     gap: 14px;
 }
-.window__code .code__tree-section {
+.window .code__tree-section {
     width: 100%;
     height: 35px;
     padding-left: 17px;
@@ -315,38 +329,38 @@ ul {
     align-items: center;
     gap: 10px;
 }
-.window__code .code__tree-section--active {
+.window .code__tree-section--active {
     background: #606060;
 }
-.window__code .code__tree-section--level-1 {
+.window .code__tree-section--level-1 {
     padding-left: 17px;
 }
-.window__code .code__tree-section--level-2 {
+.window .code__tree-section--level-2 {
     padding-left: 27px;
 }
-.window__code .code__tree-section--level-3 {
+.window .code__tree-section--level-3 {
     padding-left: 37px;
 }
-.window__code .code__tree-name {
+.window .code__tree-name {
     color: #fff;
     font-size: 16px;
     line-height: 20px;
     opacity: 0.7;
     cursor: default;
 }
-.window__code .code__tree-name--active {
+.window .code__tree-name--active {
     opacity: 1;
 }
-.window__code .code__show-screen {
+.window .code__show-screen {
     height: 100%;
     flex-grow: 1;
 }
-.window__code .code__show-screen code {
+.window .code__show-screen code {
     width: 773px;
     height: 615px;
     font-size: 16px;
 }
-.window__code .code__disconnected-screen {
+.window .code__disconnected-screen {
     width: 773px;
     height: 615px;
     display: flex;
@@ -355,6 +369,55 @@ ul {
     font-size: 20px;
     line-height: 40px;
     color: #fff;
+}
+.window__task {
+    height: 619px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #242424;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+}
+.window .task__container {
+    width: 662px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 27px;
+}
+.window .task__title {
+    color: #fff;
+    font-size: 18px;
+    line-height: normal;
+}
+.window .task__area {
+    width: 100%;
+    height: 503px;
+    padding: 9px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #191919;
+    resize: none;
+    color: #fff;
+    font-size: 16px;
+    line-height: normal;
+}
+.window .task__button {
+    width: 179px;
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    background: #a96afc;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    transition: all 0.5s;
+}
+.window .task__button:hover {
+    opacity: 0.5;
 }
 
 .messages {

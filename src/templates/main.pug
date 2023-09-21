@@ -16,6 +16,7 @@
             .room__links
                 a(href="#" class="link room__invite" id="invite") пригласить
                 a(href="#" class="link room__quit" id="quit") выйти
+            button.room__task-button#show-task Задание
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
                 p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
@@ -32,35 +33,42 @@
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
         a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
-    .window__code.code(class=!context.filetree && 'window__code--empty')
-        if !context.filetree
-            span Выберите ученика, его код появится здесь
-        else
-            .code__filetree
-                each file in context.filetree.files 
-                    if file.type === 'file' && file.status !== 'REMOVED'
-                        .code__tree-section.file(class=`code__tree-section--level-${file.level} ${
-                            file.isActive ? 'code__tree-section--active' : ''
-                        }`)
-                            img(src="./public/img/file.svg" alt="file")
-                            span.code__tree-name(class=`${
-                                file.isActive ? 'code__tree-name--active' : ''
-                            }`)= file.name
-                    else if file.type === 'folder'
-                        .code__tree-section(class=`code__tree-section--level-${file.level}`)
-                            img(src="./public/img/folder.svg" alt="folder")
-                            span.code__tree-name= file.name
-                        each dirFile in context.filetree[file.name].files
-                            if file.status !== 'REMOVED'
-                                .code__tree-section.file(class=`code__tree-section--level-${dirFile.level} ${
-                                    dirFile.isActive ? 'code__tree-section--active' : ''
-                                }`)
-                                    img(src="./public/img/file.svg" alt="file")
-                                    span.code__tree-name(class=`${
-                                        dirFile.isActive ? 'code__tree-name--active' : ''
-                                    }`)= dirFile.name
-            if context.isDisconnected || context.isReconnecting 
-                p.code__disconnected-screen Нет соединения...
-            else 
-                pre.code__show-screen 
-                    code= context.code
+    if context.isShowingTask
+        .window__task.task 
+            .task__container 
+                h2.task__title Задание
+                textarea.task__area#task-area(placeholder="Задание для учеников")
+                button.task__button#send-task Отправить ученикам
+    else
+        .window__code.code(class=!context.filetree && 'window__code--empty')   
+            if !context.filetree
+                span Выберите ученика, его код появится здесь 
+            else
+                .code__filetree
+                    each file in context.filetree.files 
+                        if file.type === 'file' && file.status !== 'REMOVED'
+                            .code__tree-section.file(class=`code__tree-section--level-${file.level} ${
+                                file.isActive ? 'code__tree-section--active' : ''
+                            }`)
+                                img(src="./public/img/file.svg" alt="file")
+                                span.code__tree-name(class=`${
+                                    file.isActive ? 'code__tree-name--active' : ''
+                                }`)= file.name
+                        else if file.type === 'folder'
+                            .code__tree-section(class=`code__tree-section--level-${file.level}`)
+                                img(src="./public/img/folder.svg" alt="folder")
+                                span.code__tree-name= file.name
+                            each dirFile in context.filetree[file.name].files
+                                if file.status !== 'REMOVED'
+                                    .code__tree-section.file(class=`code__tree-section--level-${dirFile.level} ${
+                                        dirFile.isActive ? 'code__tree-section--active' : ''
+                                    }`)
+                                        img(src="./public/img/file.svg" alt="file")
+                                        span.code__tree-name(class=`${
+                                            dirFile.isActive ? 'code__tree-name--active' : ''
+                                        }`)= dirFile.name
+                if context.isDisconnected || context.isReconnecting 
+                    p.code__disconnected-screen Нет соединения...
+                else 
+                    pre.code__show-screen 
+                        code= context.code

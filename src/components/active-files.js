@@ -1,7 +1,7 @@
 import { appElement } from "../main.js";
-import { renderApp } from "./render.js";
+import { renderApp } from "../render.js";
 import { codeElement } from "../main.js";
-import hljs from "../hljs.js";
+import hljs from "./hljs.js";
 
 export const getActiveFile = (context) => {
     let isActiveFile = false;

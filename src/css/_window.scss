@@ -1,3 +1,19 @@
+@mixin task-button {
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    background: #a96afc;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    transition: all 0.5s;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
 .window {
     position: relative;
     padding-top: 35px;
@@ -66,6 +82,10 @@
                 text-decoration: none;
                 opacity: 0.6;
             }
+        }
+
+        &__task-button {
+            @include task-button();
         }
 
         &__links {
@@ -193,75 +213,120 @@
         &--empty span {
             opacity: 0.5;
         }
+    }
 
-        .code {
-            &__filetree {
-                width: 197px;
-                padding-top: 7px;
-                overflow: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
+    .code {
+        &__filetree {
+            width: 197px;
+            padding-top: 7px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        &__tree-section {
+            width: 100%;
+            height: 35px;
+            padding-left: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            &--active {
+                background: #606060;
             }
 
-            &__tree-section {
-                width: 100%;
-                height: 35px;
+            &--level-1 {
                 padding-left: 17px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-
-                &--active {
-                    background: #606060;
-                }
-
-                &--level-1 {
-                    padding-left: 17px;
-                }
-
-                &--level-2 {
-                    padding-left: 27px;
-                }
-
-                &--level-3 {
-                    padding-left: 37px;
-                }
             }
 
-            &__tree-name {
-                color: $font-color;
-                font-size: 16px;
-                line-height: 20px;
-                opacity: 0.7;
-                cursor: default;
-
-                &--active {
-                    opacity: 1;
-                }
+            &--level-2 {
+                padding-left: 27px;
             }
 
-            &__show-screen {
-                height: 100%;
-                flex-grow: 1;
-
-                & code {
-                    width: 773px;
-                    height: 615px;
-                    font-size: 16px;
-                }
+            &--level-3 {
+                padding-left: 37px;
             }
+        }
 
-            &__disconnected-screen {
+        &__tree-name {
+            color: $font-color;
+            font-size: 16px;
+            line-height: 20px;
+            opacity: 0.7;
+            cursor: default;
+
+            &--active {
+                opacity: 1;
+            }
+        }
+
+        &__show-screen {
+            height: 100%;
+            flex-grow: 1;
+
+            & code {
                 width: 773px;
                 height: 615px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 20px;
-                line-height: 40px;
-                color: #fff;
+                font-size: 16px;
             }
+        }
+
+        &__disconnected-screen {
+            width: 773px;
+            height: 615px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            line-height: 40px;
+            color: #fff;
+        }
+    }
+
+    &__task {
+        height: 619px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: $work-background;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .task {
+        &__container {
+            width: 662px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 27px;
+        }
+
+        &__title {
+            color: #fff;
+            font-size: 18px;
+            line-height: normal;
+        }
+
+        &__area {
+            width: 100%;
+            height: 503px;
+            padding: 9px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            background: #191919;
+            resize: none;
+            color: #fff;
+            font-size: 16px;
+            line-height: normal;
+        }
+
+        &__button {
+            width: 179px;
+            @include task-button();
         }
     }
 }

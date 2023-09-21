@@ -53,7 +53,6 @@ export const getFiletree = (files) => {
 
     return tree;
 };
-
 export const removeExtraFiles = (files, set) => {
     const result = [];
     const lastFile = files[files.length - 1];
