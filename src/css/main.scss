@@ -1,12 +1,5 @@
 @import "vars";
 @import "ui-kit";
-
-.container {
-  max-width: 1278px;
-  min-height: 731px;
-  margin: 0 auto;
-}
-
 @import "connection";
 @import "window";
 @import "messages";

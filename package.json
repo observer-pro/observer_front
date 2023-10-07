@@ -4,7 +4,7 @@
     "description": "**Обсервер** – это приложение для наблюдения за несколькими учениками, которые пишут код в реальном времени. Приложение позволяет приглашать учеников в комнаты, просматривать код и обмениваться сообщениями с пользователями.",
     "main": "main.js",
     "scripts": {
-        "format": "prettier —write .",
+        "format": "prettier --write .",
         "lint:js": "eslint --ext ./src/**/*.js",
         "lint:fix": "eslint --fix ./src/**/*.js",
         "lint:css": "stylelint ./src/**/*.css --fix",

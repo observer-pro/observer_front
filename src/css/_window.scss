@@ -16,9 +16,7 @@
 
 .window {
     position: relative;
-    padding-top: 35px;
-    padding-left: 33px;
-    padding-right: 43px;
+    padding: 43px;
     display: grid;
     grid-template-columns: 224px 1fr;
     gap: 22px;
@@ -103,6 +101,7 @@
             background: $work-background;
             border-radius: 6px;
             display: flex;
+            overflow-x: hidden;
 
             &--empty {
                 justify-content: center;
@@ -130,6 +129,7 @@
             &__item {
                 height: 50px;
                 padding-left: 13px;
+                padding-right: 13px;
                 display: flex;
                 align-items: center;
                 gap: 8px;
@@ -154,12 +154,10 @@
 
                 &--DONE::before {
                     content: url(../../public/img/done-icon.svg);
-                    margin-right: 5px;
                 }
 
                 &--IN_PROGRESS::before {
                     content: url(../../public/img/doing-icon.svg);
-                    margin-right: 8px;
                 }
             }
 
@@ -267,9 +265,10 @@
             flex-grow: 1;
 
             & code {
-                width: 773px;
+                width: 900px;
                 height: 615px;
                 font-size: 16px;
+                overflow-x: auto;
             }
         }
 
@@ -287,12 +286,11 @@
 
     &__task {
         height: 619px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding: 25px 100px;
         background: $work-background;
         border-radius: 7px;
         display: flex;
-        justify-content: center;
+        justify-content: start;
     }
 
     .task {
@@ -311,7 +309,7 @@
         }
 
         &__area {
-            width: 100%;
+            width: 900px;
             height: 503px;
             padding: 9px;
             border: none;

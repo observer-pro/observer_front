@@ -67,6 +67,7 @@ export const initQuitRoom = () => {
 
         context.isClosed = true;
         context.isStart = true;
+        window.localStorage.clear();
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });
