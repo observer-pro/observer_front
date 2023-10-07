@@ -38,10 +38,21 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
-            sudo systemctl restart Observer.service
-            if [ $? -eq 0 ]; then
-              echo "Successfully restarted the service."
-            else
-              echo "Failed to restart the service."
+            retries=0
+
+            while [ $retries -lt 3 ]; do
+              sudo systemctl restart Observer.service
+              if [ $? -eq 0 ]; then
+                echo "Successfully restarted the service."
+                break
+              else
+                echo "Failed to restart the service. Retrying..."
+                retries=$((retries+1))
+                sleep 5
+              fi
+            done
+
+            if [ $retries -eq 3 ]; then
+              echo "Failed to restart the service after 3 retries."
               exit 1
             fi

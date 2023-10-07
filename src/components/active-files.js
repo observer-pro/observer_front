@@ -7,7 +7,7 @@ export const getActiveFile = (context) => {
     let isActiveFile = false;
 
     context.filetree.files.forEach((file) => {
-        if (file.name === context.activeFileName) {
+        if (file.path === context.activeFilePath) {
             console.log("Выбран файл " + file.name);
             console.log("Содержимое:");
             console.log(file.content);
@@ -21,7 +21,7 @@ export const getActiveFile = (context) => {
     });
     context.filetree.dirs.forEach((dir) => {
         context.filetree[dir].files.forEach((file) => {
-            if (file.name === context.activeFileName) {
+            if (file.path === context.activeFilePath) {
                 console.log("Выбран файл " + file.name);
                 console.log("Содержимое:");
                 console.log(file.content);
