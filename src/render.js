@@ -1,6 +1,6 @@
 import start from "./templates/start.pug";
 import main from "./templates/main.pug";
-import { initCreatingRoom, initQuitRoom } from "./events/room.js";
+import { initCreatingRoom, initInviting, initQuitRoom } from "./events/room.js";
 import { initClickingUsers } from "./events/users.js";
 import { initClickingFiles } from "./events/files.js";
 import { initReconnecting } from "./events/connect-disconnect.js";
@@ -20,5 +20,6 @@ export const renderApp = (appElement, context) => {
         initQuitRoom();
         initOpeningTask();
         initSendingTask();
+        initInviting();
     }
 };

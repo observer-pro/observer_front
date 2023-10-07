@@ -59,6 +59,27 @@ export const updateRoom = () => {
         }
     });
 };
+export const initInviting = () => {
+    const inviteElement = document.querySelector("#invite");
+
+    inviteElement.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const server = "http://5.53.125.76:5000/";
+        const pluginUrl =
+            "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";
+        const data = `Комната: ${context.room.id}\nСервер: ${server}\nУстановить плагин: ${pluginUrl}`;
+
+        navigator.clipboard
+            .writeText(data)
+            .then(() => {
+                alert("Данные скопированы в буфер обмена");
+            })
+            .catch((error) => {
+                alert("Ошибка при копировании данных", error);
+            });
+    });
+};
 export const initQuitRoom = () => {
     const quitElement = document.querySelector("#quit");
 
