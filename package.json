@@ -46,7 +46,7 @@
         "webpack-dev-server": "^4.15.1"
     },
     "dependencies": {
-        "codemirror": "^6.0.1",
+        "clipboard": "^2.0.11",
         "cross-env": "^7.0.3",
         "socket.io": "^4.7.2",
         "socket.io-client": "^4.7.2"

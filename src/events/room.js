@@ -2,6 +2,7 @@ import socket from "../components/socket.js";
 import { context, codeElement, appElement } from "../main.js";
 import { renderApp } from "../render.js";
 import hljs from "../components/hljs.js";
+import ClipboardJS from "clipboard";
 
 const createRoom = (name) => {
     console.log(`Отправлен запрос room/create. Пользователь: ${name}`);
@@ -65,19 +66,22 @@ export const initInviting = () => {
     inviteElement.addEventListener("click", (event) => {
         event.preventDefault();
 
-        const server = "http://5.53.125.76:5000/";
-        const pluginUrl =
-            "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";
-        const data = `Комната: ${context.room.id}\nСервер: ${server}\nУстановить плагин: ${pluginUrl}`;
+        const clipboard = new ClipboardJS("#invite", {
+            text: () => {
+                return inviteElement.dataset.clipboardText;
+            },
+        });
 
-        navigator.clipboard
-            .writeText(data)
-            .then(() => {
-                alert("Данные скопированы в буфер обмена");
-            })
-            .catch((error) => {
-                alert("Ошибка при копировании данных", error);
-            });
+        clipboard.on("success", () => {
+            alert("Текст скопирован в буфер обмена");
+
+            clipboard.destroy();
+        });
+        clipboard.on("error", () => {
+            alert("Ошибка копирования");
+
+            clipboard.destroy();
+        });
     });
 };
 export const initQuitRoom = () => {

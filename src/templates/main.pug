@@ -14,7 +14,13 @@
                     a(href="#" class="room__disconnected-link" id="rehost") Подключить
         else 
             .room__links
-                a(href="#" class="link room__invite" id="invite") пригласить
+                a(href="#" class="link room__invite" id="invite" data-clipboard-text=`Комната: ${
+                    context.room.id
+                }\nСервер: ${
+                    context.server
+                }\nУстановить плагин: ${
+                    context.pluginUrl
+                }`) пригласить
                 a(href="#" class="link room__quit" id="quit") выйти
             button.room__task-button#show-task Задание
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
