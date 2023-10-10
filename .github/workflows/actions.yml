@@ -13,6 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Stop Observer service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          script: |
+            sudo systemctl stop Observer.service
+
       - name: Deploy
         uses: appleboy/scp-action@master
         with:
@@ -41,18 +50,18 @@ jobs:
             retries=0
 
             while [ $retries -lt 3 ]; do
-              sudo systemctl restart Observer.service
+              sudo systemctl start Observer.service
               if [ $? -eq 0 ]; then
-                echo "Successfully restarted the service."
+                echo "Successfully started the service."
                 break
               else
-                echo "Failed to restart the service. Retrying..."
+                echo "Failed to start the service. Retrying..."
                 retries=$((retries+1))
                 sleep 5
               fi
             done
 
             if [ $retries -eq 3 ]; then
-              echo "Failed to restart the service after 3 retries."
+              echo "Failed to start the service after 3 retries."
               exit 1
             fi
