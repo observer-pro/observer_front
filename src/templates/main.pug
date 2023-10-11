@@ -8,7 +8,7 @@
         if context.isDisconnected
             .room__disconnected-block
                 if context.isReconnecting 
-                    span.room__disconnected-text Подключаюсь ....
+                    span.room__disconnected-text Подключаюсь...
                 else 
                     span.room__disconnected-text Нет соединения
                     a(href="#" class="room__disconnected-link" id="rehost") Подключить
@@ -60,7 +60,7 @@
                                 span.code__tree-name(class=`${
                                     file.isActive ? 'code__tree-name--active' : ''
                                 }`)= file.name
-                        else if file.type === 'folder'
+                        else if file.type === 'folder' && file.status !== 'REMOVED'
                             .code__tree-section(class=`code__tree-section--level-${file.level}`)
                                 img(src="./public/img/folder.svg" alt="folder")
                                 span.code__tree-name= file.name

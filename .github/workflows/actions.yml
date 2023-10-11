@@ -13,14 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Stop Observer service
+      - name: Stop Nginx
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
-            sudo systemctl stop Observer.service
+            sudo systemctl stop nginx
 
       - name: Deploy
         uses: appleboy/scp-action@master
@@ -40,7 +40,7 @@ jobs:
           source: "server.py"
           target: /home/deploy/Observer/build
 
-      - name: Restart the service
+      - name: Start Nginx
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -50,18 +50,18 @@ jobs:
             retries=0
 
             while [ $retries -lt 3 ]; do
-              sudo systemctl start Observer.service
+              sudo systemctl start nginx
               if [ $? -eq 0 ]; then
-                echo "Successfully started the service."
+                echo "Successfully started Nginx."
                 break
               else
-                echo "Failed to start the service. Retrying..."
+                echo "Failed to start Nginx. Retrying..."
                 retries=$((retries+1))
                 sleep 5
               fi
             done
 
             if [ $retries -eq 3 ]; then
-              echo "Failed to start the service after 3 retries."
+              echo "Failed to start Nginx after 3 retries."
               exit 1
             fi

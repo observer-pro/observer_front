@@ -55,22 +55,3 @@ export const getFiletree = (files) => {
 
     return tree;
 };
-export const removeExtraFiles = (files, set) => {
-    const result = [];
-    const lastFile = files[files.length - 1];
-
-    for (let i = 0; i < files.length - 1; i++) {
-        if (
-            files[i].filename !== lastFile.filename &&
-            files[i].status !== "REMOVED"
-        ) {
-            result.push(files[i]);
-        }
-    }
-
-    if (lastFile.status !== "REMOVED") {
-        result.push(lastFile);
-    }
-
-    set(result);
-};
