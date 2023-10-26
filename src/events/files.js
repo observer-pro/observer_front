@@ -10,8 +10,6 @@ export const sendCode = () => {
         console.log(`Выполнен запрос sharing/code_send. Получены данные:`);
         console.log(data);
 
-        context.code = null;
-        context.activeFilePath = null;
         context.files = data.files;
         context.filetree = getFiletree(data.files);
 

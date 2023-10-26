@@ -63,7 +63,7 @@ export const updateRoom = () => {
 export const initInviting = () => {
     const inviteElement = document.querySelector("#invite");
 
-    inviteElement.addEventListener("click", (event) => {
+    inviteElement?.addEventListener("click", (event) => {
         event.preventDefault();
 
         const clipboard = new ClipboardJS("#invite", {
