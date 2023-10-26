@@ -41,5 +41,13 @@ export const initReconnecting = () => {
             user_id: context.room.users[0].id,
             room_id: context.room.id,
         });
+
+        setTimeout(() => {
+            if (context.isDisconnected) {
+                context.isReconnecting = false;
+
+                renderApp(appElement, context);
+            }
+        }, 3000);
     });
 };
