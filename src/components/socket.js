@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://5.53.125.76:5000/", {
+const socket = io("ws://server.observer-app.pro", {
     transports: ["websocket"],
 });
 
