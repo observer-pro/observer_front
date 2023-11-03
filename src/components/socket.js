@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-const socket = io("wss://server.observer-app.pro", {
+const webserver = window.localStorage.getItem("SERVER");
+
+const socket = io(`${webserver}`, {
     transports: ["websocket"],
 });
 

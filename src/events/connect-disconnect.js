@@ -9,23 +9,18 @@ const reconnect = (data) => {
     socket.emit("room/rehost", data);
 };
 
-export const getStatus = (set) => {
-    socket.on("log", (log) => {
-        socket.on("connect", () => {
-            console.log("Коннект");
+export const connect = (set) => {
+    socket.on("connect", () => {
+        console.log("Коннект");
 
-            set(true, log);
-        });
-        socket.on("disconnect", () => {
-            set(false, log);
-        });
+        set(true);
     });
 };
 export const disconnect = (set) => {
     socket.on("disconnect", () => {
         console.log("Дисконнект");
 
-        set(true);
+        set(false);
     });
 };
 export const initReconnecting = () => {
@@ -49,5 +44,14 @@ export const initReconnecting = () => {
                 renderApp(appElement, context);
             }
         }, 3000);
+    });
+};
+export const initCheckAddress = () => {
+    const addressElement = document.querySelector("#address");
+
+    addressElement.value = window.localStorage.getItem("SERVER");
+
+    addressElement.addEventListener("input", (event) => {
+        window.localStorage.setItem("SERVER", event.target.value);
     });
 };

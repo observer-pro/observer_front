@@ -22,7 +22,7 @@ export const initSendingTask = () => {
     }
 
     areaElement?.addEventListener("input", (event) => {
-        window.localStorage.setItem("task", event.target.value);
+        window.localStorage.setItem("TASK", event.target.value);
     });
     sendTaskElement?.addEventListener("click", () => {
         const data = {

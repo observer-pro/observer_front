@@ -1,8 +1,12 @@
 .connection
+    a(href="#" class="connection__link link") Вернуться на сайт
     .connection__form
-        h2.connection__title Observer by Sky Pro
-        .connection__status
-            img(src=context.isOnline ? './public/img/status-online.svg' : './public/img/status-offline.svg')
-            span.connection__text-status= context.isOnline ? 'Сервер работает' : 'Сервер недоступен'
+        h2.connection__title Observer
+        p.connection__text Кабинет преподавателя
+        input(type="text" class="connection__input" id="address" value= context.currentAddress placeholder="ws://server.com")
+        .connection__check-section 
+            a(href="/").connection__check-button Проверить
+            .connection__status
+                img(src= context.isOnline ? './public/img/status-online.svg' : './public/img/status-offline.svg')
+                span.connection__text-status= context.isOnline ? 'Сервер работает' : 'Сервер недоступен'
         button.button.create-room#create-room(disabled=!context.isOnline) Создать комнату
-    a(href="#" class="connection__link link" id="load-plugin") Скачать плагин (для учеников)

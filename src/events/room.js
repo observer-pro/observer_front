@@ -92,7 +92,9 @@ export const initQuitRoom = () => {
 
         context.isClosed = true;
         context.isStart = true;
-        window.localStorage.clear();
+        context.currentAddress = window.localStorage.getItem("SERVER");
+
+        window.localStorage.removeItem("TASK");
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });
