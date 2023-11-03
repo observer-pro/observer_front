@@ -44,7 +44,7 @@
             .task__container 
                 h2.task__title Задание
                 textarea.task__area#task-area(placeholder="Задание для учеников")
-                button.task__button#send-task Отправить ученикам
+                button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить ученикам"
     else
         .window__code.code(class=!context.filetree && 'window__code--empty')   
             if !context.filetree

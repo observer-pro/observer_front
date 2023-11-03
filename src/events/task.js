@@ -21,6 +21,13 @@ export const initSendingTask = () => {
         areaElement.value = window.localStorage.getItem("task");
     }
 
+    areaElement?.addEventListener("focus", () => {
+        if (context.isSent) {
+            context.isSent = false;
+
+            renderApp(appElement, context);
+        }
+    });
     areaElement?.addEventListener("input", (event) => {
         window.localStorage.setItem("TASK", event.target.value);
     });
@@ -29,9 +36,13 @@ export const initSendingTask = () => {
             content: areaElement.value,
         };
 
+        context.isSent = true;
+
         console.log("Отправлен запрос exercise. Отправлены данные:");
         console.log(data);
 
         socket.emit("exercise", data);
+
+        renderApp(appElement, context);
     });
 };

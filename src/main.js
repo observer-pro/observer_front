@@ -10,7 +10,7 @@ import { getSignal } from "./events/signals.js";
 
 export const appElement = document.querySelector("#app");
 export const codeElement = document.querySelector("code");
-export const context = new Context(true, false, true, "Host", null);
+export const context = new Context(true, false, true, "Host", null, false);
 
 renderApp(appElement, context);
 connect((status) => {

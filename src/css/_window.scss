@@ -326,5 +326,11 @@
             width: 179px;
             @include task-button();
         }
+
+        &__button-sent {
+            width: 179px;
+            @include task-button();
+            background: #00aa63;
+        }
     }
 }

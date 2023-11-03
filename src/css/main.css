@@ -460,6 +460,21 @@ ul {
 .window .task__button:hover {
     opacity: 0.5;
 }
+.window .task__button-sent {
+    width: 179px;
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    transition: all 0.5s;
+    background: #00aa63;
+}
+.window .task__button-sent:hover {
+    opacity: 0.5;
+}
 
 .messages {
     width: 406px;
