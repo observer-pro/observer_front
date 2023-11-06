@@ -2,13 +2,12 @@ import socket from "../components/socket.js";
 import { context, appElement } from "../main.js";
 import { renderApp } from "../render.js";
 
-const reconnect = (data) => {
+export const reconnect = (data) => {
     console.log("Запрос room/rehost отправлен. Отправлены данные:");
     console.log(data);
 
     socket.emit("room/rehost", data);
 };
-
 export const connect = (set) => {
     socket.on("connect", () => {
         console.log("Коннект");

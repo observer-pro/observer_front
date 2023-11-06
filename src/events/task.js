@@ -36,13 +36,15 @@ export const initSendingTask = () => {
             content: areaElement.value,
         };
 
-        context.isSent = true;
+        if (data.content) {
+            context.isSent = true;
 
-        console.log("Отправлен запрос exercise. Отправлены данные:");
-        console.log(data);
+            console.log("Отправлен запрос exercise. Отправлены данные:");
+            console.log(data);
 
-        socket.emit("exercise", data);
+            socket.emit("exercise", data);
 
-        renderApp(appElement, context);
+            renderApp(appElement, context);
+        }
     });
 };

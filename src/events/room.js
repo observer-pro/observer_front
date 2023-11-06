@@ -1,8 +1,10 @@
 import socket from "../components/socket.js";
-import { context, codeElement, appElement } from "../main.js";
+import { context, appElement, codeElement } from "../main.js";
 import { renderApp } from "../render.js";
-import hljs from "../components/hljs.js";
 import ClipboardJS from "clipboard";
+import hljs from "../components/hljs.js";
+
+const newUrl = new URL(window.location.href);
 
 const createRoom = (name) => {
     console.log(`Отправлен запрос room/create. Пользователь: ${name}`);
@@ -25,11 +27,15 @@ export const initCreatingRoom = () => {
         createRoom(context.hostName);
     });
 };
-
 export const updateRoom = () => {
     socket.on("room/update", (data) => {
         console.log(`Запрос room/update. Получены данные:`);
         console.log(data);
+
+        newUrl.searchParams.set("room", data.id);
+        window.history.replaceState({}, document.title, newUrl.href);
+        window.localStorage.setItem("ROOM_ID", data.id);
+        window.localStorage.setItem("HOST_ID", data.users[0].id);
 
         context.isDisconnected = false;
         context.isReconnecting = false;
@@ -95,6 +101,9 @@ export const initQuitRoom = () => {
         context.currentAddress = window.localStorage.getItem("SERVER");
 
         window.localStorage.removeItem("TASK");
+        window.localStorage.removeItem("ROOM_ID");
+        window.localStorage.removeItem("HOST_ID");
+        window.history.pushState({}, document.title, newUrl.origin);
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });

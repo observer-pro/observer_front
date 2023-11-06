@@ -3,9 +3,9 @@ import { renderApp } from "../render.js";
 import { codeElement } from "../main.js";
 import hljs from "./hljs.js";
 
-export const getActiveFile = (context) => {
-    let isActiveFile = false;
+export let isActiveFile = false;
 
+export const getActiveFile = (context) => {
     context.filetree.files.forEach((file) => {
         if (file.path === context.activeFilePath) {
             console.log("Выбран файл " + file.name);

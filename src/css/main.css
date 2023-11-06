@@ -338,10 +338,9 @@ ul {
     line-height: 20px;
 }
 .window__code {
-    min-height: 619px;
+    height: 619px;
     background: #242424;
     border-radius: 7px;
-    overflow: auto;
     display: flex;
 }
 .window__code--empty {
@@ -356,11 +355,25 @@ ul {
 }
 .window .code__filetree {
     width: 197px;
-    padding-top: 7px;
-    overflow: auto;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 14px;
+    overflow: auto;
+    scrollbar-width: 0;
+}
+.window .code__filetree::-webkit-scrollbar {
+    width: 0;
+}
+.window .code__filetree::-webkit-scrollbar-track {
+    background: transparent;
+}
+.window .code__filetree::-webkit-scrollbar-thumb {
+    height: 5px;
+    background-color: #fff;
+    border-radius: 5px;
 }
 .window .code__tree-section {
     width: 100%;
@@ -385,7 +398,7 @@ ul {
 .window .code__tree-name {
     color: #fff;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 18px;
     opacity: 0.7;
     cursor: default;
 }
@@ -394,13 +407,24 @@ ul {
 }
 .window .code__show-screen {
     height: 100%;
-    flex-grow: 1;
+    overflow: hidden;
 }
 .window .code__show-screen code {
-    width: 900px;
-    height: 615px;
+    width: 1000px;
+    height: 100%;
     font-size: 16px;
-    overflow-x: auto;
+    overflow: auto;
+    scrollbar-width: 0;
+}
+.window .code__show-screen code::-webkit-scrollbar {
+    width: 0;
+}
+.window .code__show-screen code::-webkit-scrollbar-track {
+    background: transparent;
+}
+.window .code__show-screen code::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 5px;
 }
 .window .code__disconnected-screen {
     width: 773px;

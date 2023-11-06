@@ -1,7 +1,7 @@
 import socket from "../components/socket.js";
 import { context, appElement } from "../main.js";
 import { getFiletree } from "../components/filetree.js";
-import { getActiveFile } from "../components/active-files.js";
+import { getActiveFile, isActiveFile } from "../components/active-files.js";
 import { renderApp } from "../render.js";
 import { getNewFiles } from "../components/new-files.js";
 
@@ -22,6 +22,10 @@ export const sendCode = () => {
         });
 
         renderApp(appElement, context);
+
+        if (isActiveFile) {
+            getActiveFile(context);
+        }
     });
 };
 export const initClickingFiles = () => {
