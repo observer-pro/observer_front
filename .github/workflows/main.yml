@@ -1,9 +1,9 @@
-name: Deploy
+name: Deploy to prod
 
 on:
   push:
     branches:
-      - deploy
+      - main
 
 jobs:
   deploy:
@@ -16,36 +16,27 @@ jobs:
       - name: Stop Nginx
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_IP }}
+          host: ${{ secrets.MAIN_SERVER_IP }}
           username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
+          password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
           script: |
             sudo systemctl stop nginx
 
       - name: Deploy
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SERVER_IP }}
+          host: ${{ secrets.MAIN_SERVER_IP }}
           username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
+          password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
           source: "./build"
           target: /home/deploy/Observer
-
-      - name: Deploy server.py
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          source: "server.py"
-          target: /home/deploy/Observer/build
 
       - name: Start Nginx
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_IP }}
+          host: ${{ secrets.MAIN_SERVER_IP }}
           username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
+          password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
           script: |
             retries=0
 
