@@ -11,7 +11,11 @@ export const sendCode = () => {
         console.log(data);
 
         context.files = data.files;
-        context.filetree = getFiletree(data.files);
+        context.filetree = getFiletree(
+            data.files,
+            data.user_id,
+            context.activeUserId,
+        );
 
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
