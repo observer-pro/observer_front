@@ -10,12 +10,13 @@ export const sendCode = () => {
         console.log(`Выполнен запрос sharing/code_send. Получены данные:`);
         console.log(data);
 
+        if (!data.user_id || data.user_id !== context.activeUserId) {
+            console.log("Получены чужие данные");
+            return;
+        }
+
         context.files = data.files;
-        context.filetree = getFiletree(
-            data.files,
-            data.user_id,
-            context.activeUserId,
-        );
+        context.filetree = getFiletree(data.files);
 
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
@@ -47,6 +48,11 @@ export const updateCode = () => {
     socket.on("sharing/code_update", (data) => {
         console.log(`Выполнен запрос sharing/code_update. Получены данные:`);
         console.log(data);
+
+        if (!data.user_id || data.user_id !== context.activeUserId) {
+            console.log("Получены чужие данные");
+            return;
+        }
 
         context.code = null;
         context.files = getNewFiles(context.files, data.files);

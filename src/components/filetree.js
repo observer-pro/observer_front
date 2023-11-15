@@ -5,7 +5,7 @@ class Tree {
     }
 }
 
-export const getFiletree = (files, userId, activeUserId) => {
+export const getFiletree = (files) => {
     const tree = new Tree([], []);
 
     files.forEach((file) => {
@@ -22,15 +22,12 @@ export const getFiletree = (files, userId, activeUserId) => {
                 path: file.filename,
             };
 
-            if (userId === activeUserId) {
-                tree.files.push(newFile);
-            }
-
+            tree.files.push(newFile);
             return;
         }
 
         for (let i = 0; i < path.length - 1; i++) {
-            if (!tree.dirs.includes(path[i]) && userId === activeUserId) {
+            if (!tree.dirs.includes(path[i])) {
                 tree.dirs.push(path[i]);
                 tree.files.push({
                     name: path[i],
@@ -53,9 +50,7 @@ export const getFiletree = (files, userId, activeUserId) => {
             path: file.filename,
         };
 
-        if (userId === activeUserId) {
-            tree[path[path.length - 2]].files.push(newFile);
-        }
+        tree[path[path.length - 2]].files.push(newFile);
     });
 
     return tree;
