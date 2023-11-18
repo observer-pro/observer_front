@@ -194,10 +194,10 @@
     }
 
     &__code {
-        min-height: 619px;
+        height: 619px;
+        padding-bottom: 15px;
         background: $work-background;
         border-radius: 7px;
-        overflow: auto;
         display: flex;
 
         &--empty {
@@ -221,6 +221,15 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
+            scrollbar-width: 0px;
+
+            &::-webkit-scrollbar {
+                width: 0px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
         }
 
         &__tree-section {
@@ -261,14 +270,23 @@
         }
 
         &__show-screen {
-            height: 100%;
             flex-grow: 1;
 
             & code {
                 width: 900px;
-                height: 615px;
+                height: 610px;
+                background: #cecfd2;
                 font-size: 16px;
                 overflow-x: auto;
+                scrollbar-width: 0px;
+
+                &::-webkit-scrollbar {
+                    width: 0px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
             }
         }
 

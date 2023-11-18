@@ -3,10 +3,10 @@ import { renderApp } from "../render.js";
 import { codeElement } from "../main.js";
 import hljs from "./hljs.js";
 
-export let isActiveFile = false;
+let isActiveFile = false;
 
 export const getActiveFile = (context) => {
-    context.filetree.files.forEach((file) => {
+    context.filetree?.files.forEach((file) => {
         if (file.path === context.activeFilePath) {
             console.log("Выбран файл " + file.name);
             console.log("Содержимое:");
@@ -19,7 +19,7 @@ export const getActiveFile = (context) => {
             file.isActive = false;
         }
     });
-    context.filetree.dirs.forEach((dir) => {
+    context.filetree?.dirs.forEach((dir) => {
         context.filetree[dir].files.forEach((file) => {
             if (file.path === context.activeFilePath) {
                 console.log("Выбран файл " + file.name);

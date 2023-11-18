@@ -6,6 +6,7 @@ class Context {
         hostName,
         currentAddress,
         isSent,
+        allMessages,
     ) {
         this.isStart = isStart;
         this.isOnline = isOnline;
@@ -13,6 +14,7 @@ class Context {
         this.hostName = hostName;
         this.currentAddress = currentAddress;
         this.isSent = isSent;
+        this.allMessages = allMessages;
         this.server = "wss://server.observer-app.pro";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";

@@ -7,6 +7,7 @@ import { connect, disconnect, reconnect } from "./events/connect-disconnect.js";
 import { updateRoom } from "./events/room.js";
 import { sendCode, updateCode } from "./events/files.js";
 import { getSignal } from "./events/signals.js";
+import { receiveNewMessage } from "./events/messages.js";
 
 const ROOM_ID = +window.localStorage.getItem("ROOM_ID");
 const HOST_ID = +window.localStorage.getItem("HOST_ID");
@@ -14,8 +15,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const roomParam = urlParams.get("room");
 
 export const appElement = document.querySelector("#app");
-export const codeElement = document.querySelector("pre.line-numbers");
-export const context = new Context(true, false, true, "Host", null, false);
+export const codeElement = document.querySelector("#code");
+export const context = new Context(true, false, true, "Host", null, false, []);
 
 renderApp(appElement, context);
 connect((status) => {
@@ -37,6 +38,7 @@ disconnect((status) => {
     renderApp(appElement, context);
 });
 getSignal();
+receiveNewMessage();
 
 if (roomParam) {
     reconnect({

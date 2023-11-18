@@ -1,8 +1,9 @@
 import socket from "../components/socket.js";
-import { context, appElement, codeElement } from "../main.js";
+import { context, appElement } from "../main.js";
 import { renderApp } from "../render.js";
 import ClipboardJS from "clipboard";
-import hljs from "../components/hljs.js";
+import { getAllMessages } from "../components/message-form.js";
+import { getActiveFile } from "../components/active-files.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -34,8 +35,11 @@ export const updateRoom = () => {
 
         newUrl.searchParams.set("room", data.id);
         window.history.replaceState({}, document.title, newUrl.href);
-        window.localStorage.setItem("ROOM_ID", data.id);
-        window.localStorage.setItem("HOST_ID", data.users[0].id);
+
+        if (!context.isClosed) {
+            window.localStorage.setItem("ROOM_ID", data.id);
+            window.localStorage.setItem("HOST_ID", data.host);
+        }
 
         context.isDisconnected = false;
         context.isReconnecting = false;
@@ -50,19 +54,32 @@ export const updateRoom = () => {
             }
         });
         context.room.users.map((user) => (user.signal = "NONE"));
+        context.allMessages = getAllMessages(
+            context.room.users,
+            context.room.host,
+            context.activeUserId,
+        );
 
         if (!context.room.users.find((user) => user.isActive)) {
             context.filetree = null;
             context.code = null;
             context.activeFileName = null;
+            context.activeUserId = null;
         }
 
-        if (!context.isClosed) {
-            renderApp(appElement, context);
+        if (context.isClosed) {
+            context.code = null;
+            context.activeUserId = null;
+            context.activeFilePath = null;
+            context.isStart = true;
+
+            window.history.pushState({}, document.title, newUrl.origin);
         }
+
+        renderApp(appElement, context);
 
         if (context.code) {
-            hljs.highlightAll(codeElement);
+            getActiveFile(context);
         }
     });
 };
@@ -100,12 +117,15 @@ export const initQuitRoom = () => {
         context.isStart = true;
         context.currentAddress = window.localStorage.getItem("SERVER");
 
-        window.localStorage.removeItem("TASK");
         window.localStorage.removeItem("ROOM_ID");
         window.localStorage.removeItem("HOST_ID");
-        window.history.pushState({}, document.title, newUrl.origin);
+        window.localStorage.removeItem("ACTIVE_USER_ID");
+        window.localStorage.removeItem("ACTIVE_FILE_PATH");
+        window.localStorage.removeItem("FILES");
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });
+
+        window.history.pushState({}, document.title, newUrl.origin);
     });
 };

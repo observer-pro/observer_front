@@ -8,6 +8,8 @@ import {
     initReconnecting,
 } from "./events/connect-disconnect.js";
 import { initOpeningTask, initSendingTask } from "./events/task.js";
+import { toggleConvertingForm } from "./components/message-form.js";
+import { initSendingMessage } from "./events/messages.js";
 
 export const renderApp = (appElement, context) => {
     if (context.isStart) {
@@ -25,5 +27,7 @@ export const renderApp = (appElement, context) => {
         initOpeningTask();
         initSendingTask();
         initInviting();
+        toggleConvertingForm();
+        initSendingMessage();
     }
 };

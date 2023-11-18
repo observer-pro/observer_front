@@ -34,7 +34,7 @@
                                 user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
                             } ${
                                 user.isActive ? 'students__item--active' : ''
-                            } students__item--${user.signal}` id=user.id)
+                            } students__item--${user.signal}` id=user.id data-name=user.name)
                                 span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
@@ -76,5 +76,27 @@
                 if context.isDisconnected || context.isReconnecting 
                     p.code__disconnected-screen Нет соединения...
                 else 
-                    pre.code__show-screen 
+                    pre.code__show-screen#code 
                         code= context.code
+    if context.activeUserId
+        div(class=`${
+            !context.isFormConverted ? 'message-form' : 'message-form--converted'
+        }`).form
+            .form__top 
+                h3.form__name= context.activeUserName 
+                a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
+            if !context.isFormConverted
+                .form__messages
+                    if context.allMessages.length > 0
+                        each message in context.allMessages 
+                            if message.sender === context.activeUserId || message.sender === context.room.host && message.receiver === context.activeUserId 
+                                .form__message(class=`${
+                                    message.sender === context.activeUserId ? 'form__message--student' : 'form__message--menthor'
+                                }`)
+                                    p= message.content 
+                                        span= message.distance
+                    else 
+                        p.form__empty-text Нет сообщений
+                .form__footer
+                    input(type="text" class="form__input" placeholder="Начните печатать" id="message-text")
+                    button.form__button#send-message

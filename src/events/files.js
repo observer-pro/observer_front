@@ -1,22 +1,38 @@
 import socket from "../components/socket.js";
 import { context, appElement } from "../main.js";
 import { getFiletree } from "../components/filetree.js";
-import { getActiveFile, isActiveFile } from "../components/active-files.js";
+import { getActiveFile } from "../components/active-files.js";
 import { renderApp } from "../render.js";
 import { getNewFiles } from "../components/new-files.js";
+import { getAllMessages } from "../components/message-form.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
         console.log(`Выполнен запрос sharing/code_send. Получены данные:`);
         console.log(data);
 
-        if (!data.user_id || data.user_id !== context.activeUserId) {
+        context.activeUserId = +window.localStorage.getItem("ACTIVE_USER_ID");
+        context.activeFilePath =
+            window.localStorage.getItem("ACTIVE_FILE_PATH");
+
+        if (data?.user_id !== context.activeUserId) {
             console.log("Получены чужие данные");
             return;
         }
 
         context.files = data.files;
         context.filetree = getFiletree(data.files);
+
+        window.localStorage.setItem(
+            "FILES",
+            JSON.stringify(getFiletree(data.files)),
+        );
+
+        context.allMessages = getAllMessages(
+            context.room.users,
+            context.room.host,
+            context.activeUserId,
+        );
 
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
@@ -28,9 +44,7 @@ export const sendCode = () => {
 
         renderApp(appElement, context);
 
-        if (isActiveFile) {
-            getActiveFile(context);
-        }
+        getActiveFile(context);
     });
 };
 export const initClickingFiles = () => {
@@ -39,6 +53,11 @@ export const initClickingFiles = () => {
     fileElements.forEach((element) => {
         element.addEventListener("click", () => {
             context.activeFilePath = element.dataset.path;
+
+            window.localStorage.setItem(
+                "ACTIVE_FILE_PATH",
+                element.dataset.path,
+            );
 
             getActiveFile(context);
         });
@@ -49,7 +68,11 @@ export const updateCode = () => {
         console.log(`Выполнен запрос sharing/code_update. Получены данные:`);
         console.log(data);
 
-        if (!data.user_id || data.user_id !== context.activeUserId) {
+        context.activeUserId = +window.localStorage.getItem("ACTIVE_USER_ID");
+        context.activeFilePath =
+            window.localStorage.getItem("ACTIVE_FILE_PATH");
+
+        if (data?.user_id !== context.activeUserId) {
             console.log("Получены чужие данные");
             return;
         }
@@ -64,6 +87,12 @@ export const updateCode = () => {
                 user.isActive = false;
             }
         });
+        context.allMessages = getAllMessages(
+            context.room.users,
+            context.room.host,
+            context.activeUserId,
+        );
+
         getActiveFile(context);
     });
 };

@@ -22,7 +22,10 @@ export const initClickingUsers = () => {
     userElements.forEach((user) => {
         user.addEventListener("click", () => {
             context.activeUserId = +user.id;
+            context.activeUserName = user.dataset.name;
             context.isShowingTask = false;
+
+            window.localStorage.setItem("ACTIVE_USER_ID", user.id);
 
             userElements.forEach((user) => {
                 if (context.activeUserId === +user.id) {
