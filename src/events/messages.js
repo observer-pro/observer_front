@@ -16,34 +16,45 @@ const sendNewMessage = (userId, roomId, content) => {
 
     socket.emit("message/to_client", data);
 };
+const goMessage = (content) => {
+    const date = new Date();
+
+    if (content) {
+        context.allMessages.push({
+            sender: context.room.host,
+            receiver: context.activeUserId,
+            content,
+            created_at: getDateTime(
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+            ),
+        });
+
+        sendNewMessage(context.activeUserId, context.room.id, content);
+        renderApp(appElement, context);
+
+        if (context.code) {
+            getActiveFile(context);
+        }
+    }
+};
 
 export const initSendingMessage = () => {
     const textElement = document.querySelector("#message-text");
     const buttonElement = document.querySelector("#send-message");
 
+    textElement?.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+            const content = event.target.value;
+
+            goMessage(content);
+        }
+    });
     buttonElement?.addEventListener("click", () => {
         const content = textElement.value;
-        const date = new Date();
 
-        if (content) {
-            context.allMessages.push({
-                sender: context.room.host,
-                receiver: context.activeUserId,
-                content,
-                created_at: getDateTime(
-                    date.getHours(),
-                    date.getMinutes(),
-                    date.getSeconds(),
-                ),
-            });
-
-            sendNewMessage(context.activeUserId, context.room.id, content);
-            renderApp(appElement, context);
-
-            if (context.code) {
-                getActiveFile(context);
-            }
-        }
+        goMessage(content);
     });
 };
 export const receiveNewMessage = () => {
@@ -63,5 +74,39 @@ export const receiveNewMessage = () => {
         if (context.code) {
             getActiveFile(context);
         }
+    });
+};
+export const toggleConvertingForm = () => {
+    const convertElement = document.querySelector("#converter");
+
+    convertElement?.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (context.isFormConverted) {
+            context.isFormConverted = false;
+        } else {
+            context.isFormConverted = true;
+        }
+
+        renderApp(appElement, context);
+
+        if (context.code) {
+            getActiveFile(context);
+        }
+    });
+};
+export const requireAllMessages = (userId) => {
+    console.log(
+        `Отправлен сигнал message/users. Данные: ${{ user_id: userId }}`,
+    );
+
+    socket.emit("message/user", { user_id: userId });
+};
+export const getAllMessages = (setNewMessages) => {
+    socket.on("message/user", (data) => {
+        console.log(`Получен сигнал message/users. Данные:`);
+        console.log(data);
+
+        setNewMessages(data.messages);
     });
 };

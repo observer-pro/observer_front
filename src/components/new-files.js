@@ -9,7 +9,7 @@ export const getNewFiles = (files, newFiles) => {
     const uniquieNewFiles = removeDuplicates(newFiles);
     const result = [];
 
-    files.forEach((file) => {
+    files?.forEach((file) => {
         let isSame = false;
 
         uniquieNewFiles.forEach((newFile) => {

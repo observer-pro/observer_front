@@ -38,7 +38,6 @@
                                 span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
-        a(href="#" class="link room__instructions" id="instructions") Инструкция для учеников
     if context.isShowingTask
         .window__task.task 
             .task__container 
@@ -93,8 +92,7 @@
                                 .form__message(class=`${
                                     message.sender === context.activeUserId ? 'form__message--student' : 'form__message--menthor'
                                 }`)
-                                    p= message.content 
-                                        span= message.distance
+                                    p= message.content
                     else 
                         p.form__empty-text Нет сообщений
                 .form__footer

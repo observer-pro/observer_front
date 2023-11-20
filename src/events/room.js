@@ -2,8 +2,8 @@ import socket from "../components/socket.js";
 import { context, appElement } from "../main.js";
 import { renderApp } from "../render.js";
 import ClipboardJS from "clipboard";
-import { getAllMessages } from "../components/message-form.js";
 import { getActiveFile } from "../components/active-files.js";
+import { getAllMessages } from "./messages.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -44,8 +44,8 @@ export const updateRoom = () => {
         context.isDisconnected = false;
         context.isReconnecting = false;
         context.isStart = false;
-        context.room = data;
 
+        context.room = data;
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
                 user.isActive = true;
@@ -54,11 +54,6 @@ export const updateRoom = () => {
             }
         });
         context.room.users.map((user) => (user.signal = "NONE"));
-        context.allMessages = getAllMessages(
-            context.room.users,
-            context.room.host,
-            context.activeUserId,
-        );
 
         if (!context.room.users.find((user) => user.isActive)) {
             context.filetree = null;
@@ -76,6 +71,9 @@ export const updateRoom = () => {
             window.history.pushState({}, document.title, newUrl.origin);
         }
 
+        getAllMessages((messages) => {
+            context.allMessages = [...messages];
+        });
         renderApp(appElement, context);
 
         if (context.code) {

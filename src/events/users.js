@@ -1,5 +1,6 @@
 import socket from "../components/socket.js";
 import { context } from "../main.js";
+import { requireAllMessages } from "./messages.js";
 
 const startStudent = (userId, roomId) => {
     console.log(
@@ -26,6 +27,8 @@ export const initClickingUsers = () => {
             context.isShowingTask = false;
 
             window.localStorage.setItem("ACTIVE_USER_ID", user.id);
+
+            requireAllMessages(+user.id);
 
             userElements.forEach((user) => {
                 if (context.activeUserId === +user.id) {

@@ -8,7 +8,7 @@ import {
     initReconnecting,
 } from "./events/connect-disconnect.js";
 import { initOpeningTask, initSendingTask } from "./events/task.js";
-import { toggleConvertingForm } from "./components/message-form.js";
+import { toggleConvertingForm } from "./events/messages.js";
 import { initSendingMessage } from "./events/messages.js";
 
 export const renderApp = (appElement, context) => {

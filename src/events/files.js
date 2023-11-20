@@ -4,7 +4,7 @@ import { getFiletree } from "../components/filetree.js";
 import { getActiveFile } from "../components/active-files.js";
 import { renderApp } from "../render.js";
 import { getNewFiles } from "../components/new-files.js";
-import { getAllMessages } from "../components/message-form.js";
+import { getAllMessages, requireAllMessages } from "./messages.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
@@ -28,22 +28,19 @@ export const sendCode = () => {
             JSON.stringify(getFiletree(data.files)),
         );
 
-        context.allMessages = getAllMessages(
-            context.room.users,
-            context.room.host,
-            context.activeUserId,
-        );
-
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
                 user.isActive = true;
+
+                requireAllMessages(user.id);
             } else {
                 user.isActive = false;
             }
         });
 
-        renderApp(appElement, context);
-
+        getAllMessages((messages) => {
+            context.allMessages = [...messages];
+        });
         getActiveFile(context);
     });
 };
@@ -77,22 +74,22 @@ export const updateCode = () => {
             return;
         }
 
-        context.code = null;
-        context.files = getNewFiles(context.files, data.files);
-        context.filetree = getFiletree(context.files);
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
                 user.isActive = true;
+
+                requireAllMessages(user.id);
             } else {
                 user.isActive = false;
             }
         });
-        context.allMessages = getAllMessages(
-            context.room.users,
-            context.room.host,
-            context.activeUserId,
-        );
+        context.files = getNewFiles(context.files, data.files);
+        context.filetree = getFiletree(context.files);
 
-        getActiveFile(context);
+        renderApp(appElement, context);
+
+        if (context.code) {
+            getActiveFile(context);
+        }
     });
 };
