@@ -97,7 +97,7 @@
             background: #000;
 
             & p {
-                color: #FFF;
+                color: #fff;
                 font-size: 16px;
                 font-weight: 400;
                 line-height: normal;
@@ -110,7 +110,7 @@
         }
 
         &--student {
-            background: #D9D9D9;
+            background: #d9d9d9;
             align-self: start;
 
             & p {
@@ -151,7 +151,9 @@
     &__button {
         width: 30px;
         height: 100%;
-        background: url(../../public/img/button-send-message.svg) center no-repeat, transparent;
+        background:
+            url(../../public/img/button-send-message.svg) center no-repeat,
+            transparent;
         border: none;
         cursor: pointer;
         transition: all 0.5s;
