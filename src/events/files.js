@@ -55,6 +55,7 @@ export const initClickingFiles = () => {
                 "ACTIVE_FILE_PATH",
                 element.dataset.path,
             );
+            window.localStorage.removeItem("SCROLLED_CODE");
 
             getActiveFile(context);
         });
