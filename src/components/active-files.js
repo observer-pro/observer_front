@@ -2,6 +2,7 @@ import { appElement } from "../main.js";
 import { renderApp } from "../render.js";
 import { codeElement } from "../main.js";
 import hljs from "./hljs.js";
+import { getScrolledCode } from "./functions.js";
 
 let isActiveFile = false;
 
@@ -39,5 +40,6 @@ export const getActiveFile = (context) => {
 
     if (isActiveFile) {
         hljs.highlightAll(codeElement);
+        getScrolledCode();
     }
 };

@@ -15,7 +15,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const roomParam = urlParams.get("room");
 
 export const appElement = document.querySelector("#app");
-export const codeElement = document.querySelector("#code");
+export const codeElement = document.querySelector("#code code");
 export const context = new Context(true, false, true, "Host", null, false, []);
 
 renderApp(appElement, context);

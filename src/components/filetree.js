@@ -53,5 +53,8 @@ export const getFiletree = (files) => {
         tree[path[path.length - 2]].files.push(newFile);
     });
 
+    tree.files.sort((a, b) => a.name - b.name);
+    tree.dirs.sort((a, b) => a.name - b.name);
+
     return tree;
 };

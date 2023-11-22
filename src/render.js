@@ -10,6 +10,7 @@ import {
 import { initOpeningTask, initSendingTask } from "./events/task.js";
 import { toggleConvertingForm } from "./events/messages.js";
 import { initSendingMessage } from "./events/messages.js";
+import { saveScrolledCode } from "./components/functions.js";
 
 export const renderApp = (appElement, context) => {
     if (context.isStart) {
@@ -29,5 +30,6 @@ export const renderApp = (appElement, context) => {
         initInviting();
         toggleConvertingForm();
         initSendingMessage();
+        saveScrolledCode();
     }
 };
