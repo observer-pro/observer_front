@@ -49,7 +49,7 @@
             if !context.filetree
                 span Выберите ученика, его код появится здесь 
             else
-                .code__filetree
+                .code__filetree#filetree
                     each file in context.filetree.files 
                         if file.type === 'file' && file.status !== 'REMOVED'
                             .code__tree-section.file(class=`code__tree-section--level-${file.level} ${
@@ -85,7 +85,7 @@
                 h3.form__name= context.activeUserName 
                 a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
             if !context.isFormConverted
-                .form__messages
+                .form__messages#chat
                     if context.allMessages.length > 0
                         each message in context.allMessages 
                             if message.sender === context.activeUserId || message.sender === context.room.host && message.receiver === context.activeUserId 

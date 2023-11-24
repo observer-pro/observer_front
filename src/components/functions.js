@@ -20,3 +20,32 @@ export const getScrolledCode = () => {
         codeElement.scrollTop = 0;
     }
 };
+export const saveScrolledFiletree = () => {
+    const filetreeElement = document.querySelector("#filetree");
+
+    filetreeElement?.addEventListener("scroll", () => {
+        window.localStorage.setItem(
+            "SCROLLED_FILETREE",
+            filetreeElement.scrollTop,
+        );
+    });
+};
+export const getScrolledFiletree = () => {
+    const filetreeElement = document.querySelector("#filetree");
+    const scrollTop = +window.localStorage.getItem("SCROLLED_FILETREE");
+
+    if (filetreeElement) {
+        if (scrollTop) {
+            filetreeElement.scrollTop = scrollTop;
+        } else {
+            filetreeElement.scrollTop = 0;
+        }
+    }
+};
+export const getScrolledChat = () => {
+    const chatElement = document.querySelector("#chat");
+
+    if (chatElement) {
+        chatElement.scrollTop = 9999999999;
+    }
+};
