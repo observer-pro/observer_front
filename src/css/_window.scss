@@ -347,7 +347,8 @@
 
         &__work{
             display: none;
-            &:checked + .task__work-label {
+
+            & :checked + label.task__work-label {
                 background: #0076FE;
                 opacity: 1;
             }
@@ -366,7 +367,7 @@
                 line-height: normal;
                 transition: 0.5s ease;
     
-                &:hover{
+                & :hover {
                     opacity: 1;
                     cursor: pointer;
                 }            
