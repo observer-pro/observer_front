@@ -17,7 +17,6 @@ export const renderApp = (appElement, context) => {
         initCheckAddress();
     } else {
         appElement.innerHTML = main({ context: context });
-
         initClickingUsers();
         initClickingFiles();
         initReconnecting();

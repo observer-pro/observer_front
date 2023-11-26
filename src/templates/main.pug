@@ -22,7 +22,10 @@
                     context.pluginUrl
                 }`) пригласить
                 a(href="#" class="link room__quit" id="quit") выйти
-            button.room__task-button#show-task Задание
+            .room__task-buttons
+                button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ? "Задания" : "Файловое дерево"
+                img.room__task-settings(src="./public/img/settings-icon.svg", alt="")
+                
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
                 p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
@@ -43,8 +46,31 @@
         .window__task.task 
             .task__container 
                 h2.task__title Задание
-                textarea.task__area#task-area(placeholder="Задание для учеников")
-                button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить ученикам"
+                .task__works-box 
+                    .task__works
+                            input.task__work(type="radio" value="1" name="work" id="work-one" checked=1 === Number(context.taskNumber))
+                            label.task__work-label(for="work-one") 1
+                            input.task__work(type="radio" value="2" name="work" id="work-two" checked=2 === Number(context.taskNumber))
+                            label.task__work-label(for="work-two") 2
+                            input.task__work(type="radio" value="3" name="work" id="work-three" checked=3 === Number(context.taskNumber))
+                            label.task__work-label(for="work-three") 3
+                            input.task__work(type="radio" value="4" name="work" id="work-four" checked=4 === Number(context.taskNumber))
+                            label.task__work-label(for="work-four") 4
+                            input.task__work(type="radio" value="5" name="work" id="work-five" checked=5 === Number(context.taskNumber))
+                            label.task__work-label(for="work-five") 5
+                            input.task__work(type="radio" value="6" name="work" id="work-six" checked=6 === Number(context.taskNumber))
+                            label.task__work-label(for="work-six") 6
+                            input.task__work(type="radio" value="7" name="work" id="work-seven" checked=7 === Number(context.taskNumber))
+                            label.task__work-label(for="work-seven") 7
+                            input.task__work(type="radio" value="8" name="work" id="work-eight" checked=8 === Number(context.taskNumber))
+                            label.task__work-label(for="work-eight") 8
+                            input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="Теория" === context.taskNumber)
+                            label.task__work-label(for="work-teory") Теория
+                            
+                    button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить"
+                .task__area#task-area
+                //- button(class= context.isSent ? "task__button-red-sent" : "task__button-red")= context.isSent ? "Включить редактирование" : "Отключить редактирование"    
+
     else
         .window__code.code(class=!context.filetree && 'window__code--empty')   
             if !context.filetree
