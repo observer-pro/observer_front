@@ -34,6 +34,11 @@
             line-height: normal;
         }
 
+        &__button{
+            @include task-button();
+            width: 171px;
+        }
+
         &__panel {
             width: 100%;
             display: flex;
@@ -82,8 +87,23 @@
             }
         }
 
+                &__task-buttons{
+            display: flex;
+            gap: 16px
+        }
+
         &__task-button {
             @include task-button();
+            width: 171px;
+            background: #0076FE;
+        }
+
+        &__task-settings {
+            transition: 0.5s ease;
+            &:hover{
+                opacity: 0.5;
+                cursor: pointer;
+            }
         }
 
         &__links {
@@ -313,7 +333,7 @@
 
     .task {
         &__container {
-            width: 662px;
+            width: 750px;
             display: flex;
             flex-direction: column;
             align-items: start;
@@ -326,9 +346,61 @@
             line-height: normal;
         }
 
+        &__works-box {
+            width: 100%;
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__works {
+            height: 44px;
+            background: #000;
+            display: flex;
+            border-radius: 5px;
+            overflow-y: hidden;
+        
+        }
+
+        &__work {
+            display: none;
+
+            &:checked + .task__work-label {
+                background: #0076FE;
+                opacity: 1;
+            }
+
+            &-label {
+                background: #000;
+                color: $font-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 17px ;
+                opacity: 0.5;
+                font-size: 17.903px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                transition: 0.5s ease;
+    
+                &:hover{
+                    opacity: 1;
+                    cursor: pointer;
+                }            
+            }
+        }
+
+        &__text{
+            color: #fff;
+            width: 100px;
+        }
+
+
         &__area {
-            width: 900px;
-            height: 503px;
+            width: 100%;
+            height: 580px;
             padding: 9px;
             border: none;
             outline: none;
@@ -338,17 +410,41 @@
             color: #fff;
             font-size: 16px;
             line-height: normal;
+            & ::-webkit-scrollbar {
+                display: none;
+            }
         }
 
         &__button {
-            width: 179px;
             @include task-button();
+            height: 80px;
+            width: 120px;
+        }
+
+        &__button-red {
+            @include task-button();
+            min-height: 40px;
+            padding: 10px;
         }
 
         &__button-sent {
-            width: 179px;
             @include task-button();
             background: #00aa63;
+            height: 44px;
+            width: 120px;
+        }
+
+        &__button-red-sent {
+            @include task-button();
+            background: #00aa63;
+            min-height: 40px;
+            padding: 10px;
         }
     }
+}
+
+
+.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #00000091;
+    padding: 20px;
 }
