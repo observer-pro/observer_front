@@ -345,13 +345,13 @@
         
         }
 
-        &__work{
+        &__work {
             display: none;
 
-            & :checked + label.task__work-label {
-                background: #0076FE;
-                opacity: 1;
-            }
+            // &:checked + .task__work-label {
+            //     background: #0076FE;
+            //     opacity: 1;
+            // }
 
             &-label {
                 background: #000;
@@ -367,10 +367,10 @@
                 line-height: normal;
                 transition: 0.5s ease;
     
-                & :hover {
-                    opacity: 1;
-                    cursor: pointer;
-                }            
+                // &:hover{
+                //     opacity: 1;
+                //     cursor: pointer;
+                // }            
             }
         }
 
