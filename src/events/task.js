@@ -40,12 +40,6 @@ export const initSendingTask = () => {
         }
     });
 
-    areaElement?.addEventListener("input", () => {
-        localStorage?.setItem("TASK", JSON.stringify({
-            content: editor.getContents(),
-            text: editor.getText()
-        }));
-    });
 
     worksBtnElement?.forEach(btn => {
         
@@ -99,7 +93,7 @@ export const initSendingTask = () => {
             data[lastActive].visit = false
             localStorage.setItem("ACTIVE_TASK", JSON.stringify(data[context.taskNumber]))
 
-            if(!(data[lastActive].visit) && localStorage.getItem("TASK")) {
+            if(!(data[lastActive].visit) && editor.getContents()) {
                 data[lastActive].content = editor.getContents()
                 data[lastActive].contentText = editor.getText()
                 data[lastActive].visit = true
@@ -108,7 +102,6 @@ export const initSendingTask = () => {
                 context.taskContent = data[context.taskNumber]
             }
             localStorage.setItem('FILLED_TASK', context.taskNumber)
-            localStorage.removeItem("TASK")
             renderApp(appElement, context);
         })
     })
@@ -124,7 +117,7 @@ export const initSendingTask = () => {
 
         if (flag) {
             console.log("Flag");
-            if(localStorage.getItem("TASK")){
+            if(editor.getText()?.length > 0){
                 console.log("lastActive", lastActive);
                 data[lastActive].contentText = editor.getText();
                 data[lastActive].visit = true;
@@ -136,7 +129,7 @@ export const initSendingTask = () => {
             }))
             }
             for(let task in data){
-                if(data[task].visit){
+                if(data[task].visit && data[task].contentText !== "\n"){
                     validData.push({
                         "name": `${task === "Теория" ? "theory": task}`,
                         "content": `${data[task].contentText ? data[task].contentText : ""}`,
@@ -156,7 +149,7 @@ export const initSendingTask = () => {
 
             renderApp(appElement, context);
 
-        } else if (localStorage.getItem("TASK")?.length > 0){
+        } else if (editor.getText()?.length > 0){
             console.log("Eботе");
             const task = {
                 "name": `${lastActive === "Теория" ? "theory": lastActive}`,
