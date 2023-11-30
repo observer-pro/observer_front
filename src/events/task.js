@@ -159,8 +159,8 @@ export const initSendingTask = () => {
             context.isSent = true;
             context.taskNumber = 1
 
-            console.log("Отправлен запрос steps/send_all. Отправлены данные:", task);
-            socket.emit("steps/send_all", task);
+            console.log("Отправлен запрос steps/all. Отправлены данные:", task);
+            socket.emit("steps/all", task);
             
             renderApp(appElement, context);
         }
