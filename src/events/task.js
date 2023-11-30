@@ -145,10 +145,10 @@ export const initSendingTask = () => {
                 visit: false
             }
 
-            console.log("Отправлен запрос steps/send_all. Отправлены данные:");
+            console.log("Отправлен запрос steps/all. Отправлены данные:");
             console.log(validData);
 
-            socket.emit("steps/send_all", validData);
+            socket.emit("steps/all", validData);
 
             localStorage.removeItem("ALL_TASK")
             localStorage.getItem("FILLED_TASK")
@@ -169,8 +169,8 @@ export const initSendingTask = () => {
                 visit: false
             }
 
-            console.log("Отправлен запрос steps/send_all. Отправлены данные:", task);
-            socket.emit("steps/send_all", task);
+            console.log("Отправлен запрос steps/all. Отправлены данные:", task);
+            socket.emit("steps/all", task);
 
             localStorage.removeItem("ALL_TASK")
             localStorage.getItem("FILLED_TASK")
