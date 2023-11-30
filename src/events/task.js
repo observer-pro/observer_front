@@ -30,27 +30,25 @@ export const initSendingTask = () => {
     const editor = initQuill(areaElement);
     
 
-    if(context.taskContent.visit){
-        editor?.setContents(context.taskContent.content);
-    }
+    editor?.setContents(JSON.parse(localStorage.getItem("ACTIVE_TASK"))?.content);
 
-    if (editor) {
-        editor.data = window.localStorage.getItem("task");
-    }
 
     areaElement?.addEventListener("click", () => {
         if (context.isSent) {
             context.isSent = false;
-
             renderApp(appElement, context);
         }
     });
 
     areaElement?.addEventListener("input", () => {
-        localStorage?.setItem("TASK", JSON.stringify(editor.getContents()));
+        localStorage?.setItem("TASK", JSON.stringify({
+            content: editor.getContents(),
+            text: editor.getText()
+        }));
     });
 
     worksBtnElement?.forEach(btn => {
+        
         if(btn.checked) {
             lastActive = btn.value
         }
@@ -58,7 +56,9 @@ export const initSendingTask = () => {
 
     worksBtnElement?.forEach( btn => {
         btn?.addEventListener('click', () => {
-            if(lastActive === btn.value) return
+            if(lastActive === btn.value) {
+                return;
+            }
             let data
             if (localStorage.getItem("ALL_TASK")){
                 data = JSON.parse(localStorage.getItem("ALL_TASK"))
@@ -108,8 +108,8 @@ export const initSendingTask = () => {
                 context.taskContent = data[context.taskNumber]
             }
             localStorage.setItem('FILLED_TASK', context.taskNumber)
-            renderApp(appElement, context)
             localStorage.removeItem("TASK")
+            renderApp(appElement, context);
         })
     })
 
@@ -123,13 +123,20 @@ export const initSendingTask = () => {
         }
 
         if (flag) {
+            console.log("Flag");
             if(localStorage.getItem("TASK")){
-                console.log(lastActive);
-                data[lastActive].content = JSON.parse(localStorage.getItem("TASK"));
+                console.log("lastActive", lastActive);
+                data[lastActive].contentText = editor.getText();
                 data[lastActive].visit = true;
+                localStorage.setItem("ACTIVE_TASK", JSON.stringify({
+                    ...JSON.parse(localStorage.getItem("ACTIVE_TASK")),
+                    content: editor.getContents(),
+                    contentText: editor.getText(),
+                    visit: true
+            }))
             }
             for(let task in data){
-                if(data[task].contentText){
+                if(data[task].visit){
                     validData.push({
                         "name": `${task === "Теория" ? "theory": task}`,
                         "content": `${data[task].contentText ? data[task].contentText : ""}`,
@@ -150,19 +157,19 @@ export const initSendingTask = () => {
             renderApp(appElement, context);
 
         } else if (localStorage.getItem("TASK")?.length > 0){
+            console.log("Eботе");
             const task = {
                 "name": `${lastActive === "Теория" ? "theory": lastActive}`,
-                "content": localStorage.getItem("TASK"),
-                "type": `${lastActive === "Теория" ? "theory": "exercise"}`,
+                "content": editor.getText(),
+                "type": `${lastActive  === "Теория" ? "theory": "exercise"}`,
                 "language": "html",
             }
             context.isSent = true;
-            context.taskNumber = 1
 
             console.log("Отправлен запрос steps/all. Отправлены данные:", task);
             socket.emit("steps/all", task);
             
             renderApp(appElement, context);
-        }
+        } 
     });
 };

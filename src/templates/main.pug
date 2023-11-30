@@ -23,7 +23,7 @@
                 }`) пригласить
                 a(href="#" class="link room__quit" id="quit") выйти
             .room__task-buttons
-                button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ? "Задания" : "Файловое дерево"
+                button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ?"Файловое дерево" : "Задания" 
                 img.room__task-settings(src="./public/img/settings-icon.svg", alt="")
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
@@ -64,7 +64,6 @@
                             label.task__work-label(for="work-eight") 8
                             input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="Теория" === context.taskNumber)
                             label.task__work-label(for="work-teory") Теория
-                            
                     
                 .task__area#task-area
                 button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить"
