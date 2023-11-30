@@ -140,19 +140,12 @@ export const initSendingTask = () => {
             }
             
             context.isSent = true;
-            context.taskNumber = 1
-            context.taskContent = {
-                visit: false
-            }
+            
 
             console.log("Отправлен запрос steps/all. Отправлены данные:");
             console.log(validData);
 
             socket.emit("steps/all", validData);
-
-            localStorage.removeItem("ALL_TASK")
-            localStorage.getItem("FILLED_TASK")
-            localStorage.removeItem("ACTIVE_TASK")
 
             renderApp(appElement, context);
 
@@ -165,17 +158,9 @@ export const initSendingTask = () => {
             }
             context.isSent = true;
             context.taskNumber = 1
-            context.taskContent = {
-                visit: false
-            }
 
             console.log("Отправлен запрос steps/all. Отправлены данные:", task);
             socket.emit("steps/all", task);
-
-            localStorage.removeItem("ALL_TASK")
-            localStorage.getItem("FILLED_TASK")
-            localStorage.removeItem("ACTIVE_TASK")
-            localStorage.removeItem("TASK")
             
             renderApp(appElement, context);
         }

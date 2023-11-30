@@ -323,7 +323,7 @@
     }
 
     &__task {
-        height:  85vh;
+        min-height:  85vh;
         padding: 25px 100px;
         background: $work-background;
         border-radius: 7px;
