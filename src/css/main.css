@@ -621,9 +621,6 @@ ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 .window .task__works {
   height: 44px;
@@ -672,7 +669,7 @@ ul {
 }
 .window .task__area {
   width: 100%;
-  min-height: 300px;
+  max-height: 350px;
   padding: 9px;
   border: none;
   outline: none;
@@ -703,27 +700,11 @@ ul {
   line-height: 20px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  height: 80px;
+  background: #0076FE;
+  height: 45px;
   width: 120px;
 }
 .window .task__button:hover {
-  opacity: 0.5;
-}
-.window .task__button-red {
-  height: 37px;
-  border: none;
-  border-radius: 6px;
-  background: #a96afc;
-  cursor: pointer;
-  color: #fff;
-  font-size: 15px;
-  line-height: 20px;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  min-height: 40px;
-  padding: 10px;
-}
-.window .task__button-red:hover {
   opacity: 0.5;
 }
 .window .task__button-sent {
@@ -738,28 +719,10 @@ ul {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   background: #00aa63;
-  height: 80px;
+  height: 45px;
   width: 120px;
 }
 .window .task__button-sent:hover {
-  opacity: 0.5;
-}
-.window .task__button-red-sent {
-  height: 37px;
-  border: none;
-  border-radius: 6px;
-  background: #a96afc;
-  cursor: pointer;
-  color: #fff;
-  font-size: 15px;
-  line-height: 20px;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  background: #00aa63;
-  min-height: 40px;
-  padding: 10px;
-}
-.window .task__button-red-sent:hover {
   opacity: 0.5;
 }
 
