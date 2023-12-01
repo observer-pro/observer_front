@@ -95,7 +95,7 @@ export const initSendingTask = () => {
 
             if(!(data[lastActive].visit) && editor.getContents()) {
                 data[lastActive].content = editor.getContents()
-                data[lastActive].contentText = editor.getText()
+                data[lastActive].contentText = editor.container.firstChild.innerHTML
                 data[lastActive].visit = true
                 localStorage.setItem("ALL_TASK", JSON.stringify(data))
             } else if (data[context.taskNumber].visit){
@@ -116,20 +116,18 @@ export const initSendingTask = () => {
         }
 
         if (flag) {
-            console.log("Flag");
             if(editor.getText()?.length > 0){
-                console.log("lastActive", lastActive);
-                data[lastActive].contentText = editor.getText();
+                data[lastActive].contentText = editor.container.firstChild.innerHTML;
                 data[lastActive].visit = true;
                 localStorage.setItem("ACTIVE_TASK", JSON.stringify({
                     ...JSON.parse(localStorage.getItem("ACTIVE_TASK")),
                     content: editor.getContents(),
-                    contentText: editor.getText(),
+                    contentText: editor.container.firstChild.innerHTML,
                     visit: true
             }))
             }
             for(let task in data){
-                if(data[task].visit && data[task].contentText !== "\n"){
+                if(data[task].visit && data[task]?.contentText !== "<p><br></p>" ){
                     validData.push({
                         "name": `${task === "Теория" ? "theory": task}`,
                         "content": `${data[task].contentText ? data[task].contentText : ""}`,
@@ -139,27 +137,26 @@ export const initSendingTask = () => {
                 }
             }
             
-            context.isSent = true;
             
 
-            console.log("Отправлен запрос steps/all. Отправлены данные:");
-            console.log(validData);
-
-            socket.emit("steps/all", validData);
+            if (validData?.length > 0){
+                console.log("Отправлен запрос steps/all. Отправлены данные:\n", validData);
+                context.isSent = true;
+                socket.emit("steps/all", validData);
+            }
 
             renderApp(appElement, context);
 
         } else if (editor.getText()?.length > 0){
-            console.log("Eботе");
-            const task = {
+            const task = [{
                 "name": `${lastActive === "Теория" ? "theory": lastActive}`,
-                "content": editor.getText(),
+                "content": editor.container.firstChild.innerHTML,
                 "type": `${lastActive  === "Теория" ? "theory": "exercise"}`,
                 "language": "html",
-            }
+            }]
             context.isSent = true;
 
-            console.log("Отправлен запрос steps/all. Отправлены данные:", task);
+            console.log("Отправлен запрос steps/all. Отправлены данные:\n", task);
             socket.emit("steps/all", task);
             
             renderApp(appElement, context);
