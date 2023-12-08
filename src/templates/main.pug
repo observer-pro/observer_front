@@ -114,7 +114,7 @@
                         each message in context.allMessages 
                             if message.sender === context.activeUserId || message.sender === context.room.host && message.receiver === context.activeUserId 
                                 .form__message(class=`${
-                                    message.sender === context.activeUserId ? 'form__message--student' : 'form__message--menthor'
+                                    message.sender === context.activeUserId ? 'form__message--student' : ''
                                 }`)
                                     p= message.content
                     else 
