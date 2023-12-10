@@ -108,6 +108,7 @@
             .form__top 
                 h3.form__name= context.activeUserName 
                 a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
+            .form__steps
             if !context.isFormConverted
                 .form__messages#chat
                     if context.allMessages.length > 0

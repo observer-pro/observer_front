@@ -23,6 +23,8 @@ export const sendCode = () => {
         context.files = data.files;
         context.filetree = getFiletree(data.files);
 
+        console.log(context.filetree);
+
         window.localStorage.setItem(
             "FILES",
             JSON.stringify(getFiletree(data.files)),
