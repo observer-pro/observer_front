@@ -4,6 +4,7 @@ import { renderApp } from "../render.js";
 import ClipboardJS from "clipboard";
 import { getActiveFile } from "../components/active-files.js";
 import { getAllMessages } from "./messages.js";
+import { user_storeage } from "../components/user-storeage.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -47,6 +48,10 @@ export const updateRoom = () => {
 
         context.room = data;
         context.room.users.map((user) => {
+            if (user.role !== "host") {
+                user_storeage[user.id] = {};
+            }
+
             if (user.id === context.activeUserId) {
                 user.isActive = true;
             } else {
