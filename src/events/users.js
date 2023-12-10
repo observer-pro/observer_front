@@ -1,6 +1,7 @@
 import socket from "../components/socket.js";
 import { context } from "../main.js";
 import { requireAllMessages } from "./messages.js";
+import { getStepsStatus } from "./signals.js";
 
 const startStudent = (userId, roomId) => {
     console.log(
@@ -29,6 +30,8 @@ export const initClickingUsers = () => {
             window.localStorage.setItem("ACTIVE_USER_ID", user.id);
 
             requireAllMessages(+user.id);
+
+            getStepsStatus();
 
             userElements.forEach((user) => {
                 if (context.activeUserId === +user.id) {

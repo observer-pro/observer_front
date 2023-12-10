@@ -20,3 +20,9 @@ export const getSignal = () => {
         }
     });
 };
+export const getStepsStatus = () => {
+    socket.on("steps/status", (data) => {
+        console.log("Выполнен запрос steps/status. Получены данные:");
+        console.log(data);
+    });
+};

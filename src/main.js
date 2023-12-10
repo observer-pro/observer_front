@@ -14,7 +14,7 @@ const HOST_ID = +window.localStorage.getItem("HOST_ID");
 const urlParams = new URLSearchParams(window.location.search);
 const roomParam = urlParams.get("room");
 
-export const appElement = document.querySelector("#app");
+export const appElement = document.getElementById("app");
 export const codeElement = document.querySelector("#code code");
 export const context = new Context(true, false, true, "Host", null, false, []);
 
