@@ -108,13 +108,14 @@
             .form__top 
                 h3.form__name= context.activeUserName 
                 a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
+            .form__steps
             if !context.isFormConverted
                 .form__messages#chat
                     if context.allMessages.length > 0
                         each message in context.allMessages 
                             if message.sender === context.activeUserId || message.sender === context.room.host && message.receiver === context.activeUserId 
                                 .form__message(class=`${
-                                    message.sender === context.activeUserId ? 'form__message--student' : 'form__message--menthor'
+                                    message.sender === context.activeUserId ? 'form__message--student' : ''
                                 }`)
                                     p= message.content
                     else 
