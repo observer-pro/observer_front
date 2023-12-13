@@ -126,13 +126,17 @@ export const initQuitRoom = () => {
 
         context.isClosed = true;
         context.isStart = true;
-        context.currentAddress = window.localStorage.getItem("SERVER");
+        context.currentAddress = localStorage.getItem("SERVER");
+        // context.isSent = false
 
-        window.localStorage.removeItem("ROOM_ID");
-        window.localStorage.removeItem("HOST_ID");
-        window.localStorage.removeItem("ACTIVE_USER_ID");
-        window.localStorage.removeItem("ACTIVE_FILE_PATH");
-        window.localStorage.removeItem("FILES");
+        localStorage.removeItem("ROOM_ID");
+        localStorage.removeItem("HOST_ID");
+        localStorage.removeItem("ACTIVE_USER_ID");
+        localStorage.removeItem("ACTIVE_FILE_PATH");
+        localStorage.removeItem("FILES");
+        // localStorage.removeItem("ALL_TASK")
+        // localStorage.removeItem("FILLED_TASK")
+        // localStorage.removeItem("ACTIVE_TASK")
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });

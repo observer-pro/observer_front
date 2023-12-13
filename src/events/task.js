@@ -23,8 +23,8 @@ export const initOpeningTask = () => {
     });
 };
 export const initSendingTask = () => {
-    const areaElement = document.querySelector("#task-area");
-    const sendTaskElement = document.querySelector("#send-task");
+    const areaElement = document.getElementById("task-area");
+    const sendTaskElement = document.getElementById("send-task");
     const worksBtnElement = document.querySelectorAll(".task__work")
     let lastActive
     const editor = initQuill(areaElement);
@@ -41,14 +41,11 @@ export const initSendingTask = () => {
     });
 
 
-    worksBtnElement?.forEach(btn => {
-        
+
+    worksBtnElement?.forEach( btn => {
         if(btn.checked) {
             lastActive = btn.value
         }
-    })
-
-    worksBtnElement?.forEach( btn => {
         btn?.addEventListener('click', () => {
             if(lastActive === btn.value) {
                 return;
@@ -57,6 +54,7 @@ export const initSendingTask = () => {
             if (localStorage.getItem("ALL_TASK")){
                 data = JSON.parse(localStorage.getItem("ALL_TASK"))
             } else {
+                // Вынести в контекст
                 data = {
                     1: {
                         visit: false,
@@ -88,6 +86,7 @@ export const initSendingTask = () => {
                 }
                 localStorage.setItem("ALL_TASK", JSON.stringify(data))
             }
+            // Понять что это
             context.taskContent = false
             context.taskNumber = btn.value
             data[lastActive].visit = false
