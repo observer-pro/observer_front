@@ -47,8 +47,6 @@ export const sendCode = () => {
             user_storeage[context.activeUserId].messages = [...messages];
         });
         getActiveFile(context);
-
-        console.log(user_storeage);
     });
 };
 export const initClickingFiles = () => {

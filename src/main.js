@@ -6,8 +6,8 @@ import { renderApp } from "./render.js";
 import { connect, disconnect, reconnect } from "./events/connect-disconnect.js";
 import { updateRoom } from "./events/room.js";
 import { sendCode, updateCode } from "./events/files.js";
-import { getSignal } from "./events/signals.js";
 import { receiveNewMessage } from "./events/messages.js";
+import { getStepsStatus } from "./events/signals.js";
 
 const ROOM_ID = +window.localStorage.getItem("ROOM_ID");
 const HOST_ID = +window.localStorage.getItem("HOST_ID");
@@ -37,8 +37,8 @@ disconnect((status) => {
 
     renderApp(appElement, context);
 });
-getSignal();
 receiveNewMessage();
+getStepsStatus();
 
 if (roomParam) {
     reconnect({

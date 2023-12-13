@@ -57,6 +57,7 @@ export const updateRoom = () => {
                     scroll_code_position: 0,
                     scroll_tree_position: 0,
                     latest_updated_paths: [],
+                    steps: [],
                 };
             }
 
@@ -66,7 +67,6 @@ export const updateRoom = () => {
                 user.isActive = false;
             }
         });
-        context.room.users.map((user) => (user.signal = "NONE"));
 
         if (!context.room.users.find((user) => user.isActive)) {
             context.filetree = null;
