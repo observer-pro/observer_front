@@ -49,7 +49,15 @@ export const updateRoom = () => {
         context.room = data;
         context.room.users.map((user) => {
             if (user.role !== "host") {
-                user_storeage[user.id] = {};
+                user_storeage[user.id] = {
+                    name: user.name,
+                    messages: [],
+                    current_path: "",
+                    messages_unread: 0,
+                    scroll_code_position: 0,
+                    scroll_tree_position: 0,
+                    latest_updated_paths: [],
+                };
             }
 
             if (user.id === context.activeUserId) {

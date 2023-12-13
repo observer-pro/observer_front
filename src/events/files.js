@@ -5,6 +5,7 @@ import { getActiveFile } from "../components/active-files.js";
 import { renderApp } from "../render.js";
 import { getNewFiles } from "../components/new-files.js";
 import { getAllMessages, requireAllMessages } from "./messages.js";
+import { user_storeage } from "../components/user-storeage.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
@@ -38,10 +39,16 @@ export const sendCode = () => {
             }
         });
 
+        user_storeage[context.activeUserId].current_path =
+            context.activeFilePath;
+
         getAllMessages((messages) => {
             context.allMessages = [...messages];
+            user_storeage[context.activeUserId].messages = [...messages];
         });
         getActiveFile(context);
+
+        console.log(user_storeage);
     });
 };
 export const initClickingFiles = () => {
