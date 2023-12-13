@@ -324,7 +324,7 @@
 
     &__task {
         min-height:  85vh;
-        padding: 25px 100px;
+        padding: 25px 50px;
         background: $work-background;
         border-radius: 7px;
         display: flex;
@@ -435,7 +435,5 @@
 }
 
 
-.ql-snow .ql-editor pre.ql-syntax {
-    background-color: #00000091;
-    padding: 20px;
-}
+
+

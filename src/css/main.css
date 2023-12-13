@@ -583,7 +583,7 @@ ul {
 }
 .window__task {
   min-height: 85vh;
-  padding: 25px 100px;
+  padding: 25px 50px;
   background: #242424;
   border-radius: 7px;
   display: -webkit-box;
@@ -724,11 +724,6 @@ ul {
 }
 .window .task__button-sent:hover {
   opacity: 0.5;
-}
-
-.ql-snow .ql-editor pre.ql-syntax {
-  background-color: rgba(0, 0, 0, 0.568627451);
-  padding: 20px;
 }
 
 .message-form {
@@ -902,4 +897,28 @@ ul {
 }
 .form__button:hover {
   opacity: 0.5;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  background-color: rgba(0, 0, 0, 0.568627451);
+  padding: 20px;
+}
+
+.task__container .ql-snow {
+  border: none;
+  color: #ffffff;
+  padding: 0;
+  margin: 5px 0;
+}
+
+.ql-snow .ql-picker-options {
+  background: #242424;
+}
+
+.ql-snow .ql-picker {
+  color: #ffffff;
+}
+
+.ql-snow .ql-stroke {
+  stroke: #ffffff;
 }
