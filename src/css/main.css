@@ -584,10 +584,10 @@ ul {
 
 .message-form {
   position: absolute;
-  top: 315px;
+  bottom: 38px;
   right: 45px;
   width: 406px;
-  height: 354px;
+  min-height: 354px;
   background: #000;
   border-radius: 10px 10px 0 0;
   display: flex;
@@ -595,7 +595,7 @@ ul {
 }
 .message-form--converted {
   position: absolute;
-  bottom: 36px;
+  bottom: 210px;
   right: 45px;
   width: 406px;
   height: 49px;
@@ -609,6 +609,60 @@ ul {
   padding: 16px 21px 15px 14px;
   display: flex;
   justify-content: space-between;
+}
+.form__steps {
+  display: flex;
+  flex-flow: column;
+  gap: 1px;
+}
+.form .steps__box {
+  width: 100%;
+  height: 43px;
+  padding: 10px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form .steps__box--done {
+  background: #0076FE;
+}
+.form .steps__box--help {
+  background: #9F6405;
+}
+.form .steps__text {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.form .steps__text--underline {
+  text-decoration: underline;
+}
+.form .steps__links {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+}
+.form .steps__link {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  transition: all 0.5s;
+}
+.form .steps__link--return, .form .steps__link--complete {
+  color: #D9D9D9;
+  opacity: 0.7;
+}
+.form .steps__link--return:hover, .form .steps__link--complete:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.form .steps__link--confirm {
+  color: #00DD80;
+}
+.form .steps__link--confirm:hover {
+  opacity: 0.5;
+  text-decoration: underline;
 }
 .form__name {
   color: #fff;
