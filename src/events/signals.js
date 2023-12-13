@@ -17,6 +17,8 @@ export const getStepsStatus = () => {
 
         if (context.activeUserId) {
             context.currentSteps = [...Object.values(data.steps)];
+            console.log(context.currentSteps, 'us');
+            
         }
 
         renderApp(appElement, context);

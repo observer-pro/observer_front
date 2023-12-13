@@ -14,9 +14,11 @@
     }
 }
 
+
+
 .window {
     position: relative;
-    padding: 43px;
+    padding: 20px 30px;
     display: grid;
     grid-template-columns: 224px 1fr;
     gap: 22px;
@@ -182,11 +184,22 @@
             }
 
             .item {
+                
+                &:hover{
+                    cursor: pointer;
+                    opacity: 0.8;
+                }
+
                 &__name {
                     color: $font-color;
                     font-size: 16px;
                     line-height: 20px;
                     cursor: default;
+
+                    &:hover{
+                        cursor: pointer;
+                        opacity: 0.8;
+                    }
 
                     &--read {
                         opacity: 0.8;
@@ -214,11 +227,12 @@
     }
 
     &__code {
-        height: 619px;
-        padding-bottom: 15px;
+        height: 705px;
+        padding-top: 10px;
         background: $work-background;
         border-radius: 7px;
         display: flex;
+        overflow: hidden;
 
         &--empty {
             color: $font-color;
@@ -236,7 +250,7 @@
     .code {
         &__filetree {
             width: 197px;
-            padding-top: 7px;
+            padding: 7px;
             overflow: auto;
             display: flex;
             flex-direction: column;
@@ -253,12 +267,18 @@
         }
 
         &__tree-section {
+            padding: 5px;
             width: 100%;
             height: 35px;
             padding-left: 17px;
             display: flex;
             align-items: center;
             gap: 10px;
+            
+            &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
 
             &--active {
                 background: #606060;
@@ -284,6 +304,10 @@
             opacity: 0.7;
             cursor: default;
 
+            &:hover {
+                cursor: pointer;
+            }
+
             &--active {
                 opacity: 1;
             }
@@ -294,11 +318,12 @@
 
             & code {
                 width: 900px;
-                height: 610px;
+                height: 705px;
                 background: #cecfd2;
                 font-size: 16px;
                 overflow-x: auto;
                 scrollbar-width: 0px;
+                margin-top: -25px;
 
                 &::-webkit-scrollbar {
                     width: 0px;
@@ -323,7 +348,7 @@
     }
 
     &__task {
-        min-height:  85vh;
+        min-height: 94vh;
         padding: 25px 50px;
         background: $work-background;
         border-radius: 7px;

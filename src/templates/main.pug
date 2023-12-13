@@ -102,9 +102,10 @@
                     pre.code__show-screen#code 
                         code= context.code
     if context.activeUserId
+        
         div(class=`${
             !context.isFormConverted ? 'message-form' : 'message-form--converted'
-        }`).form
+        }`).form(style= `${context.currentSteps && context.isFormConverted && context.currentSteps.filter( status => status !== 'NONE').length !== 0 ? `bottom: ${context.currentSteps.filter( status => status !== 'NONE').length * (44) + 19}px`: "bottom : 19px"}`)
             .form__top 
                 h3.form__name= context.activeUserName 
                 a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
