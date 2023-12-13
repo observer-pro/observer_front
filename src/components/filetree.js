@@ -9,7 +9,7 @@ export const getFiletree = (files) => {
     const tree = new Tree([], []);
 
     files.forEach((file) => {
-        const path = file.filename.slice(1).split("/");
+        const path = file.filename.split("/");
 
         if (path.length === 1) {
             const newFile = {

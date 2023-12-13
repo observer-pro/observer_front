@@ -1,23 +1,23 @@
 .message-form {
     position: absolute;
-    top: 315px;
+    bottom: 38px;
     right: 45px;
 
     width: 406px;
-    height: 354px;
-    background: #fff;
+    min-height: 354px;
+    background: #000;
     border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: column;
 
     &--converted {
         position: absolute;
-        bottom: 36px;
+        bottom: 210px;
         right: 45px;
 
         width: 406px;
         height: 49px;
-        background: #fff;
+        background: #000;
         border-bottom: 1px solid rgba(0, 0, 0, 20%);
         border-radius: 10px 10px 0 0;
     }
@@ -31,15 +31,84 @@
         justify-content: space-between;
     }
 
+    &__steps {
+        display: flex;
+        flex-flow: column;
+        gap: 1px;
+    }
+
+    .steps {
+        &__box {
+            width: 100%;
+            height: 43px;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &--done {
+                background: #0076FE;
+            }
+
+            &--help {
+                background: #9F6405;
+            }
+        }
+
+        &__text {
+            color: #FFF;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+
+            &--underline {
+                text-decoration: underline;
+            }
+        }
+
+        &__links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        &__link {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            transition: all 0.5s;
+
+            &--return,
+            &--complete {
+                color: #D9D9D9;
+                opacity: 0.7;
+
+                &:hover {
+                    opacity: 1;
+                    text-decoration: underline;
+                }
+            }
+
+            &--confirm {
+                color: #00DD80;
+
+                &:hover {
+                    opacity: 0.5;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
     &__name {
-        color: #000;
+        color: #fff;
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
     }
 
     &__link {
-        color: #000;
+        color: #fff;
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
@@ -54,8 +123,8 @@
     &__messages {
         height: 252px;
         padding: 31px 19px 9px;
-        border-top: 1px solid rgba(0, 0, 0, 20%);
-        border-bottom: 1px solid rgba(0, 0, 0, 20%);
+        border-top: 1px solid rgba(255, 255, 255, 20%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         overflow: auto;
         scrollbar-width: 0;
 
@@ -75,7 +144,7 @@
     }
 
     &__empty-text {
-        color: #000;
+        color: #fff;
         text-align: center;
         font-size: 14px;
         font-weight: 400;
@@ -92,35 +161,20 @@
         min-height: 40px;
         padding: 10px;
         border-radius: 6px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: normal;
+        background: #fff;
+        color: #000;
 
-        &--menthor {
-            background: #000;
-
-            & p {
-                color: #fff;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: normal;
-
-                & span {
-                    font-size: 14px;
-                    opacity: 0.5;
-                }
-            }
+        & span {
+            font-size: 14px;
+            opacity: 0.5;
         }
 
         &--student {
-            background: #d9d9d9;
             align-self: start;
-
-            & p {
-                color: #000;
-
-                & span {
-                    font-size: 14px;
-                    opacity: 0.5;
-                }
-            }
+            background: #d9d9d9;
         }
     }
 
@@ -136,9 +190,10 @@
         height: 100%;
         padding-left: 18px;
         padding-right: 18px;
+        background: transparent;
         border: none;
         outline: none;
-        color: #000;
+        color: #fff;
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
