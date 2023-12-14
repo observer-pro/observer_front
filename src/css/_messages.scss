@@ -1,7 +1,7 @@
 .message-form {
     position: absolute;
-    bottom: 38px;
-    right: 45px;
+    bottom: 19px;
+    right: 50px;
 
     width: 406px;
     min-height: 354px;
@@ -9,11 +9,15 @@
     border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: column;
+    // animation: open 0.5s ;
+
+
 
     &--converted {
         position: absolute;
-        bottom: 210px;
-        right: 45px;
+        bottom: 19px;
+        right: 50px;
+        // animation: close 0.5s ;
 
         width: 406px;
         height: 49px;
@@ -22,6 +26,8 @@
         border-radius: 10px 10px 0 0;
     }
 }
+
+
 
 .form {
     &__top {
@@ -157,7 +163,7 @@
     }
 
     &__message {
-        width: 267px;
+        max-width: 267px;
         min-height: 40px;
         padding: 10px;
         border-radius: 6px;
@@ -167,6 +173,8 @@
         background: #fff;
         color: #000;
 
+
+
         & span {
             font-size: 14px;
             opacity: 0.5;
@@ -175,6 +183,7 @@
         &--student {
             align-self: start;
             background: #d9d9d9;
+            
         }
     }
 
@@ -218,3 +227,25 @@
         }
     }
 }
+
+// @keyframes open {
+//     0% {
+//         opacity: 0;
+//         bottom: -500px ;
+//     }
+//     100% {
+//         opacity: 1;
+//         bottom: 18px;
+//     }
+// }
+
+// @keyframes close {
+//     0% {
+//         opacity: 1;
+//         bottom: 320px;
+//     }
+//     100% {
+//         opacity: 1;
+//         bottom: 18px;
+//     }
+// }
