@@ -17,10 +17,6 @@ jobs:
         run: |
           npm ci
           npm run build
-        cache:
-          paths:
-            - 'frontend/node_modules'
-            - 'frontend/package-lock.json'
 
       - name: Deploy
         uses: appleboy/scp-action@master
