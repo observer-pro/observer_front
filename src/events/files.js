@@ -3,9 +3,10 @@ import { context, appElement } from "../main.js";
 import { getFiletree } from "../components/filetree.js";
 import { getActiveFile } from "../components/active-files.js";
 import { renderApp } from "../render.js";
-import { getNewFiles } from "../components/new-files.js";
+import { getNewFiles, getNewFilenames } from "../components/new-files.js";
 import { getAllMessages, requireAllMessages } from "./messages.js";
 import { user_storeage } from "../components/user-storeage.js";
+import { getChangedFile } from "../components/changed-files.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
@@ -90,9 +91,18 @@ export const updateCode = () => {
                 user.isActive = false;
             }
         });
-        context.files = getNewFiles(context.files, data.files);
-        context.filetree = getFiletree(context.files);
 
+        user_storeage[context.activeUserId].latest_updated_paths.push(
+            ...getNewFilenames(data.files),
+        );
+        context.filetree = getFiletree(getNewFiles(context.files, data.files));
+
+        console.log(user_storeage);
+
+        getChangedFile(
+            context,
+            user_storeage[context.activeUserId].latest_updated_paths,
+        );
         renderApp(appElement, context);
 
         if (context.code) {

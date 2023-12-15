@@ -30,3 +30,15 @@ export const getNewFiles = (files, newFiles) => {
 
     return result;
 };
+
+export const getNewFilenames = (files) => {
+    const result = [];
+
+    files.forEach((file) => {
+        const path = file.filename.split("/");
+
+        result.push(path[path.length - 1]);
+    });
+
+    return [...new Set(result)];
+};

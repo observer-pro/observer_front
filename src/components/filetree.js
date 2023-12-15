@@ -20,6 +20,7 @@ export const getFiletree = (files) => {
                 status: file.status,
                 content: file.content,
                 path: file.filename,
+                isChanged: false,
             };
 
             tree.files.push(newFile);
@@ -48,6 +49,7 @@ export const getFiletree = (files) => {
             status: file.status,
             content: file.content,
             path: file.filename,
+            isChanged: false,
         };
 
         tree[path[path.length - 2]].files.push(newFile);
