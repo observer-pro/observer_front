@@ -5,8 +5,8 @@ import hljs from "../components/hljs.js";
 import { user_storeage } from "../components/user-storeage.js";
 
 export const getStepsStatus = () => {
-    socket.on("steps/status", (data) => {
-        console.log("Выполнен запрос steps/status. Получены данные:");
+    socket.on("steps/status/to_mentor", (data) => {
+        console.log("Выполнен запрос steps/status/to_mentor. Получены данные:");
         console.log(data);
 
         context.room.users.forEach((user) => {
@@ -17,8 +17,6 @@ export const getStepsStatus = () => {
 
         if (context.activeUserId) {
             context.currentSteps = [...Object.values(data.steps)];
-            console.log(context.currentSteps, 'us');
-            
         }
 
         renderApp(appElement, context);

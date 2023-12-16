@@ -563,6 +563,12 @@ ul {
 .window .code__tree-name--active {
   opacity: 1;
 }
+.window .code__tree-point {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #FFCF4D;
+}
 .window .code__show-screen {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -703,7 +709,7 @@ ul {
   width: 10px;
   background-color: transparent;
 }
-.window .task__area ::-webkit-scrollbar-thumb {
+.window .task__area::-webkit-scrollbar-thumb {
   background-color: rgb(169, 106, 252);
   border-radius: 20px;
 }

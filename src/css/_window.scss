@@ -313,6 +313,13 @@
             }
         }
 
+        &__tree-point {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #FFCF4D;
+        }
+
         &__show-screen {
             flex-grow: 1;
 
@@ -434,11 +441,13 @@
             font-size: 16px;
             line-height: normal;
             border: solid 8px #191919;
+
             & ::-webkit-scrollbar {
                 width: 10px;
                 background-color: transparent;
             }
-            ::-webkit-scrollbar-thumb {
+
+            &::-webkit-scrollbar-thumb {
                 background-color: rgb(169, 106, 252);
                 border-radius: 20px
             }
