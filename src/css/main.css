@@ -372,7 +372,7 @@ ul {
   line-height: 20px;
 }
 .window .room__students {
-  min-height: 187px;
+  min-height: 200px;
   background: #242424;
   border-radius: 6px;
   display: -webkit-box;
