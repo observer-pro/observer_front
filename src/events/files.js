@@ -48,6 +48,10 @@ export const sendCode = () => {
             context.allMessages = [...messages];
             user_storeage[context.activeUserId].messages = [...messages];
         });
+        getChangedFile(
+            context,
+            user_storeage[context.activeUserId].latest_updated_paths,
+        );
         getActiveFile(context);
     });
 };
