@@ -616,9 +616,10 @@ ul {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
+  gap: 50px;
 }
 .window .task__container {
-  width: 750px;
+  width: 650px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -641,10 +642,12 @@ ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 80px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .window .task__works {
   height: 44px;
@@ -747,6 +750,83 @@ ul {
   width: 120px;
 }
 .window .task__button-sent:hover {
+  opacity: 0.5;
+}
+.window .task__notion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 83px;
+}
+.window .notion__box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 23px;
+}
+.window .notion__title {
+  color: #FFF;
+  font-family: StratosSkyeng;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.window .notion__input {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  min-width: 295px;
+  outline: none;
+  color: #FFF;
+  background: #000;
+  font-family: StratosSkyeng;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.window .notion__btn {
+  height: 37px;
+  border: none;
+  border-radius: 6px;
+  background: #a96afc;
+  cursor: pointer;
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 78px;
+  padding: 6px;
+}
+.window .notion__btn:hover {
+  opacity: 0.5;
+}
+.window .notion__btn-sent {
+  height: 37px;
+  border: none;
+  border-radius: 6px;
+  background: #a96afc;
+  cursor: pointer;
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  padding: 6px;
+  background: #00aa63;
+  width: 151px;
+}
+.window .notion__btn-sent:hover {
   opacity: 0.5;
 }
 

@@ -6,7 +6,7 @@ import { renderApp } from "../render.js";
 
 
 export const initOpeningTask = () => {
-    const showTaskElement = document.querySelector("#show-task");
+    const showTaskElement = document.getElementById("show-task");
 
 
     showTaskElement?.addEventListener("click", () => {
@@ -22,6 +22,7 @@ export const initOpeningTask = () => {
 
     });
 };
+
 export const initSendingTask = () => {
     const areaElement = document.getElementById("task-area");
     const sendTaskElement = document.getElementById("send-task");
@@ -162,3 +163,51 @@ export const initSendingTask = () => {
         } 
     });
 };
+
+
+export const initNotion = () => {
+    const input = document.getElementById('notion-input');
+    const btn = document.getElementById('notion-btn');
+
+    input?.addEventListener('focus', () => {
+        if (context.isNotion === true){
+            context.isNotion = false
+            renderApp(appElement, context)
+        }
+    })
+    
+    btn?.addEventListener('click', () => {
+        const notionUrl = input.value;
+        if (notionUrl.length > 0){
+            context.isNotion = true;
+            renderApp(appElement, context);
+            socket.emit('steps/import', {"url" : notionUrl});
+            console.log("Отправлен запрос steps/import. Отправлены данные:\n", {"url" : notionUrl}); 
+        } 
+        
+    })
+    socket.on("steps/load", (data) => {
+        const editor = document.querySelector('.ql-editor');
+        console.log(data);
+        context.taskContent = {
+            visit: true,
+            content: data[0].content
+        }
+
+        localStorage.setItem('ACTIVE_TASK', JSON.stringify({
+            visit: true,
+            content: data[0].content
+        }))
+
+        editor.innerHTML = data[0].content
+
+        renderApp(appElement, context);
+
+    })    
+
+
+    socket.on("error", (data) => {
+        console.log(data);
+    })  
+   
+}

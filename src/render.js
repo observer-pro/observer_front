@@ -17,6 +17,8 @@ import {
     getScrolledChat,
 } from "./components/functions.js";
 
+import { initNotion } from "./events/task.js";
+
 export const renderApp = (appElement, context) => {
     if (context.isStart) {
         appElement.innerHTML = start({ context: context });
@@ -25,13 +27,13 @@ export const renderApp = (appElement, context) => {
         initCheckAddress();
     } else {
         appElement.innerHTML = main({ context: context });
-
         initClickingUsers();
         initClickingFiles();
         initReconnecting();
         initQuitRoom();
         initOpeningTask();
         initSendingTask();
+        initNotion()
         initInviting();
         toggleConvertingForm();
         initSendingMessage();

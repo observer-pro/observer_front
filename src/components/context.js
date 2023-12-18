@@ -7,6 +7,7 @@ class Context {
         currentAddress,
         isSent,
         allMessages,
+        isNotion
     ) {
         this.isStart = isStart;
         this.isOnline = isOnline;
@@ -23,6 +24,7 @@ class Context {
             visit: false,
             content: ""
         }
+        this.isNotion = isNotion;
     }
 }
 
