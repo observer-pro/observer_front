@@ -897,6 +897,9 @@ ul {
 .form .steps__box--help {
   background: #9F6405;
 }
+.form .steps__box--accepted {
+  background: #015c21;
+}
 .form .steps__text {
   color: #FFF;
   font-size: 16px;

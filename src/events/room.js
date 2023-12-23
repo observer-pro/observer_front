@@ -5,6 +5,7 @@ import ClipboardJS from "clipboard";
 import { getActiveFile } from "../components/active-files.js";
 import { getAllMessages } from "./messages.js";
 import { user_storeage } from "../components/user-storeage.js";
+import { getChangedFile } from "../components/changed-files.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -87,6 +88,10 @@ export const updateRoom = () => {
         getAllMessages((messages) => {
             context.allMessages = [...messages];
         });
+        getChangedFile(
+            context,
+            user_storeage[context.activeUserId]?.latest_updated_paths,
+        );
         renderApp(appElement, context);
 
         if (context.code) {

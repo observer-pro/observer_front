@@ -16,6 +16,7 @@ import {
     getScrolledFiletree,
     getScrolledChat,
 } from "./components/functions.js";
+import { initSendingSteps } from "./events/signals.js";
 
 import { initNotion } from "./events/task.js";
 
@@ -41,5 +42,6 @@ export const renderApp = (appElement, context) => {
         saveScrolledFiletree();
         getScrolledFiletree();
         getScrolledChat();
+        initSendingSteps();
     }
 };
