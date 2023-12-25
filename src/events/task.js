@@ -190,7 +190,6 @@ export const initNotion = (editor) => {
             socket.emit('steps/import', {"url" : notionUrl});
             console.log("Отправлен запрос steps/import. Отправлены данные:\n", {"url" : notionUrl}); 
         } 
-        
     })
 
     socket.on('error', (messege) => {
