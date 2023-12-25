@@ -794,6 +794,33 @@ ul {
   font-weight: 400;
   line-height: normal;
 }
+.window .notion__btn-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+.window .notion__error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 37px;
+  border: none;
+  border-radius: 6px;
+  background: #fc4c1e;
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 100%;
+}
 .window .notion__btn {
   height: 37px;
   border: none;

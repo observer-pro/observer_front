@@ -7,7 +7,7 @@ class Context {
         currentAddress,
         isSent,
         allMessages,
-        isNotion
+        isNotion,
     ) {
         this.isStart = isStart;
         this.isOnline = isOnline;
@@ -25,6 +25,7 @@ class Context {
             content: ""
         }
         this.isNotion = isNotion;
+        this.notionError = false
     }
 }
 

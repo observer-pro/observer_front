@@ -29,9 +29,16 @@ export const initSendingTask = () => {
     const worksBtnElement = document.querySelectorAll(".task__work")
     let lastActive
     const editor = initQuill(areaElement);
-    
 
-    editor?.setContents(JSON.parse(localStorage.getItem("ACTIVE_TASK"))?.content);
+    initNotion(editor)
+    
+    const lsContent = JSON.parse(localStorage.getItem("ACTIVE_TASK"))?.content
+    // editor?.setContents(lsContent);
+    if (editor && lsContent !== "" && lsContent !== undefined) {
+        editor.container.firstChild.innerHTML = ""
+        editor.container.firstChild.innerHTML = lsContent
+    }
+
 
 
     areaElement?.addEventListener("click", () => {
@@ -94,8 +101,7 @@ export const initSendingTask = () => {
             localStorage.setItem("ACTIVE_TASK", JSON.stringify(data[context.taskNumber]))
 
             if(!(data[lastActive].visit) && editor.getContents()) {
-                data[lastActive].content = editor.getContents()
-                data[lastActive].contentText = editor.container.firstChild.innerHTML
+                data[lastActive].content = editor.container.firstChild.innerHTML
                 data[lastActive].visit = true
                 localStorage.setItem("ALL_TASK", JSON.stringify(data))
             } else if (data[context.taskNumber].visit){
@@ -117,20 +123,19 @@ export const initSendingTask = () => {
 
         if (flag) {
             if(editor.getText()?.length > 0){
-                data[lastActive].contentText = editor.container.firstChild.innerHTML;
+                data[lastActive].content = editor.container.firstChild.innerHTML;
                 data[lastActive].visit = true;
                 localStorage.setItem("ACTIVE_TASK", JSON.stringify({
                     ...JSON.parse(localStorage.getItem("ACTIVE_TASK")),
-                    content: editor.getContents(),
-                    contentText: editor.container.firstChild.innerHTML,
+                    content: editor.container.firstChild.innerHTML,
                     visit: true
             }))
             }
             for(let task in data){
-                if(data[task].visit && data[task]?.contentText !== "<p><br></p>" ){
+                if(data[task].visit && data[task]?.content !== "<p><br></p>" ){
                     validData.push({
                         "name": `${task === "Теория" ? "theory": task}`,
-                        "content": `${data[task].contentText ? data[task].contentText : ""}`,
+                        "content": `${data[task].content ? data[task].content : ""}`,
                         "type": `${task === "Теория" ? "theory": "exercise"}`,
                         "language": "html",
                     })
@@ -165,13 +170,14 @@ export const initSendingTask = () => {
 };
 
 
-export const initNotion = () => {
+export const initNotion = (editor) => {
     const input = document.getElementById('notion-input');
     const btn = document.getElementById('notion-btn');
 
-    input?.addEventListener('focus', () => {
+    input?.addEventListener('click', () => {
         if (context.isNotion === true){
             context.isNotion = false
+            context.notionError = false
             renderApp(appElement, context)
         }
     })
@@ -186,9 +192,22 @@ export const initNotion = () => {
         } 
         
     })
+
+    socket.on('error', (messege) => {
+        console.error(messege);
+        context.notionError = true
+        renderApp(appElement, context)
+    })
+    
     socket.on("steps/load", (data) => {
-        const editor = document.querySelector('.ql-editor');
+        data.map(task => {
+            task.visit = true
+        })
         console.log(data);
+
+        context.taskNumber = 1
+
+        localStorage.setItem('FILLED_TASK', 1)
         context.taskContent = {
             visit: true,
             content: data[0].content
@@ -199,7 +218,44 @@ export const initNotion = () => {
             content: data[0].content
         }))
 
-        editor.innerHTML = data[0].content
+        let validData = {
+            1: {
+                visit: false,
+            },
+            2: {
+                visit: false,
+            },
+            3: {
+                visit: false,
+            },
+            4: {
+                visit: false,
+            },
+            5: {
+                visit: false,
+            },
+            6: {
+                visit: false,
+            },
+            7: {
+                visit: false,
+            },
+            8: {
+                visit: false,
+            },
+            "Теория" : {
+                visit: false,
+            },
+        }
+        data.forEach((task) => {
+            validData[task.name] = task
+        })
+
+
+        localStorage.setItem('ALL_TASK', JSON.stringify({
+            ...JSON.parse(localStorage.getItem('ALL_TASK')),
+            ...validData
+        }))
 
         renderApp(appElement, context);
 

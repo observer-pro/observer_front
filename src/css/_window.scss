@@ -506,6 +506,26 @@
             line-height: normal;
         }
 
+        &__btn-box{
+            display: flex;
+            gap: 20px;
+        }
+
+        &__error {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 37px;
+            border: none;
+            border-radius: 6px;
+            background: #fc4c1e;
+            color: #fff;
+            font-size: 15px;
+            line-height: 20px;
+            transition: all 0.5s;
+            width: 100%;
+        }
+
         &__btn {
             @include task-button();
             width: 78px;

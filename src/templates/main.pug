@@ -72,7 +72,12 @@
                 .notion__box
                     h2.notion__title Импорт
                     input.notion__input(type="text" placeholder="Вставьте ссылку на Notion")#notion-input
-                    button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : "Импорт"
+                        
+                    if context.notionError 
+                            p.notion__error Ошибка импорта
+                    else
+                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : "Импорт"
+
                 
 
     else
