@@ -119,7 +119,7 @@
         }
 
         &__students {
-            min-height: 187px;
+            min-height: 200px;
             background: $work-background;
             border-radius: 6px;
             display: flex;
@@ -361,11 +361,12 @@
         border-radius: 7px;
         display: flex;
         justify-content: start;
+        gap: 50px;
     }
 
     .task {
         &__container {
-            width: 750px;
+            width: 650px;
             display: flex;
             flex-direction: column;
             align-items: start;
@@ -381,8 +382,8 @@
         &__works-box {
             width: 100%;
             display: flex;
-            gap: 80px;
             align-items: center;
+            justify-content: space-between;
         }
 
         &__works {
@@ -463,6 +464,78 @@
                 background: #00aa63;
                 height: 45px;
                 width: 120px;
+            }
+        }
+
+        &__notion {
+            display: flex;
+            flex-direction: column;
+            gap: 83px;
+        }
+    }
+
+    .notion{
+        &__box{
+            display: flex;
+            flex-direction: column;
+            gap: 23px;
+        }
+
+        &__title{
+            color: #FFF;
+            font-family: StratosSkyeng;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        &__input {
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            min-width: 295px;
+            outline: none;
+
+            color: #FFF;
+            background: #000;
+            font-family: StratosSkyeng;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        &__btn-box{
+            display: flex;
+            gap: 20px;
+        }
+
+        &__error {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 37px;
+            border: none;
+            border-radius: 6px;
+            background: #fc4c1e;
+            color: #fff;
+            font-size: 15px;
+            line-height: 20px;
+            transition: all 0.5s;
+            width: 100%;
+        }
+
+        &__btn {
+            @include task-button();
+            width: 78px;
+            padding: 6px;
+
+            &-sent{
+                @include task-button();
+                padding: 6px;
+                background: #00aa63;
+                width: 151px;
             }
         }
     }

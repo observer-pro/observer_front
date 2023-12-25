@@ -41,7 +41,7 @@
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
     if context.isShowingTask
-       .window__task.task 
+        .window__task.task 
             .task__container 
                 h2.task__title Задание
                 .task__works-box 
@@ -67,6 +67,18 @@
 
                     button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить"                    
                 .task__area#task-area
+            
+            .task__notion.notion
+                .notion__box
+                    h2.notion__title Импорт
+                    input.notion__input(type="text" placeholder="Вставьте ссылку на Notion")#notion-input
+                        
+                    if context.notionError 
+                            p.notion__error Ошибка импорта
+                    else
+                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : "Импорт"
+
+                
 
     else
         .window__code.code(class=!context.filetree && 'window__code--empty')   

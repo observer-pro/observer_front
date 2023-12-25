@@ -132,7 +132,7 @@ export const initQuitRoom = () => {
         context.isClosed = true;
         context.isStart = true;
         context.currentAddress = localStorage.getItem("SERVER");
-        // context.isSent = false
+        context.isSent = false
 
         localStorage.removeItem("ROOM_ID");
         localStorage.removeItem("HOST_ID");
