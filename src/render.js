@@ -18,7 +18,7 @@ import {
 } from "./components/functions.js";
 import { initSendingSteps } from "./events/signals.js";
 
-import { initNotion } from "./events/task.js";
+import { initNotion } from "./events/notion";
 
 export const renderApp = (appElement, context) => {
     if (context.isStart) {
@@ -34,7 +34,7 @@ export const renderApp = (appElement, context) => {
         initQuitRoom();
         initOpeningTask();
         initSendingTask();
-        initNotion()
+        initNotion();
         initInviting();
         toggleConvertingForm();
         initSendingMessage();
