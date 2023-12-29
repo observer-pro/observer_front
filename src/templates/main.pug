@@ -76,7 +76,7 @@
                     if context.notionError 
                             p.notion__error Ошибка импорта
                     else
-                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : "Импорт"
+                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : context.isNotion === null ? "Загрузка..." : "Импорт"
 
                 
 

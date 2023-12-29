@@ -17,13 +17,15 @@ export const initNotion = () => {
     btn?.addEventListener('click', () => {
         const notionUrl = input.value;
         if (notionUrl.length > 0){
+            context.isNotion = null
             renderApp(appElement, context);
             socket.emit('steps/import', {"url" : notionUrl});
             console.log("Отправлен запрос steps/import. Отправлены данные:\n", {"url" : notionUrl}); 
         } 
     })
+}
 
-    socket.on('alerts', (messege) => {
+socket.on('alerts', (messege) => {
     if(messege.type === "ERROR"){
         console.error(messege);
         context.notionError = true
@@ -31,6 +33,7 @@ export const initNotion = () => {
         context.isNotion = true;
     } else {
         context.isNotion = true;
+        renderApp(appElement,context);
     }
 })
 
@@ -93,4 +96,3 @@ socket.on("steps/load", (data) => {
     renderApp(appElement, context);
 
 })    
-}
