@@ -30,7 +30,6 @@ export const initSendingTask = () => {
     let lastActive
     const editor = initQuill(areaElement);
 
-    initNotion(editor)
     
     const lsContent = JSON.parse(localStorage.getItem("ACTIVE_TASK"))?.content
     // editor?.setContents(lsContent);
@@ -170,99 +169,3 @@ export const initSendingTask = () => {
 };
 
 
-export const initNotion = (editor) => {
-    const input = document.getElementById('notion-input');
-    const btn = document.getElementById('notion-btn');
-
-    input?.addEventListener('click', () => {
-        if (context.isNotion === true){
-            context.isNotion = false
-            context.notionError = false
-            renderApp(appElement, context)
-        }
-    })
-    
-    btn?.addEventListener('click', () => {
-        const notionUrl = input.value;
-        if (notionUrl.length > 0){
-            context.isNotion = true;
-            renderApp(appElement, context);
-            socket.emit('steps/import', {"url" : notionUrl});
-            console.log("Отправлен запрос steps/import. Отправлены данные:\n", {"url" : notionUrl}); 
-        } 
-    })
-
-    socket.on('error', (messege) => {
-        console.error(messege);
-        context.notionError = true
-        renderApp(appElement, context)
-    })
-    
-    socket.on("steps/load", (data) => {
-        data.map(task => {
-            task.visit = true
-        })
-        console.log(data);
-
-        context.taskNumber = 1
-
-        localStorage.setItem('FILLED_TASK', 1)
-        context.taskContent = {
-            visit: true,
-            content: data[0].content
-        }
-
-        localStorage.setItem('ACTIVE_TASK', JSON.stringify({
-            visit: true,
-            content: data[0].content
-        }))
-
-        let validData = {
-            1: {
-                visit: false,
-            },
-            2: {
-                visit: false,
-            },
-            3: {
-                visit: false,
-            },
-            4: {
-                visit: false,
-            },
-            5: {
-                visit: false,
-            },
-            6: {
-                visit: false,
-            },
-            7: {
-                visit: false,
-            },
-            8: {
-                visit: false,
-            },
-            "Теория" : {
-                visit: false,
-            },
-        }
-        data.forEach((task) => {
-            validData[task.name] = task
-        })
-
-
-        localStorage.setItem('ALL_TASK', JSON.stringify({
-            ...JSON.parse(localStorage.getItem('ALL_TASK')),
-            ...validData
-        }))
-
-        renderApp(appElement, context);
-
-    })    
-
-
-    socket.on("error", (data) => {
-        console.log(data);
-    })  
-   
-}

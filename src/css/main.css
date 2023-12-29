@@ -696,7 +696,7 @@ ul {
 }
 .window .task__area {
   width: 100%;
-  max-height: 350px;
+  max-height: 60vh;
   padding: 9px;
   border: none;
   outline: none;
