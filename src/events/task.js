@@ -51,7 +51,7 @@ export const initSendingTask = () => {
 
     worksBtnElement?.forEach( btn => {
         if(btn.checked) {
-            lastActive = btn.value
+            lastActive = btn.value !== "Теория" ? btn.value : "theory"
         }
         btn?.addEventListener('click', () => {
             if(lastActive === btn.value) {
@@ -87,7 +87,7 @@ export const initSendingTask = () => {
                     8: {
                         visit: false,
                     },
-                    "Теория" : {
+                    "theory" : {
                         visit: false,
                     },
                 }
@@ -95,7 +95,7 @@ export const initSendingTask = () => {
             }
             // Понять что это
             context.taskContent = false
-            context.taskNumber = btn.value
+            context.taskNumber = btn.value !== "Теория" ? btn.value : "theory"
             data[lastActive].visit = false
             localStorage.setItem("ACTIVE_TASK", JSON.stringify(data[context.taskNumber]))
 
@@ -133,9 +133,9 @@ export const initSendingTask = () => {
             for(let task in data){
                 if(data[task].visit && data[task]?.content !== "<p><br></p>" ){
                     validData.push({
-                        "name": `${task === "Теория" ? "theory": task}`,
+                        "name": `${task === "theory" ? "theory": task}`,
                         "content": `${data[task].content ? data[task].content : ""}`,
-                        "type": `${task === "Теория" ? "theory": "exercise"}`,
+                        "type": `${task === "theory" ? "theory": "exercise"}`,
                         "language": "html",
                     })
                 }
@@ -153,9 +153,9 @@ export const initSendingTask = () => {
 
         } else if (editor.getText()?.length > 0){
             const task = [{
-                "name": `${lastActive === "Теория" ? "theory": lastActive}`,
+                "name": `${lastActive === "theory" ? "theory": lastActive}`,
                 "content": editor.container.firstChild.innerHTML,
-                "type": `${lastActive  === "Теория" ? "theory": "exercise"}`,
+                "type": `${lastActive  === "theory" ? "theory": "exercise"}`,
                 "language": "html",
             }]
             context.isSent = true;

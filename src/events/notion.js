@@ -68,7 +68,7 @@ socket.on("steps/load", (data) => {
         8: {
             visit: false,
         },
-        "Теория" : {
+        "theory" : {
             visit: false,
         },
     }

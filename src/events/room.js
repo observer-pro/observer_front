@@ -62,6 +62,7 @@ export const updateRoom = () => {
                 };
             }
 
+
             if (user.id === context.activeUserId) {
                 user.isActive = true;
             } else {
