@@ -33,7 +33,7 @@ export const sendCode = () => {
         context.room.users.map((user) => {
             if (user.id === context.activeUserId) {
                 user.isActive = true;
-                context.currentSteps = [...user_storeage[user.id].steps];
+                context.currentSteps = user.steps;
 
                 requireAllMessages(user.id);
             } else {

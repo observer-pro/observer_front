@@ -23,7 +23,8 @@
                 }`) пригласить
                 a(href="#" class="link room__quit" id="quit") выйти
             .room__task-buttons
-                button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ?"Файловое дерево" : "Задания" 
+                if !context.isShowingTask
+                    button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ?"Файловое дерево" : "Задания" 
                 img.room__task-settings(src="./public/img/settings-icon.svg", alt="")
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
@@ -37,6 +38,13 @@
                             } ${
                                 user.isActive ? 'students__item--active' : ''
                             }` id=user.id data-name=user.name)
+                                if user.steps !== null && user.steps !== undefinded
+                                    if Object.values(user.steps).includes("HELP")
+                                        img(src="./public/img/help-icon.svg", alt="help")
+                                    if Object.values(user.steps).includes("DONE") && !(Object.values(user.steps).includes("HELP"))
+                                        img(src="./public/img/done-icon.svg", alt="done")
+                                    if  Object.values(user.steps).length > 0 && Object.values(user.steps).every(el => el === "ACCEPTED")
+                                        img(src="./public/img/accepted-icon.svg", alt="accepted")
                                 span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
                                 if user.unreadMessages && !user.isActive
                                     span.item__unread= user.unreadMessages.length
@@ -62,7 +70,7 @@
                             label.task__work-label(for="work-seven") 7
                             input.task__work(type="radio" value="8" name="work" id="work-eight" checked=8 === Number(context.taskNumber))
                             label.task__work-label(for="work-eight") 8
-                            input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="Теория" === context.taskNumber)
+                            input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
                             label.task__work-label(for="work-teory") Теория
 
                     button(class= context.isSent ? "task__button-sent" : "task__button")#send-task= context.isSent ? "Отправлено" : "Отправить"                    
@@ -76,7 +84,7 @@
                     if context.notionError 
                             p.notion__error Ошибка импорта
                     else
-                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : "Импорт"
+                        button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : context.isNotion === null ? "Загрузка..." : "Импорт"
 
                 
 
@@ -121,30 +129,30 @@
         
         div(class=`${
             !context.isFormConverted ? 'message-form' : 'message-form--converted'
-        }`).form(style= `${context.currentSteps && context.isFormConverted && context.currentSteps.filter( status => status !== 'NONE').length !== 0 ? `bottom: ${context.currentSteps.filter( status => status !== 'NONE').length * (44) + 19}px`: "bottom : 19px"}`)
+        }`).form(style= `${context.currentSteps && context.isFormConverted && Object.values(context.currentSteps).filter( status => status !== 'NONE').length !== 0 ? `bottom: ${Object.values(context.currentSteps).filter( status => status !== 'NONE').length * (44) + 19}px`: "bottom : 19px"}`)
             .form__top 
                 h3.form__name= context.activeUserName 
                 a(href="#" class="form__link" id="converter")= context.isFormConverted ? 'Развернуть' : 'Свернуть'
             if context.currentSteps
                 .form__steps.steps
-                    each step, index in context.currentSteps 
+                    each step, key in context.currentSteps
                         if step === 'DONE'
                             .steps__box.steps__box--done 
                                 p.steps__text На проверке
-                                    span.steps__text--underline= ` #${index + 1}`
+                                    span.steps__text--underline= ` #${key}`
                                 .steps__links 
-                                    a.steps__link.steps__link--return.return(href="#" data-number=`${index + 1}`) Вернуть
-                                    a.steps__link.steps__link--confirm.accept(href="#" data-number=`${index + 1}`) Принять
+                                    a.steps__link.steps__link--return.return(href="#" data-number=`${key}`) Вернуть
+                                    a.steps__link.steps__link--confirm.accept(href="#" data-number=`${key}`) Принять
                         else if step === 'HELP'
                             .steps__box.steps__box--help 
                                 p.steps__text Нужна помощь с
-                                    span.steps__text--underline= ` #${index + 1}`
+                                    span.steps__text--underline= ` #${key}`
                                 .steps__links 
-                                    a.steps__link.steps__link--complete.complete(href="#" data-number=`${index + 1}`) Разобрались
+                                    a.steps__link.steps__link--complete.complete(href="#" data-number=`${key}`) Разобрались
                         else if step === 'ACCEPTED'
                             .steps__box.steps__box--accepted
                                 p.steps__text Выполнено
-                                    span.steps__text--underline= ` #${index + 1}`
+                                    span.steps__text--underline= ` #${key}`
             if !context.isFormConverted
                 .form__messages#chat
                     if context.allMessages.length > 0

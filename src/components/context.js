@@ -19,7 +19,7 @@ class Context {
         this.server = "wss://server.observer-app.pro";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";
-        this.taskNumber = localStorage.getItem("FILLED_TASK") ? +localStorage.getItem("FILLED_TASK"): 1;
+        this.taskNumber = localStorage.getItem("FILLED_TASK") ? localStorage.getItem("FILLED_TASK"): 1;
         this.taskContent = JSON.parse(localStorage.getItem("ACTIVE_TASK")) ? JSON.parse(localStorage.getItem("ACTIVE_TASK")) : {
             visit: false,
             content: ""

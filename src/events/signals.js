@@ -23,12 +23,13 @@ export const getStepsStatus = () => {
 
         context.room.users.forEach((user) => {
             if (user.id === data.user_id) {
+                user.steps = data.steps;
                 user_storeage[user.id].steps = Object.values(data.steps);
             }
         });
 
         if (context.activeUserId) {
-            context.currentSteps = [...Object.values(data.steps)];
+            context.currentSteps = data.steps;
         }
 
         renderApp(appElement, context);
@@ -54,6 +55,12 @@ export const initSendingSteps = () => {
 
             steps[number] = "ACCEPTED";
 
+            context.room.users.forEach((user) => {
+                if (user.id === activeUserId) {
+                    user.steps[number] = "ACCEPTED";
+                }
+            });
+
             goStepsData(activeUserId, steps);
 
             socket.emit("steps/table", {});
@@ -67,6 +74,12 @@ export const initSendingSteps = () => {
 
             steps[number] = "NONE";
 
+            context.room.users.forEach((user) => {
+                if (user.id === activeUserId) {
+                    user.steps[number] = "NONE";
+                }
+            });
+
             goStepsData(activeUserId, steps);
 
             socket.emit("steps/table", {});
@@ -79,6 +92,12 @@ export const initSendingSteps = () => {
             const number = element.dataset.number;
 
             steps[number] = "NONE";
+        
+            context.room.users.forEach((user) => {
+                if (user.id === activeUserId) {
+                    user.steps[number] = "NONE";
+                }
+            });
 
             goStepsData(activeUserId, steps);
 
@@ -98,7 +117,7 @@ export const getChangedSteps = () => {
         context.stepsTable.forEach((step) => {
             if (context.activeUserId === step.user_id) {
                 user_storeage[step.user_id].steps = Object.values(step.steps);
-                context.currentSteps = [...Object.values(step.steps)];
+                context.currentSteps = step.steps;
             }
         });
 
