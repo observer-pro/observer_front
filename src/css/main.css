@@ -352,6 +352,7 @@ ul {
   opacity: 0.5;
 }
 .window .room__task-settings {
+  margin-left: auto;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
 }
