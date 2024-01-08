@@ -24,7 +24,7 @@
                 a(href="#" class="link room__quit" id="quit") выйти
             .room__task-buttons
                 if !context.isShowingTask
-                    button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ?"Файловое дерево" : "Задания" 
+                    button(class= `${context.isShowingTask ? "room__task-button" : "room__button"}`)#show-task= context.isShowingTask ?"Файловое дерево" : "Задания"
                 img.room__task-settings(src="./public/img/settings-icon.svg", alt="")
         .room__students.students(class=context.room.users.length < 2 ? 'room__students--empty' : '')
             if context.room.users.length < 2
