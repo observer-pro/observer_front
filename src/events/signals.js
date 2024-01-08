@@ -128,3 +128,81 @@ export const getChangedSteps = () => {
         }
     });
 };
+
+export const getAlerts = () => {
+    socket.on('alerts', (alerts) => {
+        alert(`${alerts.type}: ${alerts.message}`)
+    if(alerts.type === "ERROR" && alerts.message.startsWith('Could not extract domain and page_id from url')){
+        console.error(alerts);
+        context.notionError = true
+        renderApp(appElement, context)
+        context.isNotion = true;
+    } else {
+        context.isNotion = true;
+        renderApp(appElement,context);
+    }
+    })
+}
+
+export const stepsLoad = () => {
+    socket.on("steps/load", (data) => {
+        data.map(task => {
+            task.visit = true
+        })
+        console.log("Запрос steps/load. Получены данные:\n", {"url" : data}); 
+
+        let validData = {
+            1: {
+                visit: false,
+            },
+            2: {
+                visit: false,
+            },
+            3: {
+                visit: false,
+            },
+            4: {
+                visit: false,
+            },
+            5: {
+                visit: false,
+            },
+            6: {
+                visit: false,
+            },
+            7: {
+                visit: false,
+            },
+            8: {
+                visit: false,
+            },
+            "theory" : {
+                visit: false,
+            },
+        }
+
+        data.forEach((task) => {
+            validData[task.name] = task
+        })
+
+        context.taskContent = {
+            visit: true,
+            content: validData[context.taskNumber].content
+        }
+
+        localStorage.setItem('ACTIVE_TASK', JSON.stringify({
+            visit: true,
+            content: validData[context.taskNumber].content
+        }))
+
+
+
+        localStorage.setItem('ALL_TASK', JSON.stringify({
+            ...JSON.parse(localStorage.getItem('ALL_TASK')),
+            ...validData
+        }))
+
+        renderApp(appElement, context);
+
+    })   
+}
