@@ -128,3 +128,7 @@ export const getChangedSteps = () => {
         }
     });
 };
+
+socket.on('alerts', (alerts) => {
+    alert(`${alerts.type}: ${alerts.message}`)
+})

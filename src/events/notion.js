@@ -25,9 +25,9 @@ export const initNotion = () => {
     })
 }
 
-socket.on('alerts', (messege) => {
-    if(messege.type === "ERROR"){
-        console.error(messege);
+socket.on('alerts', (alert) => {
+    if(alert.type === "ERROR" && alert.message.startsWith('Could not extract domain and page_id from url')){
+        console.error(alert);
         context.notionError = true
         renderApp(appElement, context)
         context.isNotion = true;
