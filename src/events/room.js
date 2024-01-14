@@ -26,6 +26,9 @@ export const initCreatingRoom = () => {
 
     createElement.addEventListener("click", () => {
         context.isClosed = false;
+        context.taskNumber = 1
+
+        localStorage.removeItem("TASK_NUMBER")
 
         createRoom(context.hostName);
     });
@@ -134,15 +137,14 @@ export const initQuitRoom = () => {
         context.isStart = true;
         context.currentAddress = localStorage.getItem("SERVER");
         context.isSent = false
+        context.taskNumber = 1
 
         localStorage.removeItem("ROOM_ID");
         localStorage.removeItem("HOST_ID");
         localStorage.removeItem("ACTIVE_USER_ID");
         localStorage.removeItem("ACTIVE_FILE_PATH");
         localStorage.removeItem("FILES");
-        // localStorage.removeItem("ALL_TASK")
-        // localStorage.removeItem("FILLED_TASK")
-        // localStorage.removeItem("ACTIVE_TASK")
+        localStorage.removeItem("TASK_NUMBER")
 
         renderApp(appElement, context);
         closeRoom({ room_id: context.room.id });

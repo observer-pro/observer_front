@@ -667,7 +667,6 @@ ul {
   opacity: 1;
 }
 .window .task__work-label {
-  background: #000;
   color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -688,6 +687,30 @@ ul {
   transition: 0.5s ease;
 }
 .window .task__work-label:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.window .task__work-plus {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 17px;
+  opacity: 0.5;
+  font-size: 17.903px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+.window .task__work-plus:hover {
   opacity: 1;
   cursor: pointer;
 }

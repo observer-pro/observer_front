@@ -1,3 +1,5 @@
+import { taskMode } from "./all_tasks";
+
 class Context {
     constructor(
         isStart,
@@ -8,6 +10,7 @@ class Context {
         isSent,
         allMessages,
         isNotion,
+        taskCountMode
     ) {
         this.isStart = isStart;
         this.isOnline = isOnline;
@@ -19,13 +22,10 @@ class Context {
         this.server = "wss://server.observer-app.pro";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";
-        this.taskNumber = localStorage.getItem("FILLED_TASK") ? localStorage.getItem("FILLED_TASK"): 1;
-        this.taskContent = JSON.parse(localStorage.getItem("ACTIVE_TASK")) ? JSON.parse(localStorage.getItem("ACTIVE_TASK")) : {
-            visit: false,
-            content: ""
-        }
+        this.taskNumber = localStorage.getItem("TASK_NUMBER") ? localStorage.getItem("TASK_NUMBER") : 1;
         this.isNotion = isNotion;
         this.notionError = false
+        this.taskCountMode = taskMode;
     }
 }
 

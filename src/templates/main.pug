@@ -31,7 +31,7 @@
                 p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
             else
                 ul.students__list
-                    each user in context.room.users 
+                    each user in context.room.users
                         if user.role === 'client'
                             li.students__item.item(class=`${
                                 user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
@@ -54,6 +54,7 @@
                 h2.task__title Задание
                 .task__works-box 
                     .task__works
+                        if context.taskCountMode
                             input.task__work(type="radio" value="1" name="work" id="work-one" checked=1 === Number(context.taskNumber))
                             label.task__work-label(for="work-one") 1
                             input.task__work(type="radio" value="2" name="work" id="work-two" checked=2 === Number(context.taskNumber))
@@ -70,6 +71,18 @@
                             label.task__work-label(for="work-seven") 7
                             input.task__work(type="radio" value="8" name="work" id="work-eight" checked=8 === Number(context.taskNumber))
                             label.task__work-label(for="work-eight") 8
+                            input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
+                            label.task__work-label(for="work-teory") Теория
+                        else
+                            input.task__work(type="radio" value="1" name="work" id="work-one" checked=1 === Number(context.taskNumber))
+                            label.task__work-label(for="work-one") 1
+                            input.task__work(type="radio" value="2" name="work" id="work-two" checked=2 === Number(context.taskNumber))
+                            label.task__work-label(for="work-two") 2
+                            input.task__work(type="radio" value="3" name="work" id="work-three" checked=3 === Number(context.taskNumber))
+                            label.task__work-label(for="work-three") 3
+                            input.task__work(type="radio" value="4" name="work" id="work-four" checked=4 === Number(context.taskNumber))
+                            label.task__work-label(for="work-four") 4
+                            div.task__work-plus +
                             input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
                             label.task__work-label(for="work-teory") Теория
 
