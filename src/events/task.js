@@ -1,3 +1,4 @@
+import { allTasks } from "../components/all_tasks.js";
 import { initQuill } from "../components/quill.js";
 import socket from "../components/socket.js";
 import { appElement, context } from "../main.js";
@@ -30,16 +31,6 @@ export const initSendingTask = () => {
     let lastActive
     const editor = initQuill(areaElement);
 
-    
-    const lsContent = JSON.parse(localStorage.getItem("ACTIVE_TASK"))?.content
-    // editor?.setContents(lsContent);
-    if (editor && lsContent !== "" && lsContent !== undefined) {
-        editor.container.firstChild.innerHTML = ""
-        editor.container.firstChild.innerHTML = lsContent
-    }
-
-
-
     areaElement?.addEventListener("click", () => {
         if (context.isSent) {
             context.isSent = false;
@@ -47,94 +38,46 @@ export const initSendingTask = () => {
         }
     });
 
-
-
     worksBtnElement?.forEach( btn => {
         if(btn.checked) {
             lastActive = btn.value !== "Теория" ? btn.value : "theory"
         }
+        
+        editor.container.firstChild.innerHTML = allTasks[lastActive]?.content || ""
+
         btn?.addEventListener('click', () => {
             if(lastActive === btn.value) {
                 return;
             }
-            let data
-            if (localStorage.getItem("ALL_TASK")){
-                data = JSON.parse(localStorage.getItem("ALL_TASK"))
-            } else {
-                // Вынести в контекст
-                data = {
-                    1: {
-                        visit: false,
-                    },
-                    2: {
-                        visit: false,
-                    },
-                    3: {
-                        visit: false,
-                    },
-                    4: {
-                        visit: false,
-                    },
-                    5: {
-                        visit: false,
-                    },
-                    6: {
-                        visit: false,
-                    },
-                    7: {
-                        visit: false,
-                    },
-                    8: {
-                        visit: false,
-                    },
-                    "theory" : {
-                        visit: false,
-                    },
-                }
-                localStorage.setItem("ALL_TASK", JSON.stringify(data))
-            }
-            // Понять что это
-            context.taskContent = false
             context.taskNumber = btn.value !== "Теория" ? btn.value : "theory"
-            data[lastActive].visit = false
-            localStorage.setItem("ACTIVE_TASK", JSON.stringify(data[context.taskNumber]))
+            localStorage.setItem('TASK_NUMBER', context.taskNumber)
 
-            if(!(data[lastActive].visit) && editor.getContents()) {
-                data[lastActive].content = editor.container.firstChild.innerHTML
-                data[lastActive].visit = true
-                localStorage.setItem("ALL_TASK", JSON.stringify(data))
-            } else if (data[context.taskNumber].visit){
-                context.taskContent = data[context.taskNumber]
-            }
-            localStorage.setItem('FILLED_TASK', context.taskNumber)
+            if(!(allTasks[lastActive].visit) && editor.getContents()) {
+                allTasks[lastActive].content = editor.container.firstChild.innerHTML
+                allTasks[lastActive].visit = true
+            } 
             renderApp(appElement, context);
         })
     })
 
     sendTaskElement?.addEventListener("click", () => {
-        const data = JSON.parse(localStorage.getItem("ALL_TASK"))
         const validData = []
 
         let flag
-        for (let task in data){
-            data[task].visit === true ? flag = true : ""
+        for (let task in allTasks){
+            allTasks[task].visit === true ? flag = true : ""
         }
 
         if (flag) {
             if(editor.getText()?.length > 0){
-                data[lastActive].content = editor.container.firstChild.innerHTML;
-                data[lastActive].visit = true;
-                localStorage.setItem("ACTIVE_TASK", JSON.stringify({
-                    ...JSON.parse(localStorage.getItem("ACTIVE_TASK")),
-                    content: editor.container.firstChild.innerHTML,
-                    visit: true
-            }))
+                allTasks[lastActive].content = editor.container.firstChild.innerHTML;
+                allTasks[lastActive].visit = true;
             }
-            for(let task in data){
-                if(data[task].visit && data[task]?.content !== "<p><br></p>" ){
+            for(let task in allTasks){
+                if(allTasks[task].visit && allTasks[task]?.content !== "<p><br></p>" ){
                     validData.push({
                         "name": `${task === "theory" ? "theory": task}`,
-                        "content": `${data[task].content ? data[task].content : ""}`,
+                        "content": `${allTasks[task].content ? allTasks[task].content : ""}`,
                         "type": `${task === "theory" ? "theory": "exercise"}`,
                         "language": "html",
                     })

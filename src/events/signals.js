@@ -1,8 +1,11 @@
 import socket from "../components/socket.js";
+import signal from "../templates/signal.pug"
 import { context, appElement, codeElement } from "../main.js";
 import { renderApp } from "../render.js";
 import hljs from "../components/hljs.js";
 import { user_storeage } from "../components/user-storeage.js";
+import { initClickingUsers } from "./users.js";
+import { allTasks } from "../components/all_tasks.js";
 
 const goStepsData = (userId, allSteps) => {
     const data = {
@@ -32,7 +35,14 @@ export const getStepsStatus = () => {
             context.currentSteps = data.steps;
         }
 
-        renderApp(appElement, context);
+        if(context.isShowingTask) {
+        document.querySelector('.students').innerHTML = signal({ context: context })
+        initClickingUsers()
+        } else {
+            renderApp(appElement, context);
+        }
+
+
 
         if (context.code) {
             hljs.highlightAll(codeElement);
@@ -150,57 +160,19 @@ export const stepsLoad = () => {
             task.visit = true
         })
         console.log("Запрос steps/load. Получены данные:\n", {"url" : data}); 
-
-        let validData = {
-            1: {
-                visit: false,
-            },
-            2: {
-                visit: false,
-            },
-            3: {
-                visit: false,
-            },
-            4: {
-                visit: false,
-            },
-            5: {
-                visit: false,
-            },
-            6: {
-                visit: false,
-            },
-            7: {
-                visit: false,
-            },
-            8: {
-                visit: false,
-            },
-            "theory" : {
-                visit: false,
-            },
-        }
+        const tasksLenght = context.taskCountMode ? 8 : 4
 
         data.forEach((task) => {
-            validData[task.name] = task
+        if (task.name === 'theory' || +task.name <= tasksLenght) {
+            allTasks[task.name] = task
+        }
         })
+
 
         context.taskContent = {
             visit: true,
-            content: validData[context.taskNumber].content
+            content: allTasks[context.taskNumber].content
         }
-
-        localStorage.setItem('ACTIVE_TASK', JSON.stringify({
-            visit: true,
-            content: validData[context.taskNumber].content
-        }))
-
-
-
-        localStorage.setItem('ALL_TASK', JSON.stringify({
-            ...JSON.parse(localStorage.getItem('ALL_TASK')),
-            ...validData
-        }))
 
         renderApp(appElement, context);
 
