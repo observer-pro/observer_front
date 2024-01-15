@@ -51,7 +51,8 @@ export const initSendingTask = () => {
             }
             context.taskNumber = btn.value !== "Теория" ? btn.value : "theory"
             localStorage.setItem('TASK_NUMBER', context.taskNumber)
-
+            allTasks[lastActive].visit = false
+            
             if(!(allTasks[lastActive].visit) && editor.getContents()) {
                 allTasks[lastActive].content = editor.container.firstChild.innerHTML
                 allTasks[lastActive].visit = true
