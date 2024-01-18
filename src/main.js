@@ -7,7 +7,12 @@ import { connect, disconnect, reconnect } from "./events/connect-disconnect.js";
 import { updateRoom } from "./events/room.js";
 import { sendCode, updateCode } from "./events/files.js";
 import { receiveNewMessage } from "./events/messages.js";
-import { getChangedSteps, getStepsStatus, getAlerts, stepsLoad } from "./events/signals.js";
+import {
+    getChangedSteps,
+    getStepsStatus,
+    getAlerts,
+    stepsLoad,
+} from "./events/signals.js";
 
 const ROOM_ID = +window.localStorage.getItem("ROOM_ID");
 const HOST_ID = +window.localStorage.getItem("HOST_ID");
@@ -30,7 +35,7 @@ disconnect((status) => {
     renderApp(appElement, context);
 });
 updateRoom();
-stepsLoad()
+stepsLoad();
 sendCode();
 updateCode();
 disconnect((status) => {
