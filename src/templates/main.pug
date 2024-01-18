@@ -55,33 +55,19 @@
                 .task__works-box 
                     .task__works
                         if context.taskCountMode
-                            input.task__work(type="radio" value="1" name="work" id="work-one" checked=1 === Number(context.taskNumber))
-                            label.task__work-label(for="work-one") 1
-                            input.task__work(type="radio" value="2" name="work" id="work-two" checked=2 === Number(context.taskNumber))
-                            label.task__work-label(for="work-two") 2
-                            input.task__work(type="radio" value="3" name="work" id="work-three" checked=3 === Number(context.taskNumber))
-                            label.task__work-label(for="work-three") 3
-                            input.task__work(type="radio" value="4" name="work" id="work-four" checked=4 === Number(context.taskNumber))
-                            label.task__work-label(for="work-four") 4
-                            input.task__work(type="radio" value="5" name="work" id="work-five" checked=5 === Number(context.taskNumber))
-                            label.task__work-label(for="work-five") 5
-                            input.task__work(type="radio" value="6" name="work" id="work-six" checked=6 === Number(context.taskNumber))
-                            label.task__work-label(for="work-six") 6
-                            input.task__work(type="radio" value="7" name="work" id="work-seven" checked=7 === Number(context.taskNumber))
-                            label.task__work-label(for="work-seven") 7
-                            input.task__work(type="radio" value="8" name="work" id="work-eight" checked=8 === Number(context.taskNumber))
-                            label.task__work-label(for="work-eight") 8
+                            - let count = 1
+                            while count <= 8
+                                input.task__work(type="radio" value=`${count}` name="work" id=`${count}` checked= count === Number(context.taskNumber))
+                                label.task__work-label(for=`${count}`)= count
+                                - count += 1;
                             input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
                             label.task__work-label(for="work-teory") Теория
                         else
-                            input.task__work(type="radio" value="1" name="work" id="work-one" checked=1 === Number(context.taskNumber))
-                            label.task__work-label(for="work-one") 1
-                            input.task__work(type="radio" value="2" name="work" id="work-two" checked=2 === Number(context.taskNumber))
-                            label.task__work-label(for="work-two") 2
-                            input.task__work(type="radio" value="3" name="work" id="work-three" checked=3 === Number(context.taskNumber))
-                            label.task__work-label(for="work-three") 3
-                            input.task__work(type="radio" value="4" name="work" id="work-four" checked=4 === Number(context.taskNumber))
-                            label.task__work-label(for="work-four") 4
+                            -let countFore = 1
+                            while countFore <= 4
+                                input.task__work(type="radio" value=`${countFore}` name="work" id=`${countFore}` checked= countFore === Number(context.taskNumber))
+                                label.task__work-label(for=`${countFore}`)= countFore
+                                - countFore += 1;
                             div.task__work-plus +
                             input.task__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
                             label.task__work-label(for="work-teory") Теория
