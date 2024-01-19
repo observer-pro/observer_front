@@ -1,9 +1,8 @@
 import socket from "../components/socket.js";
-import { context, appElement } from "../main.js";
+import { context } from "../main.js";
 import { renderApp } from "../render.js";
 import ClipboardJS from "clipboard";
 import { getActiveFile } from "../components/active-files.js";
-import { getAllMessages } from "./messages.js";
 import { user_storeage } from "../components/user-storeage.js";
 import { getChangedFile } from "../components/changed-files.js";
 
@@ -88,14 +87,11 @@ export const updateRoom = () => {
             window.history.pushState({}, document.title, newUrl.origin);
         }
 
-        getAllMessages((messages) => {
-            context.allMessages = [...messages];
-        });
         getChangedFile(
             context,
             user_storeage[context.activeUserId]?.latest_updated_paths,
         );
-        renderApp(appElement, context);
+        renderApp(context);
 
         if (context.code) {
             getActiveFile(context);
@@ -145,7 +141,7 @@ export const initQuitRoom = () => {
         localStorage.removeItem("FILES");
         localStorage.removeItem("TASK_NUMBER");
 
-        renderApp(appElement, context);
+        renderApp(context);
         closeRoom({ room_id: context.room.id });
 
         window.history.pushState({}, document.title, newUrl.origin);

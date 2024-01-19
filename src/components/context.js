@@ -10,7 +10,6 @@ class Context {
         isSent,
         allMessages,
         isNotion,
-        taskCountMode
     ) {
         this.isStart = isStart;
         this.isOnline = isOnline;
@@ -22,9 +21,11 @@ class Context {
         this.server = "wss://server.observer-app.pro";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/feature/build/distributions/observer_java-1.0-SNAPSHOT.zip";
-        this.taskNumber = localStorage.getItem("TASK_NUMBER") ? localStorage.getItem("TASK_NUMBER") : 1;
+        this.taskNumber = localStorage.getItem("TASK_NUMBER")
+            ? localStorage.getItem("TASK_NUMBER")
+            : 1;
         this.isNotion = isNotion;
-        this.notionError = false
+        this.notionError = false;
         this.taskCountMode = taskMode;
     }
 }

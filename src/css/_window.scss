@@ -14,8 +14,6 @@
     }
 }
 
-
-
 .window {
     position: relative;
     padding: 20px 30px;
@@ -36,7 +34,7 @@
             line-height: normal;
         }
 
-        &__button{
+        &__button {
             @include task-button();
             width: 171px;
         }
@@ -89,21 +87,22 @@
             }
         }
 
-                &__task-buttons{
+        &__task-buttons {
             display: flex;
-            gap: 16px
+            gap: 16px;
         }
 
         &__task-button {
             @include task-button();
             width: 171px;
-            background: #0076FE;
+            background: #0076fe;
         }
 
         &__task-settings {
             margin-left: auto;
             transition: 0.5s ease;
-            &:hover{
+
+            &:hover {
                 opacity: 0.5;
                 cursor: pointer;
             }
@@ -185,8 +184,7 @@
             }
 
             .item {
-                
-                &:hover{
+                &:hover {
                     cursor: pointer;
                     opacity: 0.8;
                 }
@@ -197,7 +195,7 @@
                     line-height: 20px;
                     cursor: default;
 
-                    &:hover{
+                    &:hover {
                         cursor: pointer;
                         opacity: 0.8;
                     }
@@ -275,7 +273,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            
+
             &:hover {
                 cursor: pointer;
                 opacity: 0.8;
@@ -318,7 +316,7 @@
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            background-color: #FFCF4D;
+            background-color: #ffcf4d;
         }
 
         &__show-screen {
@@ -399,7 +397,7 @@
             display: none;
 
             &:checked + .task__work-label {
-                background: #0076FE;
+                background: #0076fe;
                 opacity: 1;
             }
 
@@ -408,18 +406,18 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 0 17px ;
+                padding: 0 17px;
                 opacity: 0.5;
                 font-size: 17.903px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
                 transition: 0.5s ease;
-    
-                &:hover{
+
+                &:hover {
                     opacity: 1;
                     cursor: pointer;
-                }            
+                }
             }
 
             &-plus {
@@ -427,26 +425,25 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 0 17px ;
+                padding: 0 17px;
                 opacity: 0.5;
                 font-size: 17.903px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
                 transition: 0.5s ease;
-    
-                &:hover{
+
+                &:hover {
                     opacity: 1;
                     cursor: pointer;
-                }   
+                }
             }
         }
 
-        &__text{
+        &__text {
             color: #fff;
             width: 100px;
         }
-
 
         &__area {
             width: 100%;
@@ -469,13 +466,13 @@
 
             &::-webkit-scrollbar-thumb {
                 background-color: rgb(169, 106, 252);
-                border-radius: 20px
+                border-radius: 20px;
             }
         }
 
         &__button {
             @include task-button();
-            background: #0076FE;
+            background: #0076fe;
             height: 45px;
             width: 120px;
             &-sent {
@@ -493,15 +490,15 @@
         }
     }
 
-    .notion{
-        &__box{
+    .notion {
+        &__box {
             display: flex;
             flex-direction: column;
             gap: 23px;
         }
 
-        &__title{
-            color: #FFF;
+        &__title {
+            color: #fff;
             font-family: StratosSkyeng;
             font-size: 22px;
             font-style: normal;
@@ -516,7 +513,7 @@
             min-width: 295px;
             outline: none;
 
-            color: #FFF;
+            color: #fff;
             background: #000;
             font-family: StratosSkyeng;
             font-size: 16px;
@@ -525,7 +522,7 @@
             line-height: normal;
         }
 
-        &__btn-box{
+        &__btn-box {
             display: flex;
             gap: 20px;
         }
@@ -550,7 +547,7 @@
             width: 78px;
             padding: 6px;
 
-            &-sent{
+            &-sent {
                 @include task-button();
                 padding: 6px;
                 background: #00aa63;
@@ -559,7 +556,3 @@
         }
     }
 }
-
-
-
-
