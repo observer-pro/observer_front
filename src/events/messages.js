@@ -59,7 +59,7 @@ export const initSendingMessage = () => {
 };
 export const receiveNewMessage = () => {
     socket.on("message/to_mentor", (data) => {
-        console.log("Принят запрос message/to_menthor. Данные:");
+        console.log("Принят запрос message/to_mentor. Данные:");
         console.log(data);
 
         context.allMessages.push({
@@ -97,14 +97,14 @@ export const toggleConvertingForm = () => {
 };
 export const requireAllMessages = (userId) => {
     console.log(
-        `Отправлен сигнал message/users. Данные: ${{ user_id: userId }}`,
+        `Отправлен сигнал message/user. Данные: ${{ user_id: userId }}`,
     );
 
     socket.emit("message/user", { user_id: userId });
 };
 export const getAllMessages = (setNewMessages) => {
     socket.on("message/user", (data) => {
-        console.log(`Получен сигнал message/users. Данные:`);
+        console.log(`Получен сигнал message/user. Данные:`);
         console.log(data);
 
         setNewMessages(data.messages);

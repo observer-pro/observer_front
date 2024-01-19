@@ -1,5 +1,6 @@
 import start from "./templates/start.pug";
 import main from "./templates/main.pug";
+import { appElement } from "./main.js";
 import { initCreatingRoom, initInviting, initQuitRoom } from "./events/room.js";
 import { initClickingUsers } from "./events/users.js";
 import { initClickingFiles } from "./events/files.js";
@@ -20,7 +21,7 @@ import { initSendingSteps } from "./events/signals.js";
 
 import { initNotion } from "./events/notion";
 
-export const renderApp = (appElement, context) => {
+export const renderApp = (context) => {
     if (context.isStart) {
         appElement.innerHTML = start({ context: context });
 
@@ -28,6 +29,7 @@ export const renderApp = (appElement, context) => {
         initCheckAddress();
     } else {
         appElement.innerHTML = main({ context: context });
+
         initClickingUsers();
         initClickingFiles();
         initReconnecting();

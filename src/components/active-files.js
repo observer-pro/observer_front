@@ -1,4 +1,3 @@
-import { appElement } from "../main.js";
 import { renderApp } from "../render.js";
 import { codeElement } from "../main.js";
 import hljs from "./hljs.js";
@@ -36,7 +35,7 @@ export const getActiveFile = (context) => {
         });
     });
 
-    renderApp(appElement, context);
+    renderApp(context);
 
     if (isActiveFile) {
         hljs.highlightAll(codeElement);

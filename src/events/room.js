@@ -1,9 +1,8 @@
 import socket from "../components/socket.js";
-import { context, appElement } from "../main.js";
+import { context } from "../main.js";
 import { renderApp } from "../render.js";
 import ClipboardJS from "clipboard";
 import { getActiveFile } from "../components/active-files.js";
-import { getAllMessages } from "./messages.js";
 import { user_storeage } from "../components/user-storeage.js";
 import { getChangedFile } from "../components/changed-files.js";
 
@@ -26,9 +25,9 @@ export const initCreatingRoom = () => {
 
     createElement.addEventListener("click", () => {
         context.isClosed = false;
-        context.taskNumber = 1
+        context.taskNumber = 1;
 
-        localStorage.removeItem("TASK_NUMBER")
+        localStorage.removeItem("TASK_NUMBER");
 
         createRoom(context.hostName);
     });
@@ -65,7 +64,6 @@ export const updateRoom = () => {
                 };
             }
 
-
             if (user.id === context.activeUserId) {
                 user.isActive = true;
             } else {
@@ -89,14 +87,11 @@ export const updateRoom = () => {
             window.history.pushState({}, document.title, newUrl.origin);
         }
 
-        getAllMessages((messages) => {
-            context.allMessages = [...messages];
-        });
         getChangedFile(
             context,
             user_storeage[context.activeUserId]?.latest_updated_paths,
         );
-        renderApp(appElement, context);
+        renderApp(context);
 
         if (context.code) {
             getActiveFile(context);
@@ -136,17 +131,17 @@ export const initQuitRoom = () => {
         context.isClosed = true;
         context.isStart = true;
         context.currentAddress = localStorage.getItem("SERVER");
-        context.isSent = false
-        context.taskNumber = 1
+        context.isSent = false;
+        context.taskNumber = 1;
 
         localStorage.removeItem("ROOM_ID");
         localStorage.removeItem("HOST_ID");
         localStorage.removeItem("ACTIVE_USER_ID");
         localStorage.removeItem("ACTIVE_FILE_PATH");
         localStorage.removeItem("FILES");
-        localStorage.removeItem("TASK_NUMBER")
+        localStorage.removeItem("TASK_NUMBER");
 
-        renderApp(appElement, context);
+        renderApp(context);
         closeRoom({ room_id: context.room.id });
 
         window.history.pushState({}, document.title, newUrl.origin);

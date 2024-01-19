@@ -1,58 +1,42 @@
 name: Deploy to test
 
 on:
-    push:
-        branches:
-            - deploy
+  push:
+    branches:
+      - deploy
 
 jobs:
-    deploy:
-        runs-on: ubuntu-22.04
+  deploy:
+    runs-on: ubuntu-22.04
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Stop Nginx
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.DEPLOY_PASSWORD }}
-                  script: |
-                      sudo systemctl stop nginx
+      - name: Build Frontend
+        run: |
+          npm ci
+          npm run build
 
-            - name: Deploy
-              uses: appleboy/scp-action@master
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.DEPLOY_PASSWORD }}
-                  source: "./build"
-                  target: /home/deploy/observer
+      - name: Deploy
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          source: "./build"
+          target: /home/deploy/observer
 
-            - name: Start Nginx
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.DEPLOY_PASSWORD }}
-                  script: |
-                      retries=0
-
-                      while [ $retries -lt 3 ]; do
-                        sudo systemctl start nginx
-                        if [ $? -eq 0 ]; then
-                          echo "Successfully started Nginx."
-                          break
-                        else
-                          echo "Failed to start Nginx. Retrying..."
-                          retries=$((retries+1))
-                          sleep 5
-                        fi
-                      done
-
-                      if [ $retries -eq 3 ]; then
-                        echo "Failed to start Nginx after 3 retries."
-                        exit 1
-                      fi
+      - name: Check and Restart Nginx
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          script: |
+            if sudo systemctl is-active nginx; then
+              echo "Nginx is already running, no action needed."
+            else
+              sudo systemctl restart nginx
+              echo "Restarted Nginx."
+            fi
