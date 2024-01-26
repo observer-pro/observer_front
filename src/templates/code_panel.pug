@@ -1,0 +1,34 @@
+if !context.filetree
+    .code-panel__empty-block
+        span Выберите ученика, его код появится здесь 
+else
+    .code-panel__filetree#filetree
+        each file in context.filetree.files 
+            if file.type === 'file' && file.status !== 'REMOVED'
+                .code-panel__tree-section.file(class=`code-panel__tree-section--level-${file.level} ${
+                    file.isActive ? 'code-panel__tree-section--active' : ''
+                }` data-path= file.path)
+                    img(src="./public/img/file.svg" alt="file")
+                    span.code-panel__tree-name(class=`${
+                        file.isActive ? 'code-panel__tree-name--active' : ''
+                    }`)= file.name
+                    if file.isChanged
+                        .code-panel__tree-point
+            else if file.type === 'folder' && file.status !== 'REMOVED'
+                .code-panel__tree-section(class=`code-panel__tree-section--level-${file.level}`)
+                    img(src="./public/img/folder.svg" alt="folder")
+                    span.code-panel__tree-name= file.name
+                each dirFile in context.filetree[file.name].files
+                    if dirFile.status !== 'REMOVED'
+                        .code-panel__tree-section.file(class=`code-panel__tree-section--level-${dirFile.level} ${
+                            dirFile.isActive ? 'code-panel__tree-section--active' : ''
+                        }` data-path= dirFile.path)
+                            img(src="./public/img/file.svg" alt="file")
+                            span.code-panel__tree-name(class=`${
+                                dirFile.isActive ? 'code-panel__tree-name--active' : ''
+                            }`)= dirFile.name
+                            if dirFile.isChanged
+                                .code-panel__tree-point
+.code-panel__code-block
+    pre
+        code= context.code

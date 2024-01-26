@@ -1,35 +1,24 @@
-.message-form {
+.messages {
     position: absolute;
     bottom: 19px;
     right: 50px;
-
     width: 406px;
-    min-height: 354px;
     background: #000;
     border-radius: 10px 10px 0 0;
     display: flex;
     flex-direction: column;
-    // animation: open 0.5s ;
-
-
 
     &--converted {
         position: absolute;
         bottom: 19px;
         right: 50px;
-        // animation: close 0.5s ;
-
         width: 406px;
         height: 49px;
         background: #000;
         border-bottom: 1px solid rgba(0, 0, 0, 20%);
         border-radius: 10px 10px 0 0;
     }
-}
 
-
-
-.form {
     &__top {
         height: 49px;
         padding: 16px 21px 15px 14px;
@@ -53,20 +42,16 @@
             align-items: center;
 
             &--done {
-                background: #0076FE;
+                background: #0076fe;
             }
 
             &--help {
-                background: #9F6405;
-            }
-
-            &--accepted {
-                background: #015c21;
+                background: #9f6405;
             }
         }
 
         &__text {
-            color: #FFF;
+            color: #fff;
             font-size: 16px;
             font-weight: 400;
             line-height: 20px;
@@ -90,7 +75,7 @@
 
             &--return,
             &--complete {
-                color: #D9D9D9;
+                color: #d9d9d9;
                 opacity: 0.7;
 
                 &:hover {
@@ -100,7 +85,7 @@
             }
 
             &--confirm {
-                color: #00DD80;
+                color: #00dd80;
 
                 &:hover {
                     opacity: 0.5;
@@ -130,14 +115,13 @@
         }
     }
 
-    &__messages {
+    &__chat {
         height: 252px;
         padding: 31px 19px 9px;
         border-top: 1px solid rgba(255, 255, 255, 20%);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         overflow: auto;
         scrollbar-width: 0;
-
         display: flex;
         flex-direction: column;
         align-items: end;
@@ -160,7 +144,6 @@
         font-weight: 400;
         line-height: 20px;
         opacity: 0.5;
-
         position: absolute;
         top: 100px;
         left: 150px;
@@ -177,8 +160,6 @@
         background: #fff;
         color: #000;
 
-
-
         & span {
             font-size: 14px;
             opacity: 0.5;
@@ -187,7 +168,6 @@
         &--student {
             align-self: start;
             background: #d9d9d9;
-            
         }
     }
 
@@ -231,25 +211,3 @@
         }
     }
 }
-
-// @keyframes open {
-//     0% {
-//         opacity: 0;
-//         bottom: -500px ;
-//     }
-//     100% {
-//         opacity: 1;
-//         bottom: 18px;
-//     }
-// }
-
-// @keyframes close {
-//     0% {
-//         opacity: 1;
-//         bottom: 320px;
-//     }
-//     100% {
-//         opacity: 1;
-//         bottom: 18px;
-//     }
-// }

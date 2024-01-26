@@ -1,56 +1,32 @@
 "use strict";
 
 import "./css/main.css";
-import Context from "./components/context.js";
-import { renderApp } from "./render.js";
-import { connect, disconnect, reconnect } from "./events/connect-disconnect.js";
-import { updateRoom } from "./events/room.js";
-import { sendCode, updateCode } from "./events/files.js";
-import { receiveNewMessage } from "./events/messages.js";
-import {
-    getChangedSteps,
-    getStepsStatus,
-    getAlerts,
-    stepsLoad,
-} from "./events/signals.js";
+import context from "./store/context.js";
+import { render } from "./render.js";
+import { connect, disconnect } from "./components/connection/connection.js";
+import { updateRoom } from "./components/room/update-room.js";
+import { rehostRoomAfterRefresh } from "./components/room/rehost-room.js";
+import { sendCode } from "./components/sharing/send-code.js";
+import { updateCode } from "./components/sharing/update-code.js";
+import { receiveMessage } from "./components/message/receive-message.js";
+import { getAllMessages } from "./components/message/get-all-messages.js";
+import { receiveSteps } from "./components/tasks/receive-steps.js";
+import { getAllSteps } from "./components/tasks/get-all-steps.js";
+import { loadSteps } from "./components/tasks/load-steps.js";
+import { getAlerts } from "./components/tasks/get-alerts.js";
 
-const ROOM_ID = +window.localStorage.getItem("ROOM_ID");
-const HOST_ID = +window.localStorage.getItem("HOST_ID");
-const urlParams = new URLSearchParams(window.location.search);
-const roomParam = urlParams.get("room");
+export const codeElement = document.querySelector("code");
 
-export const appElement = document.getElementById("app");
-export const codeElement = document.querySelector("#code code");
-export const context = new Context(true, false, true, "Host", null, false, []);
-
-renderApp(appElement, context);
-connect((status) => {
-    context.isOnline = status;
-
-    renderApp(appElement, context);
-});
-disconnect((status) => {
-    context.isOnline = status;
-
-    renderApp(appElement, context);
-});
+render(context);
+connect();
+disconnect();
 updateRoom();
-stepsLoad();
+rehostRoomAfterRefresh();
 sendCode();
 updateCode();
-disconnect((status) => {
-    context.isDisconnected = !status;
-
-    renderApp(appElement, context);
-});
-receiveNewMessage();
-getStepsStatus();
-getChangedSteps();
+receiveMessage();
+getAllMessages();
+receiveSteps();
+getAllSteps();
+loadSteps();
 getAlerts();
-
-if (roomParam) {
-    reconnect({
-        room_id: ROOM_ID,
-        user_id: HOST_ID,
-    });
-}

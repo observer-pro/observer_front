@@ -1,28 +1,32 @@
-.ql-snow .ql-editor pre.ql-syntax {
-    background-color: #00000091;
-    padding: 20px;
-}
+.main {
+    .task-editor {
+        .ql-snow .ql-editor pre.ql-syntax {
+            background-color: #00000091;
+            padding: 20px;
+        }
 
-.task__container .ql-snow{
-    border: none;
-    color: #ffffff;
-    padding: 0;
-    margin: 5px 0;
-}
+        &__container,
+        .ql-snow {
+            border: none;
+            color: #ffffff;
+            padding: 0;
+            margin: 5px 0;
+        }
 
-.ql-snow .ql-picker-options {
-    background: #242424;
-}
+        .ql-snow .ql-picker-options {
+            background: #242424;
+        }
 
-.ql-snow .ql-picker {
-    color: #ffffff;
-    
-}
+        .ql-snow .ql-picker {
+            color: #ffffff;
+        }
 
-.ql-snow .ql-stroke {
-    stroke: #ffffff;
-}
+        .ql-snow .ql-stroke {
+            stroke: #ffffff;
+        }
 
-.hljs {
-    background: #000;
+        .hljs {
+            background: #000;
+        }
+    }
 }

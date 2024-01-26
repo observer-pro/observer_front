@@ -1,0 +1,194 @@
+.main {
+    .task-editor {
+        &__container {
+            width: 650px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 27px;
+        }
+
+        &__title {
+            color: #fff;
+            font-size: 18px;
+            line-height: normal;
+        }
+
+        &__works-box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__works {
+            height: 44px;
+            background: #000;
+            display: flex;
+            border-radius: 5px;
+            overflow-y: hidden;
+        }
+
+        &__work {
+            display: none;
+
+            &:checked + .task-editor__work-label {
+                background: #0076fe;
+                opacity: 1;
+            }
+
+            &-label {
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 17px;
+                opacity: 0.5;
+                font-size: 17.903px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                transition: 0.5s ease;
+
+                &:hover {
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+
+            &-plus {
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 17px;
+                opacity: 0.5;
+                font-size: 17.903px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                transition: 0.5s ease;
+
+                &:hover {
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__text {
+            color: #fff;
+            width: 100px;
+        }
+
+        &__area {
+            width: 100%;
+            min-height: 60vh;
+            padding: 9px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            background: #191919;
+            resize: none;
+            color: #fff;
+            font-size: 16px;
+            line-height: normal;
+            border: solid 8px #191919;
+
+            & ::-webkit-scrollbar {
+                width: 10px;
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgb(169, 106, 252);
+                border-radius: 20px;
+            }
+        }
+
+        &__button {
+            @include task-button();
+            background: #0076fe;
+            height: 45px;
+            width: 120px;
+            &-sent {
+                @include task-button();
+                background: #00aa63;
+                height: 45px;
+                width: 120px;
+            }
+        }
+
+        &__notion {
+            display: flex;
+            flex-direction: column;
+            gap: 83px;
+        }
+
+        .notion {
+            &__box {
+                display: flex;
+                flex-direction: column;
+                gap: 23px;
+            }
+
+            &__title {
+                color: #fff;
+                font-family: StratosSkyeng;
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            &__input {
+                border: none;
+                border-radius: 5px;
+                padding: 8px 14px;
+                min-width: 295px;
+                outline: none;
+
+                color: #fff;
+                background: #000;
+                font-family: StratosSkyeng;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            &__btn-box {
+                display: flex;
+                gap: 20px;
+            }
+
+            &__error {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 37px;
+                border: none;
+                border-radius: 6px;
+                background: #fc4c1e;
+                color: #fff;
+                font-size: 15px;
+                line-height: 20px;
+                transition: all 0.5s;
+                width: 100%;
+            }
+
+            &__btn {
+                @include task-button();
+                width: 78px;
+                padding: 6px;
+
+                &-sent {
+                    @include task-button();
+                    padding: 6px;
+                    background: #00aa63;
+                    width: 151px;
+                }
+            }
+        }
+    }
+}

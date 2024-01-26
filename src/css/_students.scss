@@ -1,0 +1,90 @@
+.main {
+    .user-panel {
+        .students {
+            &__empty {
+                width: 168px;
+                color: #fff;
+                font-size: 12px;
+                line-height: 20px;
+                opacity: 0.5;
+                text-align: center;
+            }
+
+            &__list {
+                width: 229px;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__item {
+                height: 50px;
+                padding-left: 13px;
+                padding-right: 13px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &--unread {
+                    border-bottom: 1px solid #fff;
+                }
+
+                &--active {
+                    background: #606060;
+                }
+
+                &--NONE::before {
+                    content: "";
+                    width: 20px;
+                    background: transparent;
+                }
+
+                &--HELP::before {
+                    content: url(../../public/img/help-icon.svg);
+                }
+
+                &--DONE::before {
+                    content: url(../../public/img/done-icon.svg);
+                }
+
+                &--IN_PROGRESS::before {
+                    content: url(../../public/img/doing-icon.svg);
+                }
+            }
+
+            .item {
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.8;
+                }
+
+                &__name {
+                    color: #fff;
+                    font-size: 16px;
+                    line-height: 20px;
+                    cursor: default;
+
+                    &:hover {
+                        cursor: pointer;
+                        opacity: 0.8;
+                    }
+
+                    &--read {
+                        opacity: 0.8;
+                    }
+                }
+
+                &__unread {
+                    width: 28px;
+                    height: 24px;
+                    border-radius: 6px;
+                    background: #000;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
