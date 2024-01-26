@@ -17,7 +17,6 @@ export const receiveMessage = () => {
         for (let user in store.users) {
             if (data.user_id === store.users[user].id) {
                 store.users[user].messages.push(newMessage);
-                store.users[user].is_first_click = false;
             }
         }
 
