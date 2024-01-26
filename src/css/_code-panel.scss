@@ -15,7 +15,8 @@
         }
 
         &__filetree {
-            width: 197px;
+            flex-grow: 1;
+            min-width: 197px;
             padding: 7px;
             overflow: auto;
             display: flex;
@@ -88,7 +89,7 @@
 
         &__code-block {
             padding-top: 15px;
-            flex-grow: 1;
+            flex-grow: 8;
 
             & pre {
                 width: 100%;
@@ -112,17 +113,6 @@
                     }
                 }
             }
-        }
-
-        &__disconnected-screen {
-            width: 773px;
-            height: 615px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            line-height: 40px;
-            color: #fff;
         }
     }
 }
