@@ -14,9 +14,16 @@ export const receiveMessage = () => {
             content: data.content,
         };
 
-        store.users[store.active_user_id].messages.push(newMessage);
-        context.allMessages = [...store.users[store.active_user_id].messages];
+        for (let user in store.users) {
+            if (data.user_id === store.users[user].id) {
+                store.users[user].messages.push(newMessage);
+            }
+        }
 
-        render(context, ["add-message-form"]);
+        if (data.user_id === store.active_user_id) {
+            context.allMessages = [...store.users[data.user_id].messages];
+
+            render(context, ["add-message-form"]);
+        }
     });
 };

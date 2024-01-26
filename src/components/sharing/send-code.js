@@ -13,10 +13,12 @@ export const sendCode = () => {
         store.files = [...data.files];
         context.filetree = { ...getFiletree(store.files) };
         context.currentSteps = [...store.users[store.active_user_id].steps];
+        context.code = null;
+        context.allMessages = [...store.users[store.active_user_id].messages];
 
         render(context, ["share-code-panel", "add-message-form"]);
 
-        if (context.code) {
+        if (store.users[store.active_user_id].current_path) {
             getActiveFile();
         }
     });

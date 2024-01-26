@@ -738,6 +738,7 @@ ul {
   right: 50px;
   width: 406px;
   background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
@@ -869,10 +870,6 @@ ul {
   line-height: normal;
   background: #fff;
   color: #000;
-}
-.messages__message span {
-  font-size: 14px;
-  opacity: 0.5;
 }
 .messages__message--student {
   align-self: start;
