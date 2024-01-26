@@ -14,6 +14,7 @@ const selectFile = (file) => {
 
         isActiveFile = true;
         file.isActive = true;
+        file.isChanged = false;
         context.code = file.content;
     } else {
         file.isActive = false;
