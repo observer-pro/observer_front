@@ -33,7 +33,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "src/templates/index.pug",
+            template: "src/index.pug",
         }),
         new CopyPlugin({
             patterns: [{ from: "public", to: "public" }],

@@ -1,6 +1,63 @@
-@import "vars";
 @import "ui-kit";
-@import "connection";
-@import "window";
+@import "start";
+
+@mixin task-button {
+    height: 37px;
+    border: none;
+    border-radius: 6px;
+    background: #a96afc;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    transition: all 0.5s;
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.main {
+    position: relative;
+    padding: 20px 30px;
+    display: grid;
+    grid-template-columns: 224px 1fr;
+    gap: 22px;
+
+    &__user-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__task-editor {
+        min-height: 94vh;
+        padding: 25px 50px;
+        background: #242424;
+        border-radius: 7px;
+        display: flex;
+        justify-content: start;
+        gap: 50px;
+    }
+
+    &__code-panel {
+        height: 705px;
+        padding-top: 10px;
+        background: #242424;
+        border-radius: 7px;
+        display: flex;
+        overflow: hidden;
+    }
+}
+
+@import "user-panel";
+@import "students";
+@import "tasks-editor";
+@import "code-panel";
 @import "messages";
-@import "quill"
+@import "quill";
