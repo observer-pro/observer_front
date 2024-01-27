@@ -30,9 +30,6 @@ export const updateRoom = () => {
             store.users[store.active_user_id].isActive = true;
         }
 
-        newUrl.searchParams.set("room", store.room_id);
-        window.history.replaceState({}, document.title, newUrl.href);
-
         context.isDisconnected = false;
         context.isReconnecting = false;
         context.activeUserId = store.active_user_id;
@@ -52,6 +49,9 @@ export const updateRoom = () => {
 
         if (store.is_first_loading) {
             store.is_first_loading = false;
+
+            newUrl.searchParams.set("room", store.room_id);
+            window.history.replaceState({}, document.title, newUrl.href);
 
             render(context, ["open-task-editor", "add-user-panel"]);
         } else {
