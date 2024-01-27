@@ -19,7 +19,7 @@ export const receiveSteps = () => {
         if (store.active_user_id) {
             render(context, ["add-user-panel", "add-message-form"]);
         } else {
-            render(context, ["add-user-panel", "send-tasks"]);
+            render(context, ["add-user-panel"]);
         }
     });
 };
