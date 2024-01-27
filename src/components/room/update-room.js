@@ -55,13 +55,7 @@ export const updateRoom = () => {
 
             render(context, ["open-task-editor", "add-user-panel"]);
         } else {
-            context.isShowingTask
-                ? render(context, ["add-user-panel", "send-tasks"])
-                : render(context, [
-                      "open-task-editor",
-                      "add-user-panel",
-                      "add-message-form",
-                  ]);
+            render(context, ["add-user-panel"]);
         }
 
         if (context.code) {

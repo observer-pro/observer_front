@@ -29,7 +29,7 @@ export const handleRehostRoom = () => {
 
         context.isReconnecting = true;
 
-        render(context, ["add-user-panel", "send-tasks"]);
+        render(context, ["add-user-panel"]);
         reconnect({
             room_id: store.room_id,
             user_id: store.host_id,
@@ -39,7 +39,7 @@ export const handleRehostRoom = () => {
             if (context.isDisconnected) {
                 context.isReconnecting = false;
 
-                render(context, ["add-user-panel", "send-tasks"]);
+                render(context, ["add-user-panel"]);
             }
         }, 3000);
     });

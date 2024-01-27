@@ -45,14 +45,28 @@ export const render = (context, events = []) => {
                     : (tasksEditorElement.innerHTML = tasks_editor({
                           context,
                       }));
+
+                handleOpenTaskEditor();
+                handleSendTasks();
+                handleNotion();
             } else if (event === "add-user-panel") {
                 userPanelElement.innerHTML = user_panel({ context });
                 document.getElementById("students").innerHTML = students({
                     context,
                 });
+
+                handleRehostRoom();
+                handleInvite();
+                handleCloseRoom();
+                handleSelectUser();
+                handleOpenTaskEditor();
             } else if (event === "send-tasks") {
                 if (tasksEditorElement) {
                     tasksEditorElement.innerHTML = tasks_editor({ context });
+
+                    handleOpenTaskEditor();
+                    handleSendTasks();
+                    handleNotion();
                 }
             } else if (event === "add-message-form") {
                 if (messagesElement) {
@@ -65,16 +79,9 @@ export const render = (context, events = []) => {
                 }
             } else if (event === "share-code-panel") {
                 codePanelElement.innerHTML = code_panel({ context });
+
+                handleSelectFile();
             }
         });
-
-        handleRehostRoom();
-        handleInvite();
-        handleCloseRoom();
-        handleOpenTaskEditor();
-        handleSendTasks();
-        handleNotion();
-        handleSelectUser();
-        handleSelectFile();
     }
 };
