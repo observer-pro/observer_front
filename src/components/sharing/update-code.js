@@ -34,6 +34,9 @@ export const updateCode = () => {
 
         context.filetree = { ...getFiletree(store.files) };
 
+        console.log("Файловое дерево:");
+        console.log(context.filetree);
+
         getChangedFiles();
 
         if (!isCurrentPath) {
