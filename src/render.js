@@ -78,9 +78,11 @@ export const render = (context, events = []) => {
                     handleSendSteps();
                 }
             } else if (event === "share-code-panel") {
-                codePanelElement.innerHTML = code_panel({ context });
+                if (codePanelElement) {
+                    codePanelElement.innerHTML = code_panel({ context });
 
-                handleSelectFile();
+                    handleSelectFile();
+                }
             }
         });
     }

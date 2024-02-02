@@ -1,14 +1,22 @@
 import store from "../../store/store.js";
-import { getActiveFile } from "../../utils/get-active-file.js";
+import context from "../../store/context.js";
+import { render } from "../../render.js";
+import { getFiletree } from "../../utils/get-filetree.js";
+import { getFileByPath } from "../../utils/get-file-by-path.js";
+import { markFileAsCurrent } from "../../utils/mark-file-as-current.js";
+import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 
 export const handleSelectFile = () => {
     const fileElements = document.querySelectorAll(".file");
 
-    fileElements.forEach((file) => {
-        file.addEventListener("click", () => {
+    fileElements.forEach((fileTreeElement) => {
+        fileTreeElement.addEventListener("click", () => {
+            const file = getFileByPath(fileTreeElement.dataset.path, store);
+
             let pathIndex;
 
-            store.users[store.active_user_id].current_path = file.dataset.path;
+            store.users[store.active_user_id].current_path =
+                fileTreeElement.dataset.path;
             store.users[store.active_user_id].latest_updated_paths.forEach(
                 (path, index) => {
                     if (
@@ -23,7 +31,12 @@ export const handleSelectFile = () => {
                 1,
             );
 
-            getActiveFile();
+            store.files = [...markFileAsCurrent(file, store)];
+            context.filetree = { ...getFiletree(store.files) };
+            context.code = file.content;
+
+            render(context, ["share-code-panel"]);
+            turnOnHighlightJs();
         });
     });
 };

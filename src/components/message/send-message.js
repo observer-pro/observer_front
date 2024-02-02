@@ -18,8 +18,13 @@ const sendNewMessage = (content) => {
     };
 
     if (content) {
-        store.users[store.active_user_id].messages.push(newMessage);
-        context.allMessages = [...store.users[store.active_user_id].messages];
+        store.users[store.active_user_id]?.messages.push(newMessage);
+
+        if (store.active_user_id) {
+            context.allMessages = [
+                ...store.users[store.active_user_id].messages,
+            ];
+        }
 
         sendSignal({
             user_id: store.active_user_id,

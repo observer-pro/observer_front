@@ -21,7 +21,6 @@
             overflow: auto;
             display: flex;
             flex-direction: column;
-            gap: 14px;
             scrollbar-width: 0px;
 
             &::-webkit-scrollbar {
@@ -78,6 +77,10 @@
             &--active {
                 opacity: 1;
             }
+        }
+
+        &__tree-indent {
+            margin-left: 12px;
         }
 
         &__tree-point {

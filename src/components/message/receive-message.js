@@ -7,21 +7,32 @@ export const receiveMessage = () => {
     socket.on("message/to_mentor", (data) => {
         console.log("Получен сигнал message/to_mentor. Данные:");
         console.log(data);
-
+        // TODO Использовать ключи sender и receiver после обновления сервера
+        const sender_id = data.sender;
+        const receiver_id = data.receiver;
         const newMessage = {
-            sender: data.user_id,
-            receiver: store.host_id,
+            sender: sender_id,
+            receiver: receiver_id,
             content: data.content,
         };
 
-        for (let user in store.users) {
-            if (data.user_id === store.users[user].id) {
-                store.users[user].messages.push(newMessage);
-            }
+        if (!store.users[sender_id]) {
+            throw new Error(
+                "Получено сообщение от несуществующего пользователя",
+            );
         }
 
-        if (data.user_id === store.active_user_id) {
-            context.allMessages = [...store.users[data.user_id].messages];
+        store.users[sender_id].messages.push(newMessage);
+
+        // Не увеличиваем счетчик для активного пользователя
+        if (store.active_user_id !== sender_id) {
+            store.users[sender_id].messages_unread += 1;
+        }
+
+        render(context, ["add-user-panel"]);
+
+        if (sender_id === store.active_user_id) {
+            context.allMessages = [...store.users[sender_id].messages];
 
             render(context, ["add-message-form"]);
         }

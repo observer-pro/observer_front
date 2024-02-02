@@ -9,8 +9,11 @@ export const getAllMessages = () => {
         console.log(data);
 
         store.users[data.user_id].messages = [...data.messages];
-        context.allMessages = [...store.users[data.user_id].messages];
 
-        render(context, ["add-message-form"]);
+        if (store.active_user_id === data.user_id) {
+            context.allMessages = [...store.users[data.user_id].messages];
+
+            render(context, ["add-message-form"]);
+        }
     });
 };

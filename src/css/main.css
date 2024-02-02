@@ -646,7 +646,6 @@ ul {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
   scrollbar-width: 0px;
 }
 .main .code-panel__filetree::-webkit-scrollbar {
@@ -692,6 +691,9 @@ ul {
 }
 .main .code-panel__tree-name--active {
   opacity: 1;
+}
+.main .code-panel__tree-indent {
+  margin-left: 12px;
 }
 .main .code-panel__tree-point {
   width: 9px;
