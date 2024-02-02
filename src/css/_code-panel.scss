@@ -1,7 +1,6 @@
 .main {
     .code-panel {
         &__empty-block {
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,8 +14,7 @@
         }
 
         &__filetree {
-            flex-grow: 1;
-            min-width: 197px;
+            width: 300px;
             padding: 7px;
             overflow: auto;
             display: flex;
@@ -92,7 +90,7 @@
 
         &__code-block {
             padding-top: 15px;
-            flex-grow: 8;
+            width: 100vw;
 
             & pre {
                 width: 100%;

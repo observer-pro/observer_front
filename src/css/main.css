@@ -640,8 +640,7 @@ ul {
   opacity: 0.5;
 }
 .main .code-panel__filetree {
-  flex-grow: 1;
-  min-width: 197px;
+  width: 300px;
   padding: 7px;
   overflow: auto;
   display: flex;
@@ -703,7 +702,7 @@ ul {
 }
 .main .code-panel__code-block {
   padding-top: 15px;
-  flex-grow: 8;
+  width: 100vw;
 }
 .main .code-panel__code-block pre {
   width: 100%;

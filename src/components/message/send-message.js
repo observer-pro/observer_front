@@ -47,11 +47,15 @@ export const handleSendMessage = () => {
 
     messageInputElement?.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
-            sendNewMessage(content);
+            if (store.active_user_id) {
+                sendNewMessage(content);
+            }
         }
     });
 
     sendButtonElement?.addEventListener("click", () => {
-        sendNewMessage(content);
+        if (store.active_user_id) {
+            sendNewMessage(content);
+        }
     });
 };
