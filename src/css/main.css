@@ -628,7 +628,7 @@ ul {
 }
 
 .main .code-panel__empty-block {
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -701,24 +701,24 @@ ul {
   background-color: #ffcf4d;
 }
 .main .code-panel__code-block {
-  padding-top: 15px;
+  padding: 15px;
   width: 100vw;
 }
 .main .code-panel__code-block pre {
   width: 100%;
+  height: 100%;
 }
 .main .code-panel__code-block pre code {
   width: 100%;
-  height: 705px;
+  height: 100%;
   background: #cecfd2;
-  border-radius: 6px;
   font-size: 16px;
-  overflow-x: auto;
-  scrollbar-width: 0px;
   margin-top: -25px;
+  overflow: auto;
+  scrollbar-width: 0px;
 }
 .main .code-panel__code-block pre code::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 .main .code-panel__code-block pre code::-webkit-scrollbar-track {
   background: transparent;

@@ -8,7 +8,6 @@ import { getChangedFiles } from "../../utils/get-changed-files.js";
 import { sortStoreFiles } from "../../utils/sort-files.js";
 import { getFileByPath } from "../../utils/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/mark-file-as-current.js";
-import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 
 export const updateCode = () => {
     socket.on("sharing/code_update", (data) => {
@@ -40,6 +39,5 @@ export const updateCode = () => {
         console.log(context.filetree);
 
         render(context, ["share-code-panel"]);
-        turnOnHighlightJs();
     });
 };

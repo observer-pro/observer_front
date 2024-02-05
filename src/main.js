@@ -15,8 +15,6 @@ import { getAllSteps } from "./components/tasks/get-all-steps.js";
 import { loadSteps } from "./components/tasks/load-steps.js";
 import { getAlerts } from "./components/tasks/get-alerts.js";
 
-export const codeElement = document.querySelector("code");
-
 render(context);
 connect();
 disconnect();

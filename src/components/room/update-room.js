@@ -2,7 +2,6 @@ import socket from "../../services/socket.js";
 import context from "../../store/context.js";
 import store from "../../store/store.js";
 import { render } from "../../render.js";
-import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -108,7 +107,5 @@ export const updateRoom = () => {
         } else {
             render(context, ["add-user-panel", "share-code-panel"]);
         }
-
-        turnOnHighlightJs();
     });
 };

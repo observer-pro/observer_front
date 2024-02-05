@@ -4,7 +4,6 @@ import context from "../../store/context.js";
 import { getFiletree } from "../../utils/get-filetree.js";
 import { render } from "../../render.js";
 import { getChangedFiles } from "../../utils/get-changed-files.js";
-import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 import { getFileByPath } from "../../utils/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/mark-file-as-current.js";
 
@@ -33,6 +32,5 @@ export const sendCode = () => {
         context.allMessages = [...store.users[store.active_user_id].messages];
 
         render(context, ["share-code-panel", "add-message-form"]);
-        turnOnHighlightJs();
     });
 };

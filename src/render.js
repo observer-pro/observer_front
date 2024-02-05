@@ -19,6 +19,15 @@ import { handleToggleForm } from "./components/message/toggle-form.js";
 import { handleSendMessage } from "./components/message/send-message.js";
 import { getScrolledChat } from "./utils/get-scrolled-chat.js";
 import { handleSendSteps } from "./components/tasks/send-steps.js";
+import { turnOnHighlightJs } from "./utils/turn-on-hljs.js";
+import {
+    setFiletreeScrolledPosition,
+    getFiletreeScrolledPosition,
+} from "./utils/filetree-scrolled-position.js";
+import {
+    setCodeScrolledPosition,
+    getCodeScrolledPosition,
+} from "./utils/code-scrolled-position.js";
 
 export const render = (context, events = []) => {
     const appElement = document.getElementById("app");
@@ -40,11 +49,11 @@ export const render = (context, events = []) => {
 
         events.forEach((event) => {
             if (event === "open-task-editor") {
-                codePanelElement
-                    ? (codePanelElement.innerHTML = code_panel({ context }))
-                    : (tasksEditorElement.innerHTML = tasks_editor({
-                          context,
-                      }));
+                if (codePanelElement) {
+                    codePanelElement.innerHTML = code_panel({ context });
+                } else {
+                    tasksEditorElement.innerHTML = tasks_editor({ context });
+                }
 
                 handleOpenTaskEditor();
                 handleSendTasks();
@@ -81,7 +90,15 @@ export const render = (context, events = []) => {
                 if (codePanelElement) {
                     codePanelElement.innerHTML = code_panel({ context });
 
+                    const filetreeElement = document.getElementById("filetree");
+                    const codeElement = document.getElementById("code");
+
                     handleSelectFile();
+                    turnOnHighlightJs(codeElement);
+                    setFiletreeScrolledPosition(filetreeElement);
+                    getFiletreeScrolledPosition(filetreeElement);
+                    setCodeScrolledPosition(codeElement);
+                    getCodeScrolledPosition(codeElement);
                 }
             }
         });
