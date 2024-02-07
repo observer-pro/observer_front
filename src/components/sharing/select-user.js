@@ -5,7 +5,7 @@ import { render } from "../../render.js";
 import { requireAllMessages } from "../message/require-all-messages.js";
 import { requireAllSteps } from "../tasks/require-all-steps.js";
 
-const startUserSharingSession = (data) => {
+export const startUserSharingSession = (data) => {
     socket.emit("sharing/start", data);
     console.log(
         `Отправлен сигнал sharing/start. Пользователь: ${data.user_id} подключен`,
