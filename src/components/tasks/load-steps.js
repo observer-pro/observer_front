@@ -1,6 +1,6 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
-import { allTasks } from "../../utils/all-tasks.js";
+import { allTasks } from "./all-tasks.js";
 import { render } from "../../render.js";
 
 export const loadSteps = () => {

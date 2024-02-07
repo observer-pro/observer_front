@@ -1,9 +1,9 @@
 import store from "../../store/store.js";
 import context from "../../store/context.js";
 import { render } from "../../render.js";
-import { getFiletree } from "../../utils/get-filetree.js";
-import { getFileByPath } from "../../utils/get-file-by-path.js";
-import { markFileAsCurrent } from "../../utils/mark-file-as-current.js";
+import { getFiletree } from "../../utils/files/get-filetree.js";
+import { getFileByPath } from "../../utils/files/get-file-by-path.js";
+import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
 import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 
 export const handleSelectFile = () => {

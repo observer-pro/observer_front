@@ -1,16 +1,21 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { getFiletree } from "../../utils/get-filetree.js";
+import { getFiletree } from "../../utils/files/get-filetree.js";
 import { render } from "../../render.js";
-import { getChangedFiles } from "../../utils/get-changed-files.js";
-import { getFileByPath } from "../../utils/get-file-by-path.js";
-import { markFileAsCurrent } from "../../utils/mark-file-as-current.js";
+import { getChangedFiles } from "../../utils/files/get-changed-files.js";
+import { getFileByPath } from "../../utils/files/get-file-by-path.js";
+import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
         console.log(`Выполнен сигнал sharing/code_send. Данные:`);
         console.log(data);
+
+        if (data.user_id !== store.active_user_id) {
+            console.error("Получены чужие данные");
+            return;
+        }
 
         const file = getFileByPath(
             store.users[store.active_user_id].current_path,

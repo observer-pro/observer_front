@@ -17,17 +17,17 @@ import { handleSelectUser } from "./components/sharing/select-user.js";
 import { handleSelectFile } from "./components/sharing/select-file.js";
 import { handleToggleForm } from "./components/message/toggle-form.js";
 import { handleSendMessage } from "./components/message/send-message.js";
-import { getScrolledChat } from "./utils/get-scrolled-chat.js";
+import { getScrolledChat } from "./utils/scrolls/get-scrolled-chat.js";
 import { handleSendSteps } from "./components/tasks/send-steps.js";
 import { turnOnHighlightJs } from "./utils/turn-on-hljs.js";
 import {
     setFiletreeScrolledPosition,
     getFiletreeScrolledPosition,
-} from "./utils/filetree-scrolled-position.js";
+} from "./utils/scrolls/filetree-scrolled-position.js";
 import {
     setCodeScrolledPosition,
     getCodeScrolledPosition,
-} from "./utils/code-scrolled-position.js";
+} from "./utils/scrolls/code-scrolled-position.js";
 
 export const render = (context, events = []) => {
     const appElement = document.getElementById("app");

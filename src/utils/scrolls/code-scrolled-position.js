@@ -1,4 +1,4 @@
-import store from "../store/store.js";
+import store from "../../store/store.js";
 
 export const setCodeScrolledPosition = (codeElement) => {
     codeElement?.addEventListener("scroll", () => {
