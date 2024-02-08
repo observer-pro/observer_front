@@ -12,7 +12,7 @@ export const startUserSharingSession = (data) => {
     );
 };
 
-const endUserSharingSession = (data) => {
+export const endUserSharingSession = (data) => {
     socket.emit("sharing/end", data);
     console.log(
         `Отправлен сигнал sharing/end. Пользователь: ${data.user_id} отключен`,
