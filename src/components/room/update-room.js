@@ -103,9 +103,9 @@ export const updateRoom = () => {
             newUrl.searchParams.set("room", store.room_id);
             window.history.replaceState({}, document.title, newUrl.href);
 
-            render(context, ["open-task-editor", "add-user-panel"]);
+            render(context, ["open-task-editor", "update-user-panel"]);
         } else {
-            render(context, ["add-user-panel", "share-code-panel"]);
+            render(context, ["update-user-panel", "update-code-panel"]);
         }
     });
 };

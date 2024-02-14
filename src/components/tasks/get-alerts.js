@@ -18,13 +18,13 @@ export const getAlerts = () => {
             console.error(alerts);
             context.notionError = true;
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
 
             context.isNotion = true;
         } else {
             context.isNotion = true;
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
         }
     });
 };

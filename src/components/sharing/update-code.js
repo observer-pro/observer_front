@@ -43,6 +43,6 @@ export const updateCode = () => {
         console.log("Файловое дерево:");
         console.log(context.filetree);
 
-        render(context, ["share-code-panel"]);
+        render(context, ["update-code-panel"]);
     });
 };

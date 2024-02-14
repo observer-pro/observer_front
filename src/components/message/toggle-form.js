@@ -13,6 +13,6 @@ export const handleToggleForm = () => {
             context.isFormConverted = false;
         }
 
-        render(context, ["add-message-form"]);
+        render(context, ["update-message-form"]);
     });
 };

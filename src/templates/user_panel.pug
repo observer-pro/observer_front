@@ -10,17 +10,16 @@ if context.isDisconnected
         else 
             span.user-panel__disconnected-text Нет соединения
             a(href="#" class="user-panel__disconnected-link" id="rehost") Подключить
-else 
-    .user-panel__links
-        a(href="#" class="link room__invite" id="invite" data-clipboard-text=`Комната: ${
-            context.room.id
-        }\nСервер: ${
-            context.server
-        }\nУстановить плагин: ${
-            context.pluginUrl
-        }`) пригласить
-        a(href="#" class="link user-panel__quit" id="quit") выйти
-    .user-panel__task-buttons
-        button.user-panel__task-button#show-task(disabled= context.isShowingTask) Задания
-        img.user-panel__task-settings(src="./public/img/settings-icon.svg", alt="")
+.user-panel__links
+    a(href="#" class="link room__invite" id="invite" data-clipboard-text=`Комната: ${
+        context.room.id
+    }\nСервер: ${
+        context.server
+    }\nУстановить плагин: ${
+        context.pluginUrl
+    }`) пригласить
+    a(href="#" class="link user-panel__quit" id="quit") выйти
+.user-panel__task-buttons
+    button.user-panel__task-button#show-task(disabled= context.isShowingTask) Задания
+    img.user-panel__task-settings(src="./public/img/settings-icon.svg", alt="")
 .user-panel__students.students#students(class=context.room.users.length < 2 ? 'user-panel__students--empty' : '')

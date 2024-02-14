@@ -48,7 +48,7 @@ function clickUser() {
         users: Object.values(store.users),
     };
 
-    render(context, ["open-task-editor", "add-user-panel", "add-message-form"]);
+    render(context, ["open-task-editor", "update-user-panel"]);
 }
 
 export const handleSelectUser = () => {

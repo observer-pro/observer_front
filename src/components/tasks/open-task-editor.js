@@ -19,6 +19,6 @@ export const handleOpenTaskEditor = () => {
             users: Object.values(store.users),
         };
 
-        render(context, ["open-task-editor", "add-user-panel"]);
+        render(context, ["open-task-editor", "update-user-panel"]);
     });
 };

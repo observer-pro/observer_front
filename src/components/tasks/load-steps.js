@@ -25,6 +25,6 @@ export const loadSteps = () => {
             content: allTasks[context.taskNumber].content,
         };
 
-        render(context, ["send-tasks"]);
+        render(context, ["update-task-editor"]);
     });
 };

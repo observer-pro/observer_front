@@ -29,12 +29,12 @@ export const receiveMessage = () => {
             store.users[sender_id].messages_unread += 1;
         }
 
-        render(context, ["add-user-panel"]);
+        render(context, ["update-user-panel"]);
 
         if (sender_id === store.active_user_id) {
             context.allMessages = [...store.users[sender_id].messages];
 
-            render(context, ["add-message-form"]);
+            render(context, ["update-message-form"]);
         }
     });
 };

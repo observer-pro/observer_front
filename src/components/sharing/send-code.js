@@ -46,6 +46,10 @@ export const sendCode = () => {
         context.currentSteps = [...store.users[store.active_user_id].steps];
         context.allMessages = [...store.users[store.active_user_id].messages];
 
-        render(context, ["share-code-panel", "add-message-form"]);
+        render(context, [
+            "update-code-panel",
+            "update-message-form",
+            "update-steps-status",
+        ]);
     });
 };

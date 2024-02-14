@@ -35,7 +35,7 @@ export const handleSelectFile = () => {
             context.filetree = { ...getFiletree(store.files) };
             context.code = file.content;
 
-            render(context, ["share-code-panel"]);
+            render(context, ["update-code-panel"]);
             turnOnHighlightJs();
         });
     });

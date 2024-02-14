@@ -5,4 +5,13 @@
     else 
         .main__code-panel.code-panel#code-panel
     if context.activeUserId
-        #messages
+        div(class=`${
+            !context.isFormConverted ? 'messages' : 'messages--converted'
+        }`).messages(style= `${
+            context.currentSteps && context.isFormConverted && context.currentSteps.filter( status => status !== 'NONE').length !== 0 ? `bottom: ${
+                context.currentSteps.filter( status => status !== 'NONE').length * (44) + 19
+            }px`: "bottom : 19px"
+        }`)
+            #messages-top 
+            #messages-steps 
+            #messages-form

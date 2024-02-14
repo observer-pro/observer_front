@@ -21,7 +21,7 @@ export const handleNotion = () => {
         if (notionUrl.length > 0) {
             context.isNotion = false;
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
 
             socket.emit("steps/import", { url: notionUrl });
             console.log("Отправлен сигнал steps/import. Отправлены данные:\n", {

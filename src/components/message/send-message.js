@@ -4,10 +4,9 @@ import context from "../../store/context.js";
 import { render } from "../../render.js";
 
 const sendSignal = (data) => {
+    socket.emit("message/to_client", data);
     console.log("Отправлен сигнал message/to_client. Данные:");
     console.log(data);
-
-    socket.emit("message/to_client", data);
 };
 
 const sendNewMessage = (content) => {
@@ -31,7 +30,7 @@ const sendNewMessage = (content) => {
             room_id: store.room_id,
             content,
         });
-        render(context, ["add-message-form"]);
+        render(context, ["update-message-form"]);
     }
 };
 

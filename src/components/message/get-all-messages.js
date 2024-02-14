@@ -13,7 +13,7 @@ export const getAllMessages = () => {
         if (store.active_user_id === data.user_id) {
             context.allMessages = [...store.users[data.user_id].messages];
 
-            render(context, ["add-message-form"]);
+            render(context, ["update-message-form"]);
         }
     });
 };

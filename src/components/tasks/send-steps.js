@@ -5,7 +5,6 @@ import { render } from "../../render.js";
 
 const sendStep = (data) => {
     socket.emit("steps/status/to_client", data);
-
     console.log("Отправлен сигнал steps/status/to_client. Данные:");
     console.log(data);
 };
@@ -17,7 +16,7 @@ const setNewStep = (status, steps, index) => {
     store.users[store.active_user_id].steps[index] = status;
     context.currentSteps = [...store.users[store.active_user_id].steps];
 
-    render(context, ["add-message-form"]);
+    render(context, ["update-steps-status"]);
     sendStep({ user_id: store.active_user_id, steps });
 };
 

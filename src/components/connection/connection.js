@@ -4,11 +4,10 @@ import { render } from "../../render.js";
 
 export const connect = () => {
     socket.on("connect", () => {
-        console.log("Коннект");
-
         context.isOnline = true;
 
         render(context);
+        console.log("Коннект");
     });
 };
 
@@ -20,7 +19,7 @@ export const disconnect = () => {
             context.isDisconnected = true;
             context.isReconnecting = false;
 
-            render(context, ["add-user-panel", "send-tasks"]);
+            render(context, ["update-user-panel"]);
             return;
         }
 
@@ -31,8 +30,7 @@ export const disconnect = () => {
 };
 
 export const reconnect = (data) => {
+    socket.emit("room/rehost", data);
     console.log("Сигнал room/rehost отправлен. Данные:");
     console.log(data);
-
-    socket.emit("room/rehost", data);
 };

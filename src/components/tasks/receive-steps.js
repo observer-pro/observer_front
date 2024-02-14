@@ -17,9 +17,9 @@ export const receiveSteps = () => {
         };
 
         if (store.active_user_id) {
-            render(context, ["add-user-panel", "add-message-form"]);
+            render(context, ["update-user-panel", "update-steps-status"]);
         } else {
-            render(context, ["add-user-panel"]);
+            render(context, ["update-user-panel"]);
         }
     });
 };

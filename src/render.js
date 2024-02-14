@@ -4,7 +4,9 @@ import user_panel from "./templates/user_panel.pug";
 import students from "./templates/students.pug";
 import tasks_editor from "./templates/tasks_editor.pug";
 import code_panel from "./templates/code_panel.pug";
-import messages from "./templates/messages.pug";
+import messages_top from "./templates/messages_top.pug";
+import messages_steps from "./templates/messages_steps.pug";
+import messages_form from "./templates/messages_form.pug";
 import { handleSetNewAddress } from "./components/connection/set-new-address.js";
 import { handleCreateRoom } from "./components/room/create-room.js";
 import { handleRehostRoom } from "./components/room/rehost-room.js";
@@ -45,20 +47,20 @@ export const render = (context, events = []) => {
         const tasksEditorElement = document.getElementById("task-editor");
         const userPanelElement = document.getElementById("user-panel");
         const codePanelElement = document.getElementById("code-panel");
-        const messagesElement = document.getElementById("messages");
+        const messagesTopElement = document.getElementById("messages-top");
+        const messagesStepsElement = document.getElementById("messages-steps");
+        const messagesFormElement = document.getElementById("messages-form");
 
         events.forEach((event) => {
             if (event === "open-task-editor") {
-                if (codePanelElement) {
-                    codePanelElement.innerHTML = code_panel({ context });
-                } else {
+                if (tasksEditorElement) {
                     tasksEditorElement.innerHTML = tasks_editor({ context });
                 }
 
                 handleOpenTaskEditor();
                 handleSendTasks();
                 handleNotion();
-            } else if (event === "add-user-panel") {
+            } else if (event === "update-user-panel") {
                 userPanelElement.innerHTML = user_panel({ context });
                 document.getElementById("students").innerHTML = students({
                     context,
@@ -69,7 +71,7 @@ export const render = (context, events = []) => {
                 handleCloseRoom();
                 handleSelectUser();
                 handleOpenTaskEditor();
-            } else if (event === "send-tasks") {
+            } else if (event === "update-task-editor") {
                 if (tasksEditorElement) {
                     tasksEditorElement.innerHTML = tasks_editor({ context });
 
@@ -77,16 +79,28 @@ export const render = (context, events = []) => {
                     handleSendTasks();
                     handleNotion();
                 }
-            } else if (event === "add-message-form") {
-                if (messagesElement) {
-                    messagesElement.innerHTML = messages({ context });
+            } else if (event === "update-message-form") {
+                if (messagesTopElement) {
+                    messagesTopElement.innerHTML = messages_top({ context });
 
                     handleToggleForm();
+                }
+
+                if (messagesFormElement) {
+                    messagesFormElement.innerHTML = messages_form({ context });
+
                     handleSendMessage();
                     getScrolledChat();
+                }
+            } else if (event === "update-steps-status") {
+                if (messagesStepsElement) {
+                    messagesStepsElement.innerHTML = messages_steps({
+                        context,
+                    });
+
                     handleSendSteps();
                 }
-            } else if (event === "share-code-panel") {
+            } else if (event === "update-code-panel") {
                 if (codePanelElement) {
                     codePanelElement.innerHTML = code_panel({ context });
 

@@ -17,7 +17,7 @@ export const handleSendTasks = () => {
         if (context.isSent) {
             context.isSent = false;
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
         }
     });
 
@@ -46,7 +46,7 @@ export const handleSendTasks = () => {
                 allTasks[lastActive].visit = true;
             }
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
         });
     });
 
@@ -83,14 +83,13 @@ export const handleSendTasks = () => {
             }
 
             if (validData?.length > 0) {
-                console.log("Отправлен сигнал steps/all. Данные:\n", validData);
-
                 context.isSent = true;
 
                 socket.emit("steps/all", validData);
+                console.log("Отправлен сигнал steps/all. Данные:\n", validData);
             }
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
         } else if (editor.getText()?.length > 0) {
             const task = [
                 {
@@ -103,10 +102,10 @@ export const handleSendTasks = () => {
 
             context.isSent = true;
 
-            console.log("Отправлен сигнал steps/all. Данные:\n", task);
             socket.emit("steps/all", task);
+            console.log("Отправлен сигнал steps/all. Данные:\n", task);
 
-            render(context, ["send-tasks"]);
+            render(context, ["update-task-editor"]);
         }
     });
 };

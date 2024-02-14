@@ -6,10 +6,9 @@ import { render } from "../../render.js";
 const newUrl = new URL(window.location.href);
 
 const closeRoom = (data) => {
+    socket.emit("room/close", data);
     console.log("Сигнал room/close отправлен. Данные:");
     console.log(data);
-
-    socket.emit("room/close", data);
 };
 
 export const handleCloseRoom = () => {
