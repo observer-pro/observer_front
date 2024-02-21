@@ -1,6 +1,6 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const handleNotion = () => {
     const notionInputElement = document.getElementById("notion-input");
@@ -11,7 +11,7 @@ export const handleNotion = () => {
             context.isNotion = false;
             context.notionError = false;
 
-            render(context, ["send-tasks"]);
+            renderApp(context, ["send-tasks"]);
         }
     });
 
@@ -21,7 +21,7 @@ export const handleNotion = () => {
         if (notionUrl.length > 0) {
             context.isNotion = false;
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
 
             socket.emit("steps/import", { url: notionUrl });
             console.log("Отправлен сигнал steps/import. Отправлены данные:\n", {

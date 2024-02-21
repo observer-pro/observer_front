@@ -1,6 +1,6 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const getAlerts = () => {
     socket.on("alerts", (alerts) => {
@@ -18,13 +18,13 @@ export const getAlerts = () => {
             console.error(alerts);
             context.notionError = true;
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
 
             context.isNotion = true;
         } else {
             context.isNotion = true;
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
         }
     });
 };

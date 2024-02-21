@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 const sendStep = (data) => {
     socket.emit("steps/status/to_client", data);
@@ -16,7 +16,7 @@ const setNewStep = (status, steps, index) => {
     store.users[store.active_user_id].steps[index] = status;
     context.currentSteps = [...store.users[store.active_user_id].steps];
 
-    render(context, ["update-steps-status"]);
+    renderApp(context, ["update-steps-status"]);
     sendStep({ user_id: store.active_user_id, steps });
 };
 

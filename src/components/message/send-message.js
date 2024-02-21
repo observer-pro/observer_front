@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 const sendSignal = (data) => {
     socket.emit("message/to_client", data);
@@ -30,7 +30,7 @@ const sendNewMessage = (content) => {
             room_id: store.room_id,
             content,
         });
-        render(context, ["update-message-form"]);
+        renderApp(context, ["update-message-form"]);
     }
 };
 

@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
 import store from "../../store/store.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 const newUrl = new URL(window.location.href);
 
@@ -103,9 +103,9 @@ export const updateRoom = () => {
             newUrl.searchParams.set("room", store.room_id);
             window.history.replaceState({}, document.title, newUrl.href);
 
-            render(context, ["open-task-editor", "update-user-panel"]);
+            renderApp(context, ["open-task-editor", "update-user-panel"]);
         } else {
-            render(context, ["update-user-panel", "update-code-panel"]);
+            renderApp(context, ["update-user-panel", "update-code-panel"]);
         }
     });
 };

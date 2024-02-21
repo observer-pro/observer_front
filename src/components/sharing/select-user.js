@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 import { requireAllMessages } from "../message/require-all-messages.js";
 import { requireAllSteps } from "../tasks/require-all-steps.js";
 
@@ -48,7 +48,7 @@ function clickUser() {
         users: Object.values(store.users),
     };
 
-    render(context, ["open-task-editor", "update-user-panel"]);
+    renderApp(context, ["open-task-editor", "update-user-panel"]);
 }
 
 export const handleSelectUser = () => {

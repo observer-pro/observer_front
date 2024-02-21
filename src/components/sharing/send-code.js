@@ -2,7 +2,7 @@ import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
 import { getFiletree } from "../../utils/files/get-filetree.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 import { getChangedFiles } from "../../utils/files/get-changed-files.js";
 import { getFileByPath } from "../../utils/files/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
@@ -46,7 +46,7 @@ export const sendCode = () => {
         context.currentSteps = [...store.users[store.active_user_id].steps];
         context.allMessages = [...store.users[store.active_user_id].messages];
 
-        render(context, [
+        renderApp(context, [
             "update-code-panel",
             "update-message-form",
             "update-steps-status",

@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const receiveSteps = () => {
     socket.on("steps/status/to_mentor", (data) => {
@@ -17,9 +17,9 @@ export const receiveSteps = () => {
         };
 
         if (store.active_user_id) {
-            render(context, ["update-user-panel", "update-steps-status"]);
+            renderApp(context, ["update-user-panel", "update-steps-status"]);
         } else {
-            render(context, ["update-user-panel"]);
+            renderApp(context, ["update-user-panel"]);
         }
     });
 };

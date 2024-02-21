@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 import { getNewFiles } from "../../utils/files/get-new-files.js";
 import { getFiletree } from "../../utils/files/get-filetree.js";
 import { getChangedFiles } from "../../utils/files/get-changed-files.js";
@@ -43,6 +43,6 @@ export const updateCode = () => {
         console.log("Файловое дерево:");
         console.log(context.filetree);
 
-        render(context, ["update-code-panel"]);
+        renderApp(context, ["update-code-panel"]);
     });
 };

@@ -2,7 +2,7 @@ import socket from "../../services/socket.js";
 import context from "../../store/context.js";
 import { initQuill } from "../../services/quill.js";
 import { allTasks } from "./all-tasks.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const handleSendTasks = () => {
     const areaElement = document.getElementById("task-area");
@@ -17,7 +17,7 @@ export const handleSendTasks = () => {
         if (context.isSent) {
             context.isSent = false;
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
         }
     });
 
@@ -46,7 +46,7 @@ export const handleSendTasks = () => {
                 allTasks[lastActive].visit = true;
             }
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
         });
     });
 
@@ -89,7 +89,7 @@ export const handleSendTasks = () => {
                 console.log("Отправлен сигнал steps/all. Данные:\n", validData);
             }
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
         } else if (editor.getText()?.length > 0) {
             const task = [
                 {
@@ -105,7 +105,7 @@ export const handleSendTasks = () => {
             socket.emit("steps/all", task);
             console.log("Отправлен сигнал steps/all. Данные:\n", task);
 
-            render(context, ["update-task-editor"]);
+            renderApp(context, ["update-task-editor"]);
         }
     });
 };

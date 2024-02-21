@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const receiveMessage = () => {
     socket.on("message/to_mentor", (data) => {
@@ -29,12 +29,12 @@ export const receiveMessage = () => {
             store.users[sender_id].messages_unread += 1;
         }
 
-        render(context, ["update-user-panel"]);
+        renderApp(context, ["update-user-panel"]);
 
         if (sender_id === store.active_user_id) {
             context.allMessages = [...store.users[sender_id].messages];
 
-            render(context, ["update-message-form"]);
+            renderApp(context, ["update-message-form"]);
         }
     });
 };
