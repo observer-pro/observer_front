@@ -59,7 +59,7 @@ const updateUsersInStore = (updatedUserList) => {
             scroll_code_position: 0,
             scroll_tree_position: 0,
             latest_updated_paths: [],
-            steps: [],
+            steps: {},
         };
     });
 
@@ -92,6 +92,7 @@ export const updateRoom = () => {
             context.isStart = true;
 
             window.history.pushState({}, document.title, newUrl.origin);
+            return;
         } else {
             localStorage.setItem("ROOM_ID", store.room_id);
             localStorage.setItem("HOST_ID", store.host_id);

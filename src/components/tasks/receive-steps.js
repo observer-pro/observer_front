@@ -8,9 +8,8 @@ export const receiveSteps = () => {
         console.log("Получен сигнал steps/status/to_mentor. Данные:");
         console.log(data);
 
-        store.users[data.user_id].steps = [...Object.values(data.steps)];
-        store.users[data.user_id].is_got_steps = true;
-        context.currentSteps = [...store.users[data.user_id].steps];
+        store.users[data.user_id].steps = { ...data.steps };
+        context.currentSteps = { ...store.users[data.user_id].steps };
         context.room = {
             id: store.room_id,
             users: Object.values(store.users),
