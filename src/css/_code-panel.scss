@@ -15,7 +15,7 @@
         }
 
         &__filetree {
-            width: 197px;
+            min-width: 197px;
             padding: 7px;
             overflow: auto;
             display: flex;
@@ -99,7 +99,7 @@
                     background: #cecfd2;
                     border-radius: 6px;
                     font-size: 16px;
-                    overflow-x: auto;
+                    overflow: auto;
                     scrollbar-width: 0px;
                     margin-top: -25px;
 
@@ -109,6 +109,11 @@
 
                     &::-webkit-scrollbar-track {
                         background: transparent;
+                    }
+
+                    & span {
+                        max-width: 773px;
+                        overflow: scroll;
                     }
                 }
             }
