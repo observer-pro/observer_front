@@ -3,9 +3,8 @@ import store from "../../store/store.js";
 import context from "../../store/context.js";
 
 const createRoom = (name) => {
-    console.log(`Отправлен сигнал room/create. Пользователь: ${name}`);
-
     socket.emit("room/create", { name });
+    console.log(`Отправлен сигнал room/create. Пользователь: ${name}`);
 };
 
 export const handleCreateRoom = () => {

@@ -1,4 +1,4 @@
-import { taskMode } from "../utils/all-tasks.js";
+import { taskMode } from "../components/tasks/all-tasks.js";
 
 class Context {
     constructor(

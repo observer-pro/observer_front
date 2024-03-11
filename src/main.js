@@ -2,7 +2,7 @@
 
 import "./css/main.css";
 import context from "./store/context.js";
-import { render } from "./render.js";
+import { renderApp } from "./render/render-app.js";
 import { connect, disconnect } from "./components/connection/connection.js";
 import { updateRoom } from "./components/room/update-room.js";
 import { rehostRoomAfterRefresh } from "./components/room/rehost-room.js";
@@ -15,9 +15,7 @@ import { getAllSteps } from "./components/tasks/get-all-steps.js";
 import { loadSteps } from "./components/tasks/load-steps.js";
 import { getAlerts } from "./components/tasks/get-alerts.js";
 
-export const codeElement = document.querySelector("code");
-
-render(context);
+renderApp(context);
 connect();
 disconnect();
 updateRoom();

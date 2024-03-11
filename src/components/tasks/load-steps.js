@@ -1,7 +1,7 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
-import { allTasks } from "../../utils/all-tasks.js";
-import { render } from "../../render.js";
+import { allTasks } from "./all-tasks.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const loadSteps = () => {
     socket.on("steps/load", (data) => {
@@ -25,6 +25,6 @@ export const loadSteps = () => {
             content: allTasks[context.taskNumber].content,
         };
 
-        render(context, ["send-tasks"]);
+        renderApp(context, ["update-task-editor"]);
     });
 };

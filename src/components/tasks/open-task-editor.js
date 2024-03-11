@@ -1,6 +1,6 @@
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const handleOpenTaskEditor = () => {
     const showTaskElement = document.getElementById("show-task");
@@ -19,6 +19,6 @@ export const handleOpenTaskEditor = () => {
             users: Object.values(store.users),
         };
 
-        render(context, ["open-task-editor", "add-user-panel"]);
+        renderApp(context, ["open-task-editor", "update-user-panel"]);
     });
 };

@@ -1,0 +1,13 @@
+if !context.isFormConverted
+    .messages__chat#chat
+        if context.allMessages.length > 0
+            each message in context.allMessages 
+                .messages__message(class=`${
+                    message.sender === context.activeUserId ? 'messages__message--student' : ''
+                }`)
+                    p= message.content
+        else 
+            p.messages__empty-text Нет сообщений
+    .messages__footer
+        input(type="text" class="messages__input" placeholder="Начните печатать" id="message-text")
+        button.messages__button#send-message

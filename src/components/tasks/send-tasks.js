@@ -1,8 +1,8 @@
 import socket from "../../services/socket.js";
 import context from "../../store/context.js";
 import { initQuill } from "../../services/quill.js";
-import { allTasks } from "../../utils/all-tasks.js";
-import { render } from "../../render.js";
+import { allTasks } from "./all-tasks.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const handleSendTasks = () => {
     const areaElement = document.getElementById("task-area");
@@ -17,7 +17,7 @@ export const handleSendTasks = () => {
         if (context.isSent) {
             context.isSent = false;
 
-            render(context, ["send-tasks"]);
+            renderApp(context, ["update-task-editor"]);
         }
     });
 
@@ -46,7 +46,7 @@ export const handleSendTasks = () => {
                 allTasks[lastActive].visit = true;
             }
 
-            render(context, ["send-tasks"]);
+            renderApp(context, ["update-task-editor"]);
         });
     });
 
@@ -83,14 +83,13 @@ export const handleSendTasks = () => {
             }
 
             if (validData?.length > 0) {
-                console.log("Отправлен сигнал steps/all. Данные:\n", validData);
-
                 context.isSent = true;
 
                 socket.emit("steps/all", validData);
+                console.log("Отправлен сигнал steps/all. Данные:\n", validData);
             }
 
-            render(context, ["send-tasks"]);
+            renderApp(context, ["update-task-editor"]);
         } else if (editor.getText()?.length > 0) {
             const task = [
                 {
@@ -103,10 +102,10 @@ export const handleSendTasks = () => {
 
             context.isSent = true;
 
-            console.log("Отправлен сигнал steps/all. Данные:\n", task);
             socket.emit("steps/all", task);
+            console.log("Отправлен сигнал steps/all. Данные:\n", task);
 
-            render(context, ["send-tasks"]);
+            renderApp(context, ["update-task-editor"]);
         }
     });
 };

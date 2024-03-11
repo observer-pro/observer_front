@@ -628,7 +628,7 @@ ul {
 }
 
 .main .code-panel__empty-block {
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -645,7 +645,6 @@ ul {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
   scrollbar-width: 0px;
 }
 .main .code-panel__filetree::-webkit-scrollbar {
@@ -692,6 +691,9 @@ ul {
 .main .code-panel__tree-name--active {
   opacity: 1;
 }
+.main .code-panel__tree-indent {
+  margin-left: 12px;
+}
 .main .code-panel__tree-point {
   width: 9px;
   height: 9px;
@@ -699,31 +701,27 @@ ul {
   background-color: #ffcf4d;
 }
 .main .code-panel__code-block {
-  padding-top: 15px;
-  flex-grow: 1;
+  padding: 15px;
+  width: 100vw;
 }
 .main .code-panel__code-block pre {
   width: 100%;
+  height: 100%;
 }
 .main .code-panel__code-block pre code {
   width: 100%;
-  height: 705px;
+  height: 100%;
   background: #cecfd2;
-  border-radius: 6px;
   font-size: 16px;
+  margin-top: -25px;
   overflow: auto;
   scrollbar-width: 0px;
-  margin-top: -25px;
 }
 .main .code-panel__code-block pre code::-webkit-scrollbar {
-  width: 0px;
+  display: none;
 }
 .main .code-panel__code-block pre code::-webkit-scrollbar-track {
   background: transparent;
-}
-.main .code-panel__code-block pre code span {
-  max-width: 773px;
-  overflow: scroll;
 }
 .main .code-panel__disconnected-screen {
   width: 773px;

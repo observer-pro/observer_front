@@ -5,7 +5,7 @@ else
         each user in context.room.users
             if user.role === 'client'
                 li.students__item.item(class=`${
-                    user.unreadMessages && !user.isActive ? 'students__item--unread' : ''
+                    user.messages_unread && !user.isActive ? 'students__item--unread' : ''
                 } ${
                     user.isActive ? 'students__item--active' : ''
                 }` id=user.id data-name=user.name)
@@ -16,6 +16,6 @@ else
                             img(src="./public/img/done-icon.svg", alt="done")
                         if  user.steps.length > 0 && user.steps.every(el => el === "ACCEPTED")
                             img(src="./public/img/accepted-icon.svg", alt="accepted")
-                    span.item__name(class=!user.unreadMessages ? 'item__name--read' : '')= user.name 
-                    if user.unreadMessages && !user.isActive
-                        span.item__unread= user.unreadMessages.length
+                    span.item__name(class=!user.messages_unread ? 'item__name--read' : '')= user.name 
+                    if !user.isActive && user.messages_unread > 0
+                        span.item__unread= user.messages_unread

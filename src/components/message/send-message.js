@@ -1,13 +1,12 @@
 import socket from "../../services/socket.js";
 import store from "../../store/store.js";
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 const sendSignal = (data) => {
+    socket.emit("message/to_client", data);
     console.log("Отправлен сигнал message/to_client. Данные:");
     console.log(data);
-
-    socket.emit("message/to_client", data);
 };
 
 const sendNewMessage = (content) => {
@@ -18,15 +17,20 @@ const sendNewMessage = (content) => {
     };
 
     if (content) {
-        store.users[store.active_user_id].messages.push(newMessage);
-        context.allMessages = [...store.users[store.active_user_id].messages];
+        store.users[store.active_user_id]?.messages.push(newMessage);
+
+        if (store.active_user_id) {
+            context.allMessages = [
+                ...store.users[store.active_user_id].messages,
+            ];
+        }
 
         sendSignal({
             user_id: store.active_user_id,
             room_id: store.room_id,
             content,
         });
-        render(context, ["add-message-form"]);
+        renderApp(context, ["update-message-form"]);
     }
 };
 
@@ -42,11 +46,15 @@ export const handleSendMessage = () => {
 
     messageInputElement?.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
-            sendNewMessage(content);
+            if (store.active_user_id) {
+                sendNewMessage(content);
+            }
         }
     });
 
     sendButtonElement?.addEventListener("click", () => {
-        sendNewMessage(content);
+        if (store.active_user_id) {
+            sendNewMessage(content);
+        }
     });
 };

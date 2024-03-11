@@ -1,5 +1,5 @@
 import context from "../../store/context.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 export const handleToggleForm = () => {
     const converterElement = document.getElementById("converter");
@@ -13,6 +13,6 @@ export const handleToggleForm = () => {
             context.isFormConverted = false;
         }
 
-        render(context, ["add-message-form"]);
+        renderApp(context, ["update-message-form"]);
     });
 };

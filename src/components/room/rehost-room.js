@@ -1,7 +1,7 @@
 import store from "../../store/store.js";
 import context from "../../store/context.js";
 import { reconnect } from "../../components/connection/connection.js";
-import { render } from "../../render.js";
+import { renderApp } from "../../render/render-app.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const roomParams = urlParams.get("room");
@@ -29,7 +29,7 @@ export const handleRehostRoom = () => {
 
         context.isReconnecting = true;
 
-        render(context, ["add-user-panel", "send-tasks"]);
+        renderApp(context, ["update-user-panel"]);
         reconnect({
             room_id: store.room_id,
             user_id: store.host_id,
@@ -39,7 +39,7 @@ export const handleRehostRoom = () => {
             if (context.isDisconnected) {
                 context.isReconnecting = false;
 
-                render(context, ["add-user-panel", "send-tasks"]);
+                renderApp(context, ["update-user-panel"]);
             }
         }, 3000);
     });
