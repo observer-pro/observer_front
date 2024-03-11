@@ -92,6 +92,7 @@ export const updateRoom = () => {
             context.isStart = true;
 
             window.history.pushState({}, document.title, newUrl.origin);
+            return;
         } else {
             localStorage.setItem("ROOM_ID", store.room_id);
             localStorage.setItem("HOST_ID", store.host_id);
