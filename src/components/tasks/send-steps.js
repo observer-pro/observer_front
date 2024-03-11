@@ -10,11 +10,9 @@ const sendStep = (data) => {
 };
 
 const setNewStep = (status, steps, index) => {
-    const number = index + 1;
-
-    steps[number] = status;
+    steps[index] = status;
     store.users[store.active_user_id].steps[index] = status;
-    context.currentSteps = [...store.users[store.active_user_id].steps];
+    context.currentSteps = { ...store.users[store.active_user_id].steps };
 
     renderApp(context, ["update-steps-status"]);
     sendStep({ user_id: store.active_user_id, steps });
@@ -30,7 +28,7 @@ export const handleSendSteps = () => {
         element.addEventListener("click", (event) => {
             event.preventDefault();
 
-            const index = +element.dataset.index;
+            const index = element.dataset.index;
 
             setNewStep("ACCEPTED", steps, index);
         });
@@ -40,7 +38,7 @@ export const handleSendSteps = () => {
         element.addEventListener("click", (event) => {
             event.preventDefault();
 
-            const index = +element.dataset.index;
+            const index = element.dataset.index;
 
             setNewStep("NONE", steps, index);
         });
@@ -50,7 +48,7 @@ export const handleSendSteps = () => {
         element.addEventListener("click", (event) => {
             event.preventDefault();
 
-            const index = +element.dataset.index;
+            const index = element.dataset.index;
 
             setNewStep("NONE", steps, index);
         });

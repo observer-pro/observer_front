@@ -43,7 +43,7 @@ export const sendCode = () => {
         console.log("Файловое дерево:");
         console.log(context.filetree);
 
-        context.currentSteps = [...store.users[store.active_user_id].steps];
+        context.currentSteps = { ...store.users[store.active_user_id].steps };
         context.allMessages = [...store.users[store.active_user_id].messages];
 
         renderApp(context, [

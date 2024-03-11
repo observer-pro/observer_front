@@ -59,7 +59,7 @@ const updateUsersInStore = (updatedUserList) => {
             scroll_code_position: 0,
             scroll_tree_position: 0,
             latest_updated_paths: [],
-            steps: [],
+            steps: {},
         };
     });
 

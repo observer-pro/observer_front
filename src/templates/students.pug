@@ -10,11 +10,11 @@ else
                     user.isActive ? 'students__item--active' : ''
                 }` id=user.id data-name=user.name)
                     if user.steps !== null && user.steps !== undefinded
-                        if user.steps.includes("HELP")
+                        if Object.values(user.steps).includes("HELP")
                             img(src="./public/img/help-icon.svg", alt="help")
-                        if user.steps.includes("DONE") && !user.steps.includes("HELP")
+                        if Object.values(user.steps).includes("DONE") && !Object.values(user.steps).includes("HELP")
                             img(src="./public/img/done-icon.svg", alt="done")
-                        if  user.steps.length > 0 && user.steps.every(el => el === "ACCEPTED")
+                        if  Object.values(user.steps).length > 0 && Object.values(user.steps).every(el => el === "ACCEPTED")
                             img(src="./public/img/accepted-icon.svg", alt="accepted")
                     span.item__name(class=!user.messages_unread ? 'item__name--read' : '')= user.name 
                     if !user.isActive && user.messages_unread > 0

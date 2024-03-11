@@ -9,12 +9,10 @@ export const getAllSteps = () => {
 
         data.forEach((step) => {
             if (step.user_id === store.active_user_id) {
-                store.users[store.active_user_id].steps = Object.values(
-                    step.steps,
-                );
-                context.currentSteps = [
+                store.users[store.active_user_id].steps = { ...step.steps };
+                context.currentSteps = {
                     ...store.users[store.active_user_id].steps,
-                ];
+                };
             }
         });
     });
