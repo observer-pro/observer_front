@@ -8,11 +8,11 @@ mixin drawFolder(folder)
                 +drawFolder(node)
         else 
             if node.status !== 'REMOVED'
-                .code-panel__tree-section.file(class=`${
+                .code-panel__tree-section.file(@click="click_file" class=`${
                     node.isActive ? 'code-panel__tree-section--active' : ''
                 }` data-path= node.path)
                     img(src="./public/img/file.svg" alt="file")
-                    span.code-panel__tree-name(class=`${
+                    span.code-panel__tree-name(data-path= node.path class=`${
                         node.isActive ? 'code-panel__tree-name--active' : ''
                     }`)= node.name
                     if node.isChanged

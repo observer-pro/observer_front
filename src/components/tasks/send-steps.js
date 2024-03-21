@@ -18,39 +18,10 @@ const setNewStep = (status, steps, index) => {
     sendStep({ user_id: store.active_user_id, steps });
 };
 
-export const handleSendSteps = () => {
-    const acceptElements = document.querySelectorAll(".accept");
-    const returnElements = document.querySelectorAll(".return");
-    const completeElements = document.querySelectorAll(".complete");
+export const sendSteps = (event) => {
+    const index = event.target.dataset.index;
+    const status = event.target.dataset.status;
     const steps = {};
 
-    acceptElements.forEach((element) => {
-        element.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const index = element.dataset.index;
-
-            setNewStep("ACCEPTED", steps, index);
-        });
-    });
-
-    returnElements.forEach((element) => {
-        element.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const index = element.dataset.index;
-
-            setNewStep("NONE", steps, index);
-        });
-    });
-
-    completeElements.forEach((element) => {
-        element.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const index = element.dataset.index;
-
-            setNewStep("NONE", steps, index);
-        });
-    });
+    setNewStep(status, steps, index);
 };

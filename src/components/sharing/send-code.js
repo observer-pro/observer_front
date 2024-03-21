@@ -7,7 +7,6 @@ import { getChangedFiles } from "../../utils/files/get-changed-files.js";
 import { getFileByPath } from "../../utils/files/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
 import { startUserSharingSession } from "./select-user.js";
-import { endUserSharingSession } from "./select-user.js";
 
 export const sendCode = () => {
     socket.on("sharing/code_send", (data) => {
@@ -16,10 +15,6 @@ export const sendCode = () => {
 
         if (data.user_id !== store.active_user_id) {
             console.error("Получены чужие данные");
-            endUserSharingSession({
-                user_id: data.user_id,
-                room_id: store.room_id,
-            });
             startUserSharingSession({
                 user_id: store.active_user_id,
                 room_id: store.room_id,
