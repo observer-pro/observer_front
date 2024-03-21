@@ -19,6 +19,8 @@ const setNewStep = (status, steps, index) => {
 };
 
 export const sendSteps = (event) => {
+    event.preventDefault();
+
     const index = event.target.dataset.index;
     const status = event.target.dataset.status;
     const steps = {};
