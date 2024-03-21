@@ -12,24 +12,13 @@ export const startUserSharingSession = (data) => {
     );
 };
 
-export const endUserSharingSession = (data) => {
-    socket.emit("sharing/end", data);
-    console.log(
-        `Отправлен сигнал sharing/end. Пользователь: ${data.user_id} отключен`,
-    );
-};
-
-function clickUser() {
+export const clickUser = (event) => {
     if (store.active_user_id) {
         store.users[store.active_user_id].isActive = false;
-
-        endUserSharingSession({
-            user_id: store.active_user_id,
-            room_id: store.room_id,
-        });
+        context.code = null;
     }
 
-    const activeUserId = +this.id;
+    const activeUserId = +event.target.id;
 
     store.active_user_id = activeUserId;
     store.users[activeUserId].isActive = true;
@@ -49,12 +38,4 @@ function clickUser() {
     };
 
     renderApp(context, ["open-task-editor", "update-user-panel"]);
-}
-
-export const handleSelectUser = () => {
-    const userElements = document.querySelectorAll(".item");
-
-    userElements.forEach((user) => {
-        user.addEventListener("click", clickUser);
-    });
 };

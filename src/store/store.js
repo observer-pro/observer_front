@@ -8,6 +8,7 @@ class Store {
     room_id = roomIdFromLS ? +roomIdFromLS : null;
     host_id = hostIdFromLS ? +hostIdFromLS : null;
     host_name = "Host";
+    editor = null;
     active_user_id = null;
     users = {};
     files = [];

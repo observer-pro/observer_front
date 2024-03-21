@@ -6,6 +6,26 @@ import { renderApp } from "../../render/render-app.js";
 const urlParams = new URLSearchParams(window.location.search);
 const roomParams = urlParams.get("room");
 
+export const rehostRoom = (event) => {
+    event.preventDefault();
+
+    context.isReconnecting = true;
+
+    renderApp(context, ["update-user-panel"]);
+    reconnect({
+        room_id: store.room_id,
+        user_id: store.host_id,
+    });
+
+    setTimeout(() => {
+        if (context.isDisconnected) {
+            context.isReconnecting = false;
+
+            renderApp(context, ["update-user-panel"]);
+        }
+    }, 3000);
+};
+
 export const rehostRoomAfterRefresh = () => {
     if (roomParams) {
         context.isStart = false;
@@ -19,28 +39,4 @@ export const rehostRoomAfterRefresh = () => {
             user_id: store.host_id,
         });
     }
-};
-
-export const handleRehostRoom = () => {
-    const rehostElement = document.getElementById("rehost");
-
-    rehostElement?.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        context.isReconnecting = true;
-
-        renderApp(context, ["update-user-panel"]);
-        reconnect({
-            room_id: store.room_id,
-            user_id: store.host_id,
-        });
-
-        setTimeout(() => {
-            if (context.isDisconnected) {
-                context.isReconnecting = false;
-
-                renderApp(context, ["update-user-panel"]);
-            }
-        }, 3000);
-    });
 };

@@ -9,4 +9,4 @@
             .connection__status
                 img(src= context.isOnline ? './public/img/status-online.svg' : './public/img/status-offline.svg')
                 span.connection__text-status= context.isOnline ? 'Сервер работает' : 'Сервер недоступен'
-        button.button.create-room#create-room(disabled=!context.isOnline) Создать комнату
+        button.button.create-room(@click="room_create" disabled=!context.isOnline) Создать комнату
