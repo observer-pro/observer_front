@@ -15,7 +15,7 @@ export const receiveSteps = () => {
             users: Object.values(store.users),
         };
 
-        if (store.active_user_id) {
+        if (data.user_id === store.active_user_id) {
             renderApp(context, ["update-user-panel", "update-steps-status"]);
         } else {
             renderApp(context, ["update-user-panel"]);
