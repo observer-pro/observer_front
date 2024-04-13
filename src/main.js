@@ -12,8 +12,8 @@ import { receiveMessage } from "./components/message/receive-message.js";
 import { getAllMessages } from "./components/message/get-all-messages.js";
 import { receiveSteps } from "./components/tasks/receive-steps.js";
 import { getAllSteps } from "./components/tasks/get-all-steps.js";
-import { loadSteps } from "./components/tasks/load-steps.js";
 import { getAlerts } from "./components/tasks/get-alerts.js";
+import { loadSteps } from "./components/tasks/load-steps.js";
 
 renderApp(context);
 connect();
@@ -26,5 +26,5 @@ receiveMessage();
 getAllMessages();
 receiveSteps();
 getAllSteps();
-loadSteps();
 getAlerts();
+loadSteps();

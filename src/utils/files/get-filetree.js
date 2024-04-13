@@ -45,7 +45,9 @@ class Tree {
                     parent = newNode;
                 }
             });
+
             const node = this.createFile(file, filename);
+
             parent.children[filename] = node;
         }
     }

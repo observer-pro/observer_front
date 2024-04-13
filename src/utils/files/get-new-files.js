@@ -27,10 +27,8 @@ export const getNewFiles = (files, newFiles) => {
     });
 
     uniquieNewFiles.forEach((newFile) => {
-        if (newFile.status !== "REMOVED") {
-            result.files.push(newFile);
-            result.names.push(newFile.filename);
-        }
+        result.files.push(newFile);
+        result.names.push(newFile.filename);
     });
 
     return result;

@@ -8,10 +8,21 @@ class Store {
     room_id = roomIdFromLS ? +roomIdFromLS : null;
     host_id = hostIdFromLS ? +hostIdFromLS : null;
     host_name = "Host";
-    editor = null;
     active_user_id = null;
     users = {};
     files = [];
+    tasks = {
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+        theory: "",
+    };
+    active_task = 1;
 }
 
 const store = new Store();

@@ -1,5 +1,3 @@
-import { taskMode } from "../components/tasks/all-tasks.js";
-
 class Context {
     constructor(
         isStart,
@@ -19,12 +17,46 @@ class Context {
         this.server = "ws://84.38.181.252";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/Singleton_refactor/build/distributions/Observer%20App-1.2.5.zip";
-        this.taskNumber = localStorage.getItem("TASK_NUMBER")
-            ? localStorage.getItem("TASK_NUMBER")
-            : 1;
+        this.tasks = [
+            {
+                name: 1,
+                is_active: true,
+            },
+            {
+                name: 2,
+                is_active: false,
+            },
+            {
+                name: 3,
+                is_active: false,
+            },
+            {
+                name: 4,
+                is_active: false,
+            },
+            {
+                name: 5,
+                is_active: false,
+            },
+            {
+                name: 6,
+                is_active: false,
+            },
+            {
+                name: 7,
+                is_active: false,
+            },
+            {
+                name: 8,
+                is_active: false,
+            },
+            {
+                name: "theory",
+                is_active: false,
+            },
+        ];
         this.isNotion = isNotion;
         this.notionError = false;
-        this.taskCountMode = taskMode;
     }
 }
 

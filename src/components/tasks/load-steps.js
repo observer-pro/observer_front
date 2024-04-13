@@ -1,30 +1,13 @@
 import socket from "../../services/socket.js";
-import context from "../../store/context.js";
-import { allTasks } from "./all-tasks.js";
-import { renderApp } from "../../render/render-app.js";
+import store from "../../store/store.js";
 
 export const loadSteps = () => {
     socket.on("steps/load", (data) => {
         console.log("Получен сигнал steps/load. Данные:");
         console.log(data);
 
-        const tasksLenght = context.taskCountMode ? 8 : 4;
-
-        data.map((task) => {
-            task.visit = true;
+        data.forEach((step) => {
+            store.tasks[step.name] = step.content;
         });
-
-        data.forEach((task) => {
-            if (task.name === "theory" || +task.name <= tasksLenght) {
-                allTasks[task.name] = task;
-            }
-        });
-
-        context.taskContent = {
-            visit: true,
-            content: allTasks[context.taskNumber].content,
-        };
-
-        renderApp(context, ["update-task-editor"]);
     });
 };

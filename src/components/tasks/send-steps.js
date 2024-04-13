@@ -25,5 +25,7 @@ export const sendSteps = (event) => {
     const status = event.target.dataset.status;
     const steps = {};
 
-    setNewStep(status, steps, index);
+    if (store.active_user_id) {
+        setNewStep(status, steps, index);
+    }
 };
