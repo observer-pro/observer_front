@@ -1,5 +1,5 @@
 import tasks_editor from "../../templates/tasks_editor.pug";
-import { handleSendTasks } from "../../components/tasks/send-tasks.js";
+import { handleInputTaskArea } from "../../components/tasks/input-task-area.js";
 import { handleNotion } from "../../components/tasks/notion.js";
 
 export const openTaskEditor = (context) => {
@@ -8,7 +8,7 @@ export const openTaskEditor = (context) => {
     if (tasksEditorElement) {
         tasksEditorElement.innerHTML = tasks_editor({ context });
 
-        handleSendTasks();
+        handleInputTaskArea();
         handleNotion();
     }
 };

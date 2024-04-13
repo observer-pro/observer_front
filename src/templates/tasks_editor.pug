@@ -2,25 +2,10 @@
     h2.task-editor__title Задание
     .task-editor__works-box 
         .task-editor__works
-            if context.taskCountMode
-                - let count = 1
-                while count <= 8
-                    input.task-editor__work(type="radio" value=`${count}` name="work" id=`${count}` checked= count === Number(context.taskNumber))
-                    label.task-editor__work-label(for=`${count}`)= count
-                    - count += 1;
-                input.task-editor__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
-                label.task-editor__work-label(for="work-teory") Теория
-            else
-                -let countFore = 1
-                while countFore <= 4
-                    input.task-editor__work(type="radio" value=`${countFore}` name="work" id=`${countFore}` checked= countFore === Number(context.taskNumber))
-                    label.task-editor__work-label(for=`${countFore}`)= countFore
-                    - countFore += 1;
-                div.task-editor__work-plus +
-                input.task-editor__work(type="radio" value="Теория" name="work" id="work-teory" checked="theory" === context.taskNumber)
-                label.task-editor__work-label(for="work-teory") Теория
-
-        button(class= context.isSent ? "task-editor__button-sent" : "task-editor__button")#send-task= context.isSent ? "Отправлено" : "Отправить"                    
+            each task in context.tasks
+                input.task-editor__work(@click="select_task_number" type="radio" value=`${task.name}` name="work" id=`${task.name}` checked= task.is_active)
+                label.task-editor__work-label(for=`${task.name}`)= task.name === 'theory' ? 'Теория' : task.name  
+        button(@click="send_tasks" class= context.isSent ? "task-editor__button-sent" : "task-editor__button")= context.isSent ? "Отправлено" : "Отправить"                    
     .task-editor__area#task-area
             
 .task-editor__notion.notion

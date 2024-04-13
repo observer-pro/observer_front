@@ -12,6 +12,10 @@ export const closeRoom = (event) => {
 
     store.is_first_loading = true;
 
+    for (let key in store.tasks) {
+        store.tasks[key] = "";
+    }
+
     context.isClosed = true;
     context.isStart = true;
     context.currentAddress = store.server;
@@ -20,7 +24,6 @@ export const closeRoom = (event) => {
 
     localStorage.removeItem("ROOM_ID");
     localStorage.removeItem("HOST_ID");
-    localStorage.removeItem("TASK_NUMBER");
 
     renderApp(context);
 
