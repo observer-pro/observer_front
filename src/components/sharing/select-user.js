@@ -18,24 +18,29 @@ export const clickUser = (event) => {
         context.code = null;
     }
 
-    const activeUserId = +event.target.id;
+    if (+event.target.id !== store.active_user_id) {
+        const activeUserId = +event.target.id;
 
-    store.active_user_id = activeUserId;
-    store.users[activeUserId].isActive = true;
-    store.users[activeUserId].messages_unread = 0;
+        store.active_user_id = activeUserId;
+        store.users[activeUserId].isActive = true;
+        store.users[activeUserId].messages_unread = 0;
 
-    startUserSharingSession({ user_id: activeUserId, room_id: store.room_id });
-    // TODO Убрать после рефакторинга события коннект-реконнект
-    requireAllMessages({ user_id: activeUserId });
-    requireAllSteps();
+        startUserSharingSession({
+            user_id: activeUserId,
+            room_id: store.room_id,
+        });
+        // TODO Убрать после рефакторинга события коннект-реконнект
+        requireAllMessages({ user_id: activeUserId });
+        requireAllSteps();
 
-    context.isShowingTask = false;
-    context.activeUserId = store.active_user_id;
-    context.activeUserName = store.users[activeUserId].name;
-    context.room = {
-        id: store.room_id,
-        users: Object.values(store.users),
-    };
+        context.isShowingTask = false;
+        context.activeUserId = store.active_user_id;
+        context.activeUserName = store.users[activeUserId].name;
+        context.room = {
+            id: store.room_id,
+            users: Object.values(store.users),
+        };
 
-    renderApp(context, ["open-task-editor", "update-user-panel"]);
+        renderApp(context, ["open-task-editor", "update-user-panel"]);
+    }
 };
