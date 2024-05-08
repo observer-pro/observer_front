@@ -28,6 +28,7 @@
     display: grid;
     grid-template-columns: 224px 1fr;
     gap: 22px;
+    overflow: hidden;
 
     &__user-panel {
         display: flex;
