@@ -8,17 +8,6 @@
     display: flex;
     flex-direction: column;
 
-    &--converted {
-        position: absolute;
-        bottom: 19px;
-        right: 50px;
-        width: 406px;
-        height: 49px;
-        background: #000;
-        border-bottom: 1px solid rgba(0, 0, 0, 20%);
-        border-radius: 10px 10px 0 0;
-    }
-
     &__top {
         height: 49px;
         padding: 16px 21px 15px 14px;
@@ -118,6 +107,7 @@
     &__chat {
         height: 252px;
         padding: 31px 19px 9px;
+        background: #000;
         border-top: 1px solid rgba(255, 255, 255, 20%);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         overflow: auto;
