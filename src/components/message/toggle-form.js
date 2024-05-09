@@ -1,14 +1,14 @@
 import context from "../../store/context.js";
 import { renderApp } from "../../render/render-app.js";
 
-export const toggleMessageForm = (event) => {
-    event.preventDefault();
+export const handleToggleMessageForm = () => {
+    const toggleMessageElement = document.getElementById("toggle-message");
 
-    if (!context.isFormConverted) {
-        context.isFormConverted = true;
-    } else {
-        context.isFormConverted = false;
-    }
+    toggleMessageElement.addEventListener("click", (event) => {
+        event.preventDefault();
 
-    renderApp(context, ["update-message-form"]);
+        context.isFormConverted = !context.isFormConverted;
+
+        renderApp(context, ["update-message-form"]);
+    });
 };
