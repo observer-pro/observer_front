@@ -22,19 +22,18 @@ class Tree {
     pushNode(file) {
         const path = file.filename.split("/");
         const filename = path[path.length - 1];
+        const node = this.createFile(file, filename);
 
         if (path.length === 1) {
-            const node = this.createFile(file, filename);
-
             this.nodes.children[filename] = node;
         } else {
             let parent = this.nodes;
 
             path.pop();
             path.forEach((folder) => {
-                if (parent.children[folder]) {
+                if (parent.children && parent.children[folder]) {
                     parent = parent.children[folder];
-                } else {
+                } else if (file.status !== "REMOVED") {
                     const newNode = {
                         type: "folder",
                         name: folder,
@@ -46,9 +45,9 @@ class Tree {
                 }
             });
 
-            const node = this.createFile(file, filename);
-
-            parent.children[filename] = node;
+            if (parent.children) {
+                parent.children[filename] = node;
+            }
         }
     }
 }

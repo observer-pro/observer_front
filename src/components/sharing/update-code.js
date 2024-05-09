@@ -43,6 +43,12 @@ export const updateCode = () => {
         console.log("Файловое дерево:");
         console.log(context.filetree);
 
+        store.files.forEach((file, index) => {
+            if (file.status === "REMOVED") {
+                store.files.splice(index, 1);
+            }
+        });
+
         renderApp(context, ["update-code-panel"]);
     });
 };
