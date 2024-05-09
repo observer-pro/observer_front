@@ -4,28 +4,33 @@ import { renderApp } from "../../render/render-app.js";
 import { getFiletree } from "../../utils/files/get-filetree.js";
 import { getFileByPath } from "../../utils/files/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
-import { turnOnHighlightJs } from "../../utils/turn-on-hljs.js";
 
 export const clickFile = (event) => {
-    const file = getFileByPath(event.target.dataset.path, store);
+    if (
+        store.users[store.active_user_id].current_path !==
+        event.target.dataset.path
+    ) {
+        const file = getFileByPath(event.target.dataset.path, store);
 
-    let pathIndex;
+        let pathIndex;
 
-    store.users[store.active_user_id].current_path = event.target.dataset.path;
+        store.users[store.active_user_id].current_path =
+            event.target.dataset.path;
+        store.users[store.active_user_id].latest_updated_paths.forEach(
+            (path, index) => {
+                if (path === store.users[store.active_user_id].current_path) {
+                    pathIndex = index;
+                }
+            },
+        );
+        store.users[store.active_user_id].latest_updated_paths.splice(
+            pathIndex,
+            1,
+        );
+        store.files = [...markFileAsCurrent(file, store)];
+        context.filetree = { ...getFiletree(store.files) };
+        context.code = file.content;
 
-    store.users[store.active_user_id].latest_updated_paths.forEach(
-        (path, index) => {
-            if (path === store.users[store.active_user_id].current_path) {
-                pathIndex = index;
-            }
-        },
-    );
-    store.users[store.active_user_id].latest_updated_paths.splice(pathIndex, 1);
-
-    store.files = [...markFileAsCurrent(file, store)];
-    context.filetree = { ...getFiletree(store.files) };
-    context.code = file.content;
-
-    renderApp(context, ["update-code-panel"]);
-    turnOnHighlightJs();
+        renderApp(context, ["update-code-panel"]);
+    }
 };
