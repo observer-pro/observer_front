@@ -1,8 +1,8 @@
 import store from "../../store/store.js";
 import context from "../../store/context.js";
 import { renderApp } from "../../render/render-app.js";
-import { getFiletree } from "../../utils/files/get-filetree.js";
 import { getFileByPath } from "../../utils/files/get-file-by-path.js";
+import { getFiletree } from "../../utils/files/get-filetree.js";
 import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
 
 export const clickFile = (event) => {
