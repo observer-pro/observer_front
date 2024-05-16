@@ -8,6 +8,7 @@ import { getChangedFiles } from "../../utils/files/get-changed-files.js";
 import { sortStoreFiles } from "../../utils/files/sort-files.js";
 import { getFileByPath } from "../../utils/files/get-file-by-path.js";
 import { markFileAsCurrent } from "../../utils/files/mark-file-as-current.js";
+import { deleteFilesInFolder } from "../../utils/files/delete-files-in-folder.js";
 
 export const updateCode = () => {
     socket.on("sharing/code_update", (data) => {
@@ -46,6 +47,7 @@ export const updateCode = () => {
         store.files.forEach((file, index) => {
             if (file.status === "REMOVED") {
                 store.files.splice(index, 1);
+                store.files = [...deleteFilesInFolder(store.files, file)];
             }
         });
 
