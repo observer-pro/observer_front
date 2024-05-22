@@ -9,6 +9,10 @@ export const handleInputTaskArea = () => {
 
     editor.container.firstChild.innerHTML = store.tasks[store.active_task];
 
+    if (editor.container.firstChild.innerHTML === "") {
+        editor.focus();
+    }
+
     areaElement?.addEventListener("click", () => {
         if (context.isSent) {
             context.isSent = false;
@@ -17,14 +21,7 @@ export const handleInputTaskArea = () => {
         }
     });
 
-    areaElement?.addEventListener("input", (event) => {
-        store.tasks[store.active_task] = event.target.innerHTML;
-    });
-
-    areaElement?.addEventListener("keyup", (event) => {
-        if (event.key === "Backspace") {
-            store.tasks[store.active_task] =
-                editor.container.firstChild.innerHTML;
-        }
+    editor.on("text-change", () => {
+        store.tasks[store.active_task] = editor.root.innerHTML;
     });
 };
