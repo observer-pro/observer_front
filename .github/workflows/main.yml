@@ -13,14 +13,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Stop Nginx
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.MAIN_SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
-                  script: |
-                      sudo systemctl stop nginx
+            - name: Build Frontend
+              run: |
+                  npm ci
+                  npm run build
 
             - name: Deploy
               uses: appleboy/scp-action@master
@@ -38,21 +34,9 @@ jobs:
                   username: ${{ secrets.DEPLOY_USER }}
                   password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
                   script: |
-                      retries=0
-
-                      while [ $retries -lt 3 ]; do
-                        sudo systemctl start nginx
-                        if [ $? -eq 0 ]; then
-                          echo "Successfully started Nginx."
-                          break
-                        else
-                          echo "Failed to start Nginx. Retrying..."
-                          retries=$((retries+1))
-                          sleep 5
-                        fi
-                      done
-
-                      if [ $retries -eq 3 ]; then
-                        echo "Failed to start Nginx after 3 retries."
-                        exit 1
+                      if sudo systemctl is-active nginx; then
+                        echo "Nginx is already running, no action needed."
+                      else
+                        sudo systemctl restart nginx
+                        echo "Restarted Nginx."
                       fi
