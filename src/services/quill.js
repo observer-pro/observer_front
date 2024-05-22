@@ -16,6 +16,9 @@ export const initQuill = (element) => {
                     highlight: (text) => hljs.highlightAuto(text).value,
                 }, // Include syntax module
                 toolbar: toolbarOptions,
+                clipboard: {
+                    matchers: [],
+                },
             },
             theme: "snow",
         };

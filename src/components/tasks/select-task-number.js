@@ -6,6 +6,7 @@ import { getContextTasks } from "../../utils/get-context-tasks.js";
 export const selectTaskNumber = (event) => {
     store.active_task = event.target.defaultValue;
     context.tasks = [...getContextTasks(store)];
+    context.isSent = false;
 
     renderApp(context, ["update-task-editor"]);
 };
