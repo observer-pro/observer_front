@@ -1,5 +1,5 @@
 if context.room.users.length < 2
-    p.students__empty Пока никого нет. Отправьте ученикам номер комнаты, чтобы пригласить их!
+    p.students__empty There is noone so far. Send a number of the room your students to invite them!
 else
     ul.students__list
         each user in context.room.users

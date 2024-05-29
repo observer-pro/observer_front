@@ -3,14 +3,14 @@ if context.currentSteps
         each step, key in context.currentSteps
             if step === 'DONE'
                 .steps__box.steps__box--done 
-                    p.steps__text На проверке
+                    p.steps__text Task is testing
                         span.steps__text--underline= ` #${key}`
                     .steps__links 
-                        a.steps__link.steps__link--return(@click="send_steps" href="#" data-index=`${key}` data-status="NONE") Вернуть
-                        a.steps__link.steps__link--confirm(@click="send_steps" href="#" data-index=`${key}` data-status="ACCEPTED") Принять
+                        a.steps__link.steps__link--return(@click="send_steps" href="#" data-index=`${key}` data-status="NONE") Return
+                        a.steps__link.steps__link--confirm(@click="send_steps" href="#" data-index=`${key}` data-status="ACCEPTED") Accept
             else if step === 'HELP'
                 .steps__box.steps__box--help 
-                    p.steps__text Нужна помощь с
+                    p.steps__text Need a help with
                         span.steps__text--underline= ` #${key}`
                     .steps__links 
-                        a.steps__link.steps__link--complete(@click="send_steps" href="#" data-index=`${key}` data-status="NONE") Разобрались
+                        a.steps__link.steps__link--complete(@click="send_steps" href="#" data-index=`${key}` data-status="NONE") Dealt

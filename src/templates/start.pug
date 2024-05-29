@@ -1,12 +1,12 @@
 .connection
-    a(href="https://observer-app.pro/" class="connection__link link") Вернуться на сайт
+    a(href="https://observer-app.pro/" class="connection__link link") Landing page
     .connection__form
         h2.connection__title Observer
-        p.connection__text Кабинет преподавателя
+        p.connection__text Cabinet of mentor
         input(type="text" class="connection__input" id="address" value= context.currentAddress placeholder="ws://server.com")
         .connection__check-section 
-            a(href="/").connection__check-button Проверить
+            a(href="/").connection__check-button Check
             .connection__status
                 img(src= context.isOnline ? './public/img/status-online.svg' : './public/img/status-offline.svg')
-                span.connection__text-status= context.isOnline ? 'Сервер работает' : 'Сервер недоступен'
-        button.button.create-room(@click="room_create" disabled=!context.isOnline) Создать комнату
+                span.connection__text-status= context.isOnline ? 'Server is available' : 'Server is not available'
+        button.button.create-room(@click="room_create" disabled=!context.isOnline) Create room
