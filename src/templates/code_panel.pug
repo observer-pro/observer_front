@@ -20,7 +20,7 @@ mixin drawFolder(folder)
 
 if !context.filetree
     .code-panel__empty-block
-        span Выберите ученика, его код появится здесь 
+        span Change a student, his code will be here 
 else
     .code-panel__filetree#filetree
         +drawFolder(context.filetree.nodes)     

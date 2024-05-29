@@ -2,24 +2,24 @@
     h2.user-panel__title= `#${context.room.id}`
     p.user-panel__students-amount
         span= context.room.users.length - 1 
-        span онлайн
+        span online
 if context.isDisconnected
     .user-panel__disconnected-block
         if context.isReconnecting 
-            span.user-panel__disconnected-text Подключаюсь...
+            span.user-panel__disconnected-text Connecting...
         else 
-            span.user-panel__disconnected-text Нет соединения
-            a(href="#" class="user-panel__disconnected-link" @click="room_rehost") Подключить
+            span.user-panel__disconnected-text Disconnected
+            a(href="#" class="user-panel__disconnected-link" @click="room_rehost") Rehost
 .user-panel__links
-    a(href="#" class="link room__invite" id="invite" data-clipboard-text=`Комната: ${
+    a(href="#" class="link room__invite" id="invite" data-clipboard-text=`Room: ${
         context.room.id
-    }\nСервер: ${
+    }\nServer: ${
         context.server
-    }\nУстановить плагин: ${
+    }\nDownload plugin: ${
         context.pluginUrl
-    }`) пригласить
-    a(href="#" class="link user-panel__quit" @click="room_close") выйти
+    }`) invite
+    a(href="#" class="link user-panel__quit" @click="room_close") quit
 .user-panel__task-buttons
-    button.user-panel__task-button(@click="open_task" disabled= context.isShowingTask) Задания
+    button.user-panel__task-button(@click="open_task" disabled= context.isShowingTask) Tasks
     img.user-panel__task-settings(src="./public/img/settings-icon.svg", alt="")
 .user-panel__students.students#students(class=context.room.users.length < 2 ? 'user-panel__students--empty' : '')

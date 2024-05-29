@@ -1,19 +1,19 @@
 .task-editor__container 
-    h2.task-editor__title Задание
+    h2.task-editor__title Tasks
     .task-editor__works-box 
         .task-editor__works
             each task in context.tasks
                 input.task-editor__work(@click="select_task_number" type="radio" value=`${task.name}` name="work" id=`${task.name}` checked= task.is_active)
-                label.task-editor__work-label(for=`${task.name}`)= task.name === 'theory' ? 'Теория' : task.name  
-        button(@click="send_tasks" class= context.isSent ? "task-editor__button-sent" : "task-editor__button")= context.isSent ? "Отправлено" : "Отправить"                    
+                label.task-editor__work-label(for=`${task.name}`)= task.name === 'theory' ? 'Theory' : task.name  
+        button(@click="send_tasks" class= context.isSent ? "task-editor__button-sent" : "task-editor__button")= context.isSent ? "Sent" : "Send"                    
     .task-editor__area#task-area
             
 .task-editor__notion.notion
     .notion__box
-        h2.notion__title Импорт
-        input.notion__input(type="text" placeholder="Вставьте ссылку на Notion")#notion-input
+        h2.notion__title Import
+        input.notion__input(type="text" placeholder="Enter Notion link")#notion-input
             
         if context.notionError 
-                p.notion__error Ошибка импорта
+                p.notion__error Import error
         else
-            button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Запрос отправлен" : context.isNotion === null ? "Загрузка..." : "Импорт"
+            button(class= context.isNotion ? "notion__btn-sent" : "notion__btn")#notion-btn= context.isNotion ? "Request sent" : context.isNotion === null ? "Loading..." : "Import"
