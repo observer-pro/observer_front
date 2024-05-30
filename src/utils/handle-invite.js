@@ -13,12 +13,12 @@ export const handleInvite = () => {
         });
 
         clipboard.on("success", () => {
-            alert("Текст скопирован в буфер обмена");
+            alert("The text has copied");
 
             clipboard.destroy();
         });
         clipboard.on("error", () => {
-            alert("Ошибка копирования");
+            alert("Copy error");
 
             clipboard.destroy();
         });
