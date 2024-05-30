@@ -13,7 +13,7 @@ export const handleInvite = () => {
         });
 
         clipboard.on("success", () => {
-            alert("The text has copied");
+            alert("The text has been copied");
 
             clipboard.destroy();
         });
