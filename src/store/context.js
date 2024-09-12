@@ -14,7 +14,7 @@ class Context {
         this.currentAddress = currentAddress;
         this.isSent = isSent;
         this.allMessages = allMessages;
-        this.server = "ws://82.148.19.224";
+        this.server = "ws://80.249.150.171";
         this.pluginUrl =
             "https://github.com/Hybusa/observer_java/blob/Singleton_refactor/build/distributions/Observer%20App-1.2.5.zip";
         this.tasks = [
