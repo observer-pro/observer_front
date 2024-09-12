@@ -21,22 +21,18 @@ jobs:
             - name: Deploy
               uses: appleboy/scp-action@master
               with:
-                  host: ${{ secrets.MAIN_SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
+                  host: ${{ secrets.PROD_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.DEPLOY_KEY }}
                   source: "./build"
-                  target: /home/deploy/Observer
+                  target: /home/deploy/observer
 
             - name: Start Nginx
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{ secrets.MAIN_SERVER_IP }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  password: ${{ secrets.MAIN_DEPLOY_PASSWORD }}
+                  host: ${{ secrets.PROD_IP }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.DEPLOY_KEY }}
                   script: |
-                      if sudo systemctl is-active nginx; then
-                        echo "Nginx is already running, no action needed."
-                      else
-                        sudo systemctl restart nginx
-                        echo "Restarted Nginx."
-                      fi
+                      sudo systemctl restart nginx
+                      echo "Nginx restarted."
